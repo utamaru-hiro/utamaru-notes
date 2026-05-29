@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 
 type TocSection = {
@@ -45,6 +46,10 @@ export default function GuideTocDrawer({ sections }: GuideTocDrawerProps) {
       />
 
       <aside className={`toc-drawer section-card ${isOpen ? 'is-open' : ''}`}>
+        <Link href="/" className="toc-back-link" onClick={closeDrawer}>
+          ← 一覧へ戻る
+        </Link>
+
         <div className="toc-drawer-header">
           <p className="guide-sidebar-title">Contents</p>
           <button

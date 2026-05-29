@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import GuideProgressBar from '@/components/GuideProgressBar';
 import GuideTocDrawer from '@/components/GuideTocDrawer';
 import { getGuide, getGuideSlugs } from '@/lib/guides';
 import { highlightCode } from '@/lib/highlight';
@@ -57,7 +57,6 @@ export default async function GuidePage({
 
   return (
     <main className="page-shell guide-page-shell">
-      <Link href="/" className="back-link">一覧へ戻る</Link>
       <GuideTocDrawer sections={guide.sections} />
 
       <div className="guide-layout">
@@ -143,6 +142,7 @@ export default async function GuidePage({
           </div>
         </div>
       </div>
+      <GuideProgressBar slug={slug} />
     </main>
   );
 }
