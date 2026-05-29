@@ -1,0 +1,513 @@
+:root {
+  --bg: #f6f3ee;
+  --panel: rgba(255, 250, 242, 0.96);
+  --text: #243126;
+  --muted: #5a695c;
+  --border: rgba(36, 49, 38, 0.12);
+  --shadow: 0 10px 30px rgba(36, 49, 38, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(49, 120, 198, 0.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(110, 92, 62, 0.07), transparent 28%),
+    var(--bg);
+  font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+
+/* Hide Next.js dev indicator button (N) so it does not overlap the TOC trigger. */
+nextjs-portal {
+  display: none !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.hero-block {
+  margin-bottom: 32px;
+}
+
+.hero-title {
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 0.02em;
+}
+
+.hero-lead {
+  margin: 0;
+  max-width: 760px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.guide-card,
+.section-card,
+.item-card {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.guide-card {
+  display: block;
+  padding: 22px;
+}
+
+.guide-card-emoji {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.guide-card-title {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.guide-card-summary {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.guide-layout {
+  display: block;
+}
+
+.guide-sidebar-title {
+  margin: 0 0 14px;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.guide-sidebar a {
+  display: block;
+  padding: 8px 0;
+  color: var(--muted);
+}
+
+.guide-page-shell {
+  max-width: 1200px;
+}
+
+.toc-mobile-trigger-wrap {
+  position: fixed;
+  left: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  margin: 0;
+  z-index: 36;
+}
+
+.toc-mobile-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #0b2642;
+  background: #12345a;
+  color: #f7fbff;
+  border-radius: 999px;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  box-shadow: 0 10px 26px rgba(18, 52, 90, 0.35);
+}
+
+.toc-mobile-trigger-icon {
+  display: inline-grid;
+  gap: 4px;
+}
+
+.toc-mobile-trigger-icon span {
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: #f7fbff;
+}
+
+.toc-mobile-trigger:hover {
+  background: #173f6d;
+}
+
+.toc-mobile-trigger:active {
+  background: #0f2d4e;
+}
+
+.toc-overlay {
+  position: fixed;
+  inset: 0;
+  border: none;
+  background: rgba(10, 14, 10, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 34;
+}
+
+.toc-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toc-drawer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: min(86vw, 300px);
+  height: 100dvh;
+  border-radius: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+  transform: translateX(-102%);
+  transition: transform 0.24s ease;
+  z-index: 40;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.toc-drawer.is-open {
+  transform: translateX(0);
+}
+
+.toc-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.toc-close {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.toc-drawer nav a {
+  display: block;
+  padding: 8px 0;
+  color: var(--muted);
+}
+
+.guide-main {
+  min-width: 0;
+}
+
+.guide-header {
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+.guide-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: var(--muted);
+}
+
+.guide-header h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.guide-version {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: rgba(36, 49, 38, 0.05);
+}
+
+.section-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.section-card {
+  padding: 24px;
+  min-width: 0;
+}
+
+.section-head {
+  margin-bottom: 16px;
+}
+
+.section-num {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.section-card h2 {
+  margin: 0 0 10px;
+  font-size: 1.5rem;
+}
+
+.section-lead {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.item-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+.item-card {
+  padding: 20px;
+  min-width: 0;
+}
+
+.item-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+}
+
+.item-copy {
+  color: var(--muted);
+  line-height: 1.85;
+  overflow-wrap: break-word;
+}
+
+.item-copy p {
+  margin: 0 0 12px;
+}
+
+.item-label {
+  margin: 18px 0 8px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.item-warn,
+.item-output {
+  padding: 14px 16px;
+  border-radius: 14px;
+  line-height: 1.8;
+  overflow-wrap: break-word;
+}
+
+.item-warn {
+  background: #fff4de;
+  border: 1px solid rgba(177, 119, 0, 0.18);
+}
+
+.item-output {
+  background: #f0f5ff;
+  border: 1px solid rgba(49, 120, 198, 0.16);
+}
+
+.code-block-wrap {
+  margin: 12px 0 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(220, 232, 248, 0.08);
+}
+
+/* Shiki outputs <pre> with inline background — let it control colors */
+.code-block-wrap pre {
+  margin: 0;
+  padding: 20px 22px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0;
+  font-family: "JetBrains Mono", "Fira Code", "Source Code Pro", Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+}
+
+.code-block-wrap code {
+  font-size: inherit;
+  background: none;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: var(--muted);
+}
+
+/* ── Smartphone: ≤639px ─────────────────────── */
+@media (max-width: 639px) {
+  .page-shell {
+    padding: 16px 12px 72px;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+  }
+
+  .guide-grid {
+    gap: 10px;
+  }
+
+  .guide-card {
+    padding: 14px;
+  }
+
+  .guide-header {
+    padding: 16px 14px;
+    margin-bottom: 14px;
+  }
+
+  .guide-header h1 {
+    font-size: 1.55rem;
+  }
+
+  .section-list {
+    gap: 10px;
+  }
+
+  .section-card {
+    padding: 14px 12px;
+    border-radius: 14px;
+  }
+
+  .section-card h2 {
+    font-size: 1.15rem;
+  }
+
+  .item-list {
+    gap: 8px;
+  }
+
+  .item-card {
+    padding: 12px 10px;
+    border-radius: 12px;
+  }
+
+  .item-card h3 {
+    font-size: 0.97rem;
+    margin-bottom: 8px;
+  }
+
+  .item-copy {
+    font-size: 0.93rem;
+    line-height: 1.8;
+  }
+
+  .item-label {
+    margin: 10px 0 5px;
+    font-size: 0.78rem;
+  }
+
+  .item-warn,
+  .item-output {
+    padding: 9px 10px;
+    font-size: 0.88rem;
+    border-radius: 10px;
+  }
+
+  .code-block-wrap {
+    border-radius: 10px;
+  }
+
+  .code-block-wrap pre {
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  .toc-drawer nav a {
+    padding: 10px 0;
+  }
+
+  .back-link {
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+  }
+}
+
+/* ── Tablet: 640px–1023px ───────────────────── */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .page-shell {
+    padding: 32px 20px 72px;
+  }
+
+  .guide-header {
+    padding: 24px;
+  }
+
+  .section-card {
+    padding: 20px;
+  }
+
+  .section-card h2 {
+    font-size: 1.35rem;
+  }
+
+  .item-card {
+    padding: 16px;
+  }
+
+  .code-block-wrap pre {
+    padding: 16px 18px;
+    font-size: 0.87rem;
+  }
+}
+
+/* ── Desktop: ≥1024px ───────────────────────── */
+@media (min-width: 1024px) {
+  .guide-page-shell {
+    padding-left: 328px;
+  }
+
+  .toc-mobile-trigger-wrap,
+  .toc-close,
+  .toc-overlay {
+    display: none;
+  }
+
+  .toc-drawer {
+    transform: none;
+    top: 24px;
+    left: max(16px, calc((100vw - 1200px) / 2));
+    height: calc(100dvh - 48px);
+    width: 280px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+}
