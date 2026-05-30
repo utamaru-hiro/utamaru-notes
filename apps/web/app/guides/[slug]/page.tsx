@@ -6,6 +6,7 @@ import GuideProgressBar from '@/components/GuideProgressBar';
 import GuideTocDrawer from '@/components/GuideTocDrawer';
 import { getGuide, getGuideSlugs } from '@/lib/guides';
 import { highlightCode } from '@/lib/highlight';
+import { renderMarkdown } from '@/lib/markdown';
 
 export async function generateStaticParams() {
   const slugs = await getGuideSlugs();
@@ -94,18 +95,21 @@ export default async function GuidePage({
                         return item.blocks.map((block, index) => {
                           if (block.type === 'description') {
                             return (
-                              <div key={index} className="item-copy">
-                                {block.text.split('\n\n').map((paragraph, i) => (
-                                  <p key={i}>{paragraph}</p>
-                                ))}
-                              </div>
+                              <div
+                                key={index}
+                                className="item-copy"
+                                dangerouslySetInnerHTML={{ __html: renderMarkdown(block.text) }}
+                              />
                             );
                           }
                           if (block.type === 'warn') {
                             return (
                               <Fragment key={index}>
                                 <div className="item-label">注意</div>
-                                <div className="item-warn">{block.text}</div>
+                                <div
+                                  className="item-warn"
+                                  dangerouslySetInnerHTML={{ __html: renderMarkdown(block.text) }}
+                                />
                               </Fragment>
                             );
                           }
@@ -135,11 +139,10 @@ export default async function GuidePage({
                             return (
                               <Fragment key={index}>
                                 <div className="item-label">補足</div>
-                                <div className="item-copy">
-                                  {block.text.split('\n\n').map((paragraph, i) => (
-                                    <p key={i}>{paragraph}</p>
-                                  ))}
-                                </div>
+                                <div
+                                  className="item-copy"
+                                  dangerouslySetInnerHTML={{ __html: renderMarkdown(block.text) }}
+                                />
                               </Fragment>
                             );
                           }

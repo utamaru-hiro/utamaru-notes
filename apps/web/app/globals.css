@@ -313,6 +313,73 @@ a {
   margin: 0 0 12px;
 }
 
+.item-copy ul,
+.item-copy ol {
+  margin: 0 0 12px 20px;
+  padding: 0;
+}
+
+.item-copy li {
+  margin: 4px 0;
+}
+
+.item-copy strong {
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.item-copy em {
+  font-style: italic;
+}
+
+.item-copy code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: rgba(0, 0, 0, 0.06);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+
+.item-copy a {
+  color: var(--accent, #3178c6);
+  text-decoration: underline;
+}
+
+.item-warn ul,
+.item-warn ol {
+  margin: 0 0 8px 20px;
+  padding: 0;
+}
+
+.item-warn li {
+  margin: 4px 0;
+}
+
+.item-warn strong {
+  font-weight: 700;
+}
+
+.item-warn code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: rgba(0, 0, 0, 0.06);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+
+.item-warn a {
+  color: var(--accent, #3178c6);
+  text-decoration: underline;
+}
+
+.item-warn p {
+  margin: 0 0 8px;
+}
+
+.item-warn p:last-child {
+  margin-bottom: 0;
+}
+
 .item-label {
   margin: 18px 0 8px;
   font-size: 0.85rem;
