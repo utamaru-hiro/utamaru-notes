@@ -22,8 +22,6 @@ JSX は JavaScript の中に HTML に似た構文を書けるシンタックス�
 
 JSX は `return` できる要素はひとつだけです。複数要素を並べる場合は `<div>` や `<>...</>` （Fragment）で囲む必要があります。
 
-#### コード
-
 ```tsx
 // JSX は React.createElement に変換される
 const element = <h1>Hello, React!</h1>;
@@ -49,8 +47,6 @@ const styled = <div className="container">...</div>;
 #### 説明
 
 `{}` の中には任意の JavaScript 式を書けます。文（`if`文・`for`文）は直接書けないため、三項演算子・論理演算子・`.map()` などの式を使います。
-
-#### コード
 
 ```tsx
 const isLoggedIn = true;
@@ -83,8 +79,6 @@ const view = (
 
 React 19 では関数コンポーネントが標準です。Props を受け取り JSX を返す純粋関数として定義します。コンポーネント名は大文字始まりにする規約があります。
 
-#### コード
-
 ```tsx
 // シンプルな関数コンポーネント
 function Hello() {
@@ -109,8 +103,6 @@ TypeScript では `React.FC<Props>` 型か、引数に型を付けて戻り値�
 
 `React.FC` を使うと `displayName` などが自動設定されますが、ジェネリクスコンポーネントでは型推論に制限が出ることがあります。引数に型を付ける方式の方が柔軟です。
 
-#### コード
-
 ```tsx
 import type { ReactElement } from 'react';
 
@@ -130,8 +122,6 @@ const GreetFC: React.FC<GreetProps> = ({ name }) => <p>Hello, {name}!</p>;
 #### 説明
 
 UI を小さなコンポーネントに分割することで、再利用性とテスタビリティが向上します。一般的なファイル構成は `components/` ディレクトリにコンポーネントファイルを置く方式です。
-
-#### コード
 
 ```tsx
 // components/Button.tsx
@@ -165,8 +155,6 @@ function App() {
 
 Props は親から子へデータを渡す仕組みです。TypeScript では `type` または `interface` で型を定義します。コンポーネント関数の引数で分割代入するのが一般的です。
 
-#### コード
-
 ```tsx
 type CardProps = {
   title: string;
@@ -193,8 +181,6 @@ function Card({ title, description, imageUrl }: CardProps) {
 #### 説明
 
 `children` は JSX の開始タグと終了タグの間に書いたコンテンツを受け取る特別な Props です。型は `React.ReactNode` を使います。
-
-#### コード
 
 ```tsx
 import type { ReactNode } from 'react';
@@ -232,8 +218,6 @@ TypeScript では関数の引数のデフォルト値として Props のデフ�
 
 `defaultProps` は関数コンポーネントでは React 18.3 から非推奨警告が出ています。必ずデフォルト引数（`= value`）で指定してください。
 
-#### コード
-
 ```tsx
 type BadgeProps = {
   label: string;
@@ -258,8 +242,6 @@ function Badge({ label, color = 'blue', size = 'md' }: BadgeProps) {
 #### 説明
 
 HTML 要素に Props をまとめて渡す場合は `React.ComponentProps` や `React.HTMLAttributes` で型を拡張できます。`...rest` スプレッドで残りの Props を HTML 要素に委譲するパターンがよく使われます。
-
-#### コード
 
 ```tsx
 import type { ComponentProps } from 'react';
@@ -292,8 +274,6 @@ function MyButton({ variant = 'primary', className, ...rest }: MyButtonProps) {
 
 `useState` はコンポーネント内で状態を管理する Hook です。`[状態, 更新関数]` のタプルを返します。更新関数を呼ぶとコンポーネントが再レンダリングされます。TypeScript では初期値から型が推論されますが、明示的に型引数を渡すこともできます。
 
-#### コード
-
 ```tsx
 import { useState } from 'react';
 
@@ -319,8 +299,6 @@ function Counter() {
 #### 注意
 
 `setCount(count + 1)` を連続して呼ぶと、`count` が古い値（クロージャのキャプチャ）のままになるため 1 しか増えないことがあります。関数型更新 `setCount(prev => prev + 1)` を使えばこの問題を回避できます。
-
-#### コード
 
 ```tsx
 function Counter() {
@@ -349,8 +327,6 @@ function Counter() {
 #### 注意
 
 `state.count++` のような直接変更は React が変化を検知できません。必ず新しいオブジェクト・配列を返してください。
-
-#### コード
 
 ```tsx
 type User = { name: string; age: number };
@@ -382,8 +358,6 @@ function UserForm() {
 #### 説明
 
 TypeScript でイベントハンドラーを書く場合、`React.MouseEvent`・`React.ChangeEvent` などの型を使います。ハンドラーを `onClick` などに直接書く場合は型推論が効くため、型注釈を省略できます。
-
-#### コード
 
 ```tsx
 import { useState } from 'react';
@@ -418,8 +392,6 @@ function Form() {
 #### 説明
 
 `<form>` の送信は `onSubmit` で処理します。`e.preventDefault()` でページリロードを防ぎます。`FormEvent<HTMLFormElement>` を使います。
-
-#### コード
 
 ```tsx
 import type { FormEvent } from 'react';
@@ -458,8 +430,6 @@ function LoginForm() {
 
 `e.stopPropagation()` でイベントの伝播（バブリング）を止め、`e.preventDefault()` でブラウザのデフォルト動作を抑制します。ネストしたクリックハンドラーで親への伝播を防ぎたい場面で使います。
 
-#### コード
-
 ```tsx
 function Card({ onClick }: { onClick: () => void }) {
   return (
@@ -485,8 +455,6 @@ function Card({ onClick }: { onClick: () => void }) {
 #### 説明
 
 React で条件によって表示を切り替える主なパターンを整理します。状況に応じて三項演算子・論理積・早期 return を使い分けます。
-
-#### コード
 
 ```tsx
 type Status = 'loading' | 'error' | 'success';
@@ -517,8 +485,6 @@ function StatusView({ status, data }: { status: Status; data?: string }) {
 #### 注意
 
 `key` は兄弟要素の中で一意であれば十分です（グローバル一意は不要）。配列インデックスを `key` に使うのは、順序が変わらないことが保証されている場合のみにしてください。
-
-#### コード
 
 ```tsx
 type Todo = { id: number; text: string; done: boolean };
@@ -554,8 +520,6 @@ function TodoList({ todos }: { todos: Todo[] }) {
 | `[]` | マウント時のみ |
 | `[a, b]` | `a` か `b` が変わった後 |
 
-#### コード
-
 ```tsx
 import { useEffect, useState } from 'react';
 
@@ -585,8 +549,6 @@ function Timer() {
 #### 注意
 
 `useEffect` のコールバック自体は `async` にできません。内側に `async` 関数を定義して呼ぶか、Promise チェーンを使います。
-
-#### コード
 
 ```tsx
 import { useEffect, useState } from 'react';
@@ -637,8 +599,6 @@ function PostList() {
 
 依存配列の警告を `// eslint-disable-line` で無視するのは危険です。警告が出る場合はロジックを見直すか、`useCallback` などで安定した参照を作ることを検討してください。
 
-#### コード
-
 ```tsx
 import { useEffect, useState, useCallback } from 'react';
 
@@ -668,8 +628,6 @@ function Search({ query }: { query: string }) {
 
 `useRef` で DOM 要素への参照を取得できます。`ref` 属性に渡すと、マウント後に `.current` に DOM 要素が入ります。フォーカス制御・スクロール・サードパーティライブラリとの統合に使います。
 
-#### コード
-
 ```tsx
 import { useRef, useEffect } from 'react';
 
@@ -690,8 +648,6 @@ function AutoFocusInput() {
 #### 説明
 
 `useRef` は DOM 参照以外にも、レンダリングを引き起こさずに値を保持したいときに使います。タイマー ID・前回の値・フラグなどの用途に適しています。`useState` との違いは、`.current` を更新しても再レンダリングが発生しない点です。
-
-#### コード
 
 ```tsx
 import { useRef, useState, useEffect } from 'react';
@@ -732,8 +688,6 @@ function StopWatch() {
 
 `useRef` に前回の値を保存するカスタムフックは頻出パターンです。`useEffect` が実行されるタイミング（レンダリング後）を利用します。
 
-#### コード
-
 ```tsx
 import { useRef, useEffect } from 'react';
 
@@ -768,8 +722,6 @@ function Counter() {
 
 `createContext` と `useContext` を組み合わせると、Props を経由せずにコンポーネントツリーの深い部分へ値を渡せます（Props ドリリングの回避）。テーマ・ロケール・認証情報など、グローバルに共有するデータに向いています。
 
-#### コード
-
 ```tsx
 import { createContext, useContext } from 'react';
 
@@ -803,8 +755,6 @@ function ThemedButton() {
 #### 説明
 
 `useState` と組み合わせることで、コンテキスト経由で状態と更新関数を共有できます。小〜中規模のグローバル状態管理に利用できます。
-
-#### コード
 
 ```tsx
 import { createContext, useContext, useState } from 'react';
@@ -851,8 +801,6 @@ export function useAuth(): AuthContextType {
 
 一つのコンテキストに大量の状態をまとめると、一部の変更でも全コンシューマーが再レンダリングされます。大規模なグローバル状態には Zustand など専用のライブラリを検討してください。
 
-#### コード
-
 ```tsx
 // 悪い例: 頻繁に変わる値と変わらない値が同じコンテキスト
 const AppContext = createContext({ theme: 'dark', user: null, notifications: [] });
@@ -870,8 +818,6 @@ const NotificationContext = createContext<string[]>([]);          // 頻繁に�
 #### 説明
 
 カスタムフックは `use` で始まる関数で、複数の組み込み Hook を組み合わせてロジックを再利用します。コンポーネントから状態管理ロジックを分離し、テスト・再利用をしやすくします。
-
-#### コード
 
 ```tsx
 import { useState } from 'react';
@@ -903,8 +849,6 @@ function Modal() {
 #### 説明
 
 API 呼び出しのロジックをカスタムフックにまとめると、複数のコンポーネントで再利用でき、ローディング・エラー状態の管理も一元化できます。
-
-#### コード
 
 ```tsx
 import { useState, useEffect } from 'react';
@@ -966,8 +910,6 @@ function UserProfile({ userId }: { userId: number }) {
 
 すべての計算に `useMemo` を使う必要はありません。計算が単純な場合は逆にオーバーヘッドになります。実際にパフォーマンス問題が発生したときに導入するのが基本です。
 
-#### コード
-
 ```tsx
 import { useMemo, useState } from 'react';
 
@@ -996,8 +938,6 @@ function SortedList({ items }: { items: number[] }) {
 #### 説明
 
 `useCallback` は関数をメモ化し、依存値が変わらない限り同じ関数参照を返します。`React.memo` でラップした子コンポーネントへコールバックを渡すときや、`useEffect` の依存配列に関数を入れるときに有用です。
-
-#### コード
 
 ```tsx
 import { useCallback, useState, memo } from 'react';
@@ -1037,8 +977,6 @@ function Parent() {
 
 `React.memo` は Props が変わっていなければコンポーネントの再レンダリングをスキップします。親が再レンダリングされても、Props が同じなら子は再レンダリングされません。
 
-#### コード
-
 ```tsx
 import { memo } from 'react';
 
@@ -1066,8 +1004,6 @@ const AvatarDeep = memo(
 #### 説明
 
 入力値を React の状態として管理するパターンを「制御コンポーネント」と呼びます。`value` と `onChange` を明示的に指定し、React が値の唯一の源泉（Single Source of Truth）になります。バリデーションや入力の加工がしやすくなります。
-
-#### コード
 
 ```tsx
 import { useState } from 'react';
@@ -1110,8 +1046,6 @@ function ControlledForm() {
 
 `useRef` で DOM に直接アクセスして値を取得するパターンを「非制御コンポーネント」と呼びます。送信時にのみ値を参照するシンプルなフォームや、パフォーマンスが重要な場面で使われます。
 
-#### コード
-
 ```tsx
 import { useRef } from 'react';
 
@@ -1148,8 +1082,6 @@ function UncontrolledForm() {
 #### 注意
 
 `ErrorBoundary` はイベントハンドラー内のエラーや非同期エラー（`useEffect` 内の `throw` など）はキャッチしません。それらは `try/catch` で個別に処理します。
-
-#### コード
 
 ```tsx
 import { Component, type ReactNode, type ErrorInfo } from 'react';
@@ -1193,8 +1125,6 @@ class ErrorBoundary extends Component<Props, State> {
 
 `use` は Promise やコンテキストを読み取るための新しい API です。`useContext` とは異なり、条件分岐やループの中でも呼べます。Suspense と組み合わせることで、データ取得を宣言的に書けます。
 
-#### コード
-
 ```tsx
 import { use, Suspense } from 'react';
 
@@ -1227,8 +1157,6 @@ function ConditionalTheme({ show }: { show: boolean }) {
 #### 説明
 
 `useActionState`（旧 `useFormState`）はフォームのアクションと状態を統合して管理する Hook です。Server Actions との連携を想定した設計ですが、クライアントサイドでも使えます。
-
-#### コード
 
 ```tsx
 import { useActionState } from 'react';
@@ -1268,8 +1196,6 @@ function ContactForm() {
 #### 説明
 
 `useOptimistic` は非同期操作の結果を待たずに UI を先行更新（楽観的更新）するための Hook です。送信ボタンを押した瞬間にリストに追加し、サーバーレスポンスが失敗したら元に戻すパターンで使います。
-
-#### コード
 
 ```tsx
 import { useOptimistic, useState } from 'react';
@@ -1326,8 +1252,6 @@ React Server Components（RSC）はサーバーサイドで実行されるコン
 
 Server Components では `useState`・`useEffect` などのブラウザ側の Hook は使えません。インタラクティブな部分は `'use client'` ディレクティブを付けた Client Components に分離します。
 
-#### コード
-
 ```tsx
 // ServerComponent.tsx（デフォルトは Server Component）
 // async/await が使える・DB アクセス可
@@ -1364,8 +1288,6 @@ export function AddToCart({ productId }: { productId: number }) {
 
 合成（Composition）パターンは、小さなコンポーネントを組み合わせて複雑な UI を構築します。継承より合成を優先することで、柔軟で再利用しやすい設計になります。`children` や Props として JSX を渡す方法が基本です。
 
-#### コード
-
 ```tsx
 // スロットパターン: header/footer をコンポーネントとして受け取る
 type LayoutProps = {
@@ -1398,8 +1320,6 @@ function PageLayout({ header, footer, children }: LayoutProps) {
 #### 説明
 
 コンポーネントが肥大化してきたら、状態管理ロジックをカスタムフックに切り出します。コンポーネントは「表示」に集中し、「振る舞い」はフックが担う分離が理想です。
-
-#### コード
 
 ```tsx
 // ロジックをフックに分離
@@ -1444,8 +1364,6 @@ function ProductSearch({ products }: { products: Product[] }) {
 #### 説明
 
 ロジックと UI を完全に分離するパターンです。カスタムフックがロジック（状態・イベントハンドラー）を提供し、コンポーネントは好きなスタイルで描画します。ライブラリを使わずにアクセシブルなコンポーネントを作る場合によく採用されます。
-
-#### コード
 
 ```tsx
 // ロジックのみのフック

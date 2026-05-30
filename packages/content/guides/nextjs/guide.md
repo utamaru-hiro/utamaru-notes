@@ -18,8 +18,6 @@ Pages Router（`pages/` ディレクトリ）と App Router（`app/` ディレ�
 
 `create-next-app` でプロジェクトを作成します。TypeScript・ESLint・Tailwind CSS などのオプションを対話形式で選択できます。
 
-#### コード
-
 ```bash
 npx create-next-app@latest my-app
 cd my-app
@@ -31,8 +29,6 @@ npm run dev
 #### 説明
 
 App Router プロジェクトの標準的なディレクトリ構成です。`app/` がルーティングの起点で、ファイル名がルールに対応しています。
-
-#### コード
 
 ```text
 my-app/
@@ -56,8 +52,6 @@ my-app/
 #### 説明
 
 `next.config.ts` でビルド設定をカスタマイズします。TypeScript で型補完が効きます。
-
-#### コード
 
 ```ts
 import type { NextConfig } from 'next';
@@ -88,8 +82,6 @@ export default nextConfig;
 
 App Router では `app/` 配下のディレクトリ構造が URL に対応します。ルートセグメント（フォルダ）の中に `page.tsx` を置くとそのパスでアクセス可能になります。
 
-#### コード
-
 ```text
 app/
 ├── page.tsx          →  /
@@ -115,8 +107,6 @@ app/
 #### 注意
 
 `useRouter` は `'use client'` の Client Components でのみ使えます。Server Components では `redirect()` 関数を使います。
-
-#### コード
 
 ```tsx
 // Link コンポーネント
@@ -148,8 +138,6 @@ export function GoBackButton() {
 #### 説明
 
 現在のパスやクエリパラメータを読み取るフックです。どちらも Client Components でのみ使えます。`useSearchParams` は `<Suspense>` でラップが必要です。
-
-#### コード
 
 ```tsx
 'use client';
@@ -186,8 +174,6 @@ export default function Page() {
 
 ルートレイアウト（`app/layout.tsx`）は必須で、`<html>` と `<body>` タグを含む必要があります。ネストしたレイアウトには `<html>/<body>` は書きません。
 
-#### コード
-
 ```tsx
 // app/layout.tsx（ルートレイアウト）
 import type { Metadata } from 'next';
@@ -220,8 +206,6 @@ export default function RootLayout({
 
 サブディレクトリに `layout.tsx` を置くと、そのセグメント以下にのみ適用されるレイアウトを追加できます。ルートレイアウトの内側にネストされる形で組み合わさります。
 
-#### コード
-
 ```tsx
 // app/dashboard/layout.tsx
 export default function DashboardLayout({
@@ -252,8 +236,6 @@ export default function DashboardLayout({
 
 `template.tsx` は `layout.tsx` と似ていますが、ページ遷移のたびに新しいインスタンスが作られます（状態がリセットされる）。アニメーションのトリガーやページごとに初期化が必要な処理に使います。
 
-#### コード
-
 ```tsx
 // app/dashboard/template.tsx
 // ページ遷移のたびにマウント・アンマウントされる
@@ -277,8 +259,6 @@ export default function DashboardTemplate({
 #### 説明
 
 `page.tsx` はそのルートのページ本体です。`loading.tsx` はページ読み込み中に表示されるフォールバック UI で、Next.js が自動的に `<Suspense>` でラップします。
-
-#### コード
 
 ```tsx
 // app/posts/page.tsx
@@ -304,8 +284,6 @@ export default function Loading() {
 #### 説明
 
 `error.tsx` はレンダリングエラーをキャッチするエラーバウンダリです。`'use client'` が必要です。`not-found.tsx` は `notFound()` 関数が呼ばれたときや 404 時に表示されます。
-
-#### コード
 
 ```tsx
 // app/posts/error.tsx
@@ -343,8 +321,6 @@ export default function NotFound() {
 
 Server Components から `notFound()` を呼ぶと最寄りの `not-found.tsx` を表示します。`redirect()` は指定のパスへリダイレクトします。どちらも例外を投げる実装のため、`try/catch` の外で呼びます。
 
-#### コード
-
 ```tsx
 import { notFound, redirect } from 'next/navigation';
 
@@ -377,8 +353,6 @@ App Router のコンポーネントはデフォルトで Server Components で�
 #### 注意
 
 Client Component に `import` された Server Component は自動的に Client Component になりません。Server Component は `children` として Client Component に渡すことで境界を維持できます。
-
-#### コード
 
 ```tsx
 // app/page.tsx（Server Component：デフォルト）
@@ -418,8 +392,6 @@ export function ClientButton({ children }: { children: ReactNode }) {
 
 「できるだけ末端の小さなコンポーネントだけを Client Component にする」のが基本方針です。ページの大部分を Server Component にすることで、バンドルサイズを最小化できます。
 
-#### コード
-
 ```tsx
 // ✅ 良い例: インタラクティブな部分だけ Client Component に切り出す
 // app/posts/[id]/page.tsx（Server Component）
@@ -449,8 +421,6 @@ export default function PostPage() { /* ... */ }
 #### 説明
 
 Server Components は `async/await` が使えるため、コンポーネント内で直接データを取得できます。Next.js の `fetch` は標準 `fetch` を拡張しており、キャッシュ制御オプションを追加で持ちます。
-
-#### コード
 
 ```tsx
 // app/posts/page.tsx
@@ -488,8 +458,6 @@ Next.js の `fetch` は第2引数の `cache` / `next.revalidate` オプション
 | `next: { revalidate: 60 }` | 60 秒ごとに再取得（ISR） |
 | `cache: 'no-store'` | 毎リクエスト取得（動的） |
 
-#### コード
-
 ```tsx
 // 静的（デフォルト）
 const staticData = await fetch('https://api.example.com/data');
@@ -510,8 +478,6 @@ const dynamicData = await fetch('https://api.example.com/data', {
 #### 説明
 
 Server Actions やRoute Handlers から `revalidatePath` / `revalidateTag` を呼ぶことで、特定のパスやタグのキャッシュを手動で無効化できます。フォーム送信後に一覧ページを更新する用途が典型です。
-
-#### コード
 
 ```tsx
 'use server';
@@ -542,8 +508,6 @@ async function deletePost(id: string) {
 
 `[slug]` のようにブラケットで囲んだフォルダが動的セグメントです。`generateStaticParams` でビルド時に生成するパラメータ一覧を返すと、静的ページとして事前レンダリングされます。
 
-#### コード
-
 ```tsx
 // app/posts/[id]/page.tsx
 type Params = Promise<{ id: string }>;
@@ -573,8 +537,6 @@ export default async function PostPage({ params }: { params: Params }) {
 
 `[...slug]` はすべてのサブパスをキャッチするルートです。`[[...slug]]` はパラメータなしのパスも含むオプショナル版です。
 
-#### コード
-
 ```tsx
 // app/docs/[...slug]/page.tsx
 // /docs/a, /docs/a/b, /docs/a/b/c をすべてキャッチ
@@ -598,8 +560,6 @@ export default async function DocsPage({ params }: { params: Params }) {
 #### 説明
 
 `(name)` のように括弧でフォルダを囲むと URL に影響しない「Route Group」を作れます。レイアウトをグループごとに適用したい場合や、コードを論理的に整理したい場合に使います。
-
-#### コード
 
 ```tsx
 // ディレクトリ構成
@@ -630,8 +590,6 @@ Server Actions は `'use server'` ディレクティブを付けたサーバー�
 #### 注意
 
 Server Actions は POST リクエストとして実行されます。CSRF 対策は Next.js が自動で行いますが、入力値のバリデーションは必ず実装してください。
-
-#### コード
 
 ```tsx
 // app/actions.ts
@@ -665,8 +623,6 @@ export default function TodoPage() {
 #### 説明
 
 `useActionState`（React 19）と組み合わせることで、送信状態・エラー・成功メッセージをリアクティブに扱えます。
-
-#### コード
 
 ```tsx
 // app/actions.ts
@@ -707,8 +663,6 @@ export default function NewPostPage() {
 
 Server Actions はフォームだけでなく、Client Component のイベントハンドラーからも直接呼び出せます。
 
-#### コード
-
 ```tsx
 // app/actions.ts
 'use server';
@@ -747,8 +701,6 @@ export function DeleteButton({ postId }: { postId: string }) {
 
 `app/api/route.ts` に `GET`・`POST` などの関数をエクスポートすると API エンドポイントになります。従来の Pages Router の `pages/api/` に相当します。
 
-#### コード
-
 ```tsx
 // app/api/posts/route.ts
 import { NextResponse } from 'next/server';
@@ -770,8 +722,6 @@ export async function POST(request: Request) {
 #### 説明
 
 動的セグメントを持つ Route Handler では `params` を受け取れます。`NextRequest` を使うとクエリパラメータ・ヘッダー・Cookie などに簡単にアクセスできます。
-
-#### コード
 
 ```tsx
 // app/api/posts/[id]/route.ts
@@ -807,8 +757,6 @@ export async function DELETE(_req: NextRequest, { params }: Context) {
 
 `metadata` オブジェクトをエクスポートするとそのページの `<head>` に反映されます。`<title>`・`<meta description>`・OGP タグなどをサーバーサイドで設定でき、SEO に有利です。
 
-#### コード
-
 ```tsx
 // app/about/page.tsx
 import type { Metadata } from 'next';
@@ -836,8 +784,6 @@ export default function AboutPage() {
 #### 説明
 
 動的ルートでは `generateMetadata` 関数でパラメータに基づいたメタデータを返します。データ取得も可能で、ページ本体とは別に実行されます。
-
-#### コード
 
 ```tsx
 // app/posts/[id]/page.tsx
@@ -881,8 +827,6 @@ export default async function PostPage({ params }: Props) {
 
 `<Image>` は必ず `width` と `height`（または `fill` + 親要素の `position: relative`）を指定してください。指定がないと警告が出てレイアウトシフトが発生します。
 
-#### コード
-
 ```tsx
 import Image from 'next/image';
 
@@ -920,8 +864,6 @@ export function HeroImage({ src }: { src: string }) {
 #### 説明
 
 `next/font` はフォントをビルド時に最適化します。Google Fonts やローカルフォントをゼロランタイムで読み込み、フォントのレイアウトシフト（FOUT）を防ぎます。フォントファイルはサーバーから配信されるため、外部 CDN へのリクエストも発生しません。
-
-#### コード
 
 ```tsx
 // app/layout.tsx
@@ -961,8 +903,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 プロジェクトルートに置いた `middleware.ts` はすべてのリクエストの前に実行されます。認証チェック・リダイレクト・ヘッダー操作などに使います。`matcher` でミドルウェアを適用するパスを絞り込めます。
 
-#### コード
-
 ```tsx
 // middleware.ts（プロジェクトルート）
 import { NextResponse } from 'next/server';
@@ -993,8 +933,6 @@ export const config = {
 #### 説明
 
 リクエストヘッダーやレスポンスヘッダーをミドルウェアで追加・変更できます。A/B テストのためのフラグ伝達や、CORS ヘッダーの設定などに使います。
-
-#### コード
 
 ```tsx
 import { NextResponse } from 'next/server';
@@ -1035,8 +973,6 @@ Next.js は複数の `.env` ファイルを優先度順に読み込みます。`
 
 `NEXT_PUBLIC_` を付けた変数はブラウザのソースに公開されます。API キーやシークレットは絶対に `NEXT_PUBLIC_` を付けないでください。
 
-#### コード
-
 ```bash
 # .env.local（Git 管理外）
 DATABASE_URL=postgresql://localhost/mydb      # サーバーのみ
@@ -1048,8 +984,6 @@ NEXT_PUBLIC_API_URL=https://api.example.com  # クライアントにも公開
 #### 説明
 
 `process.env` の値は `string | undefined` です。型安全にアクセスするため、起動時に検証するユーティリティを作る方法が一般的です。
-
-#### コード
 
 ```ts
 // lib/env.ts（サーバーサイド専用）
@@ -1078,8 +1012,6 @@ export const publicEnv = {
 
 Next.js は Vercel に最適化されています。GitHub リポジトリを連携するだけで、`main` ブランチへの push ごとに自動デプロイされます。プレビューデプロイ（PR ごとに自動で URL が発行される）も標準機能です。
 
-#### コード
-
 ```bash
 # Vercel CLI でデプロイ（CI/CD の代替）
 npm i -g vercel
@@ -1096,8 +1028,6 @@ vercel --prod # 本番デプロイ
 #### 注意
 
 `output: 'export'` では `cache: 'no-store'` や `revalidate` を使う動的 fetch は使えません。すべてのページがビルド時に静的生成される必要があります。
-
-#### コード
 
 ```ts
 // next.config.ts
@@ -1116,8 +1046,6 @@ const nextConfig: NextConfig = {
 #### 説明
 
 ページのレンダリング戦略を `export const dynamic` で明示できます。デフォルトは静的ですが、動的データを使う場合は `'force-dynamic'` を指定します。
-
-#### コード
 
 ```tsx
 // app/dashboard/page.tsx
@@ -1144,8 +1072,6 @@ export default async function DashboardPage() {
 #### 説明
 
 `<Suspense>` でデータ取得コンポーネントをラップすると、ロードが完了した部分から順次 HTML をストリーミングできます。ページ全体の表示を遅らせずに、重いコンポーネントだけローディング UI を先に見せられます。
-
-#### コード
 
 ```tsx
 // app/page.tsx
@@ -1179,8 +1105,6 @@ async function SlowDataComponent() {
 #### 説明
 
 `@folder` の命名規則で並列ルートを定義します。同じレイアウトの中に複数の独立したページセクションを同時にレンダリングできます。ダッシュボードのような複数ペインの UI に向いています。
-
-#### コード
 
 ```tsx
 // ディレクトリ構成
@@ -1219,8 +1143,6 @@ export default function DashboardLayout({
 #### 説明
 
 `(.)folder` の命名規則でルートをインターセプトします。一覧ページでアイテムをクリックしたとき、URL は変わりつつモーダルで詳細を表示するパターン（Instagram 風フォトモーダルなど）で使います。
-
-#### コード
 
 ```tsx
 // ディレクトリ構成

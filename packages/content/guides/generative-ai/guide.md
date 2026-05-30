@@ -8,8 +8,6 @@
 
 Kerasでニューラルネットワークを実装する例。MNISTの手書き数字（0〜9）を分類する全結合ネットワークを構築し、学習・評価・推論までの一連の流れを示す。
 
-#### コード
-
 ```python
 import numpy as np
 from tensorflow import keras
@@ -126,16 +124,12 @@ print("予測ラベル:", predicted_labels)
 
 #### 説明
 
-#### コード
-
 ```python
 ```
 
 ### Few-shot プロンプト
 
 #### 説明
-
-#### コード
 
 ```python
 ```
@@ -173,8 +167,6 @@ print("予測ラベル:", predicted_labels)
 ### Function Calling / Tool Use
 
 #### 説明
-
-#### コード
 
 ```json
 ```

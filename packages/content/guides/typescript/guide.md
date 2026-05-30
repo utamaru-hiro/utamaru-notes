@@ -12,8 +12,6 @@ TypeScript には JavaScript の 7 種のプリミティブ型がそのまま対
 
 `strictNullChecks` を無効にすると `null`/`undefined` がすべての型に代入できてしまい、実行時エラーの温床になります。必ず `strict: true` を tsconfig に設定してください。
 
-#### コード
-
 ```ts
 const name: string = 'Alice';
 const age: number = 30;
@@ -37,8 +35,6 @@ let s: string = 'hello';
 #### 注意
 
 タプルは添字アクセスで範囲外を参照してもコンパイルエラーにならない場合があります（noUncheckedIndexedAccess オプションで強化できます）。
-
-#### コード
 
 ```ts
 // 配列
@@ -68,8 +64,6 @@ const sn: StringsAndNumber = ['a', 'b', 42];
 
 `any` は型の伝播（any の感染）が起きます。`any` を受け取った変数から別の変数に代入すると、その変数も `any` になります。`unknown` を使うことで型安全性を保てます。
 
-#### コード
-
 ```ts
 // any: 型チェック無効
 let a: any = 42;
@@ -96,8 +90,6 @@ function log(x: string): void {
 #### 説明
 
 TypeScript は多くの場面で型を自動推論するため、型アノテーションを省略できます。変数の初期値、関数の戻り値、配列リテラルなどは推論が効きます。型が自明な場所での明示は冗長になるため省略が一般的です。
-
-#### コード
 
 ```ts
 // 変数: 右辺から推論
@@ -126,8 +118,6 @@ let status2: 'active' | 'inactive' = 'active'; // リテラル型
 #### 説明
 
 関数の引数と戻り値に型を付けることで、呼び出し側のミスをコンパイル時に検出できます。アロー関数・関数宣言どちらも同じ構文です。
-
-#### コード
 
 ```ts
 // 関数宣言
@@ -158,8 +148,6 @@ const print = (msg: string): void => {
 
 オプション引数（`?`）と `| undefined` の共用体型は微妙に異なります。`?` は引数の省略を許容しますが、`| undefined` の場合は省略はできず `undefined` を明示的に渡す必要があります（`exactOptionalPropertyTypes` 有効時）。
 
-#### コード
-
 ```ts
 // オプション引数
 function greet(name: string, greeting?: string): string {
@@ -186,8 +174,6 @@ repeat('ha', 2);  // "haha"
 
 実装シグネチャはすべてのオーバーロードシグネチャを包含する型を持たなければなりません。包含できていない場合、実装が呼び出されても型エラーになることがあります。
 
-#### コード
-
 ```ts
 // オーバーロードシグネチャ
 function format(value: number): string;
@@ -210,8 +196,6 @@ format(new Date());  // ISO string
 #### 説明
 
 `readonly` を引数に付けると、関数内でその引数を変更できないことを型レベルで保証します。`never` を返す関数は「必ず例外を投げる」か「無限ループ」で、呼び出し元の制御フローに伝播します。
-
-#### コード
 
 ```ts
 // readonly 引数
@@ -241,8 +225,6 @@ function move(dir: Direction) {
 
 `interface` でオブジェクトの形状を宣言します。`?` でオプションプロパティ（省略可能）、`readonly` で変更不可プロパティを表現できます。
 
-#### コード
-
 ```ts
 interface User {
   readonly id: number;
@@ -271,8 +253,6 @@ const admin: AdminUser = { id: 2, name: 'Bob', role: 'admin' };
 
 宣言マージはグローバルな型（`Window`、`HTMLElement` など）を汚染するリスクがあります。ライブラリ型の拡張以外では意図しないマージが起きないよう注意してください。
 
-#### コード
-
 ```ts
 interface Window {
   myLib: { version: string };
@@ -300,8 +280,6 @@ win.myPlugin();
 
 インデックスシグネチャがあると、存在しないキーへのアクセスも型エラーにならなくなります（`noUncheckedIndexedAccess` オプションで `T | undefined` に強化できます）。
 
-#### コード
-
 ```ts
 interface StringMap {
   [key: string]: string;
@@ -326,8 +304,6 @@ type Config = Record<string, string | number>;
 #### 説明
 
 `interface` はオブジェクト・クラスの形状定義に向いており、宣言マージや `extends` による継承が可能です。`type` はユニオン・交差・マップ・条件型など複雑な型構成に向いています。
-
-#### コード
 
 ```ts
 // interface: 継承・宣言マージが可能
@@ -354,8 +330,6 @@ type StringOrNumber = string | number;
 
 `|`（Union）は「AまたはB」、`&`（Intersection）は「AかつB」を表します。Intersection はオブジェクト型を合成する際によく使われます。
 
-#### コード
-
 ```ts
 // Union型
 type StringOrNumber = string | number;
@@ -380,8 +354,6 @@ const ab: AB = { a: 1, b: 'x' }; // 両方必須
 
 特定の文字列・数値・真偽値だけを許可する型をリテラル型と言います。Union と組み合わせると列挙型のような効果が得られます。
 
-#### コード
-
 ```ts
 type Direction = 'up' | 'down' | 'left' | 'right';
 type DiceRoll = 1 | 2 | 3 | 4 | 5 | 6;
@@ -404,8 +376,6 @@ function getStatus(): 'ok' | 'error' {
 #### 説明
 
 共通のリテラル型プロパティ（判別子）を持つ Union 型を判別共用体と呼びます。`switch`/`if` で判別子を絞り込むと、各ブランチで型が自動的に絞られます。
-
-#### コード
 
 ```ts
 type Shape =
@@ -430,8 +400,6 @@ function area(shape: Shape): number {
 #### 説明
 
 `typeof` や `in` 演算子を条件式に使うと TypeScript は型を絞り込みます。`in` はプロパティの存在チェック、`typeof` はプリミティブの種別チェックに使われます。
-
-#### コード
 
 ```ts
 type Cat = { meow: () => void };
@@ -463,8 +431,6 @@ function padLeft(value: string, padding: string | number) {
 
 `type` キーワードで既存の型に別名を付けたり、複雑な型をまとめて名前を付けられます。Union・Intersection・関数型・タプル型など、`interface` では書けない型も定義できます。
 
-#### コード
-
 ```ts
 // 基本的な別名
 type UserId = string;
@@ -488,8 +454,6 @@ function divide(a: number, b: number): Result<number, string> {
 #### 説明
 
 型エイリアスは自己参照（再帰型）が可能です。ツリー構造や JSON のような再帰的なデータ構造を表現できます。
-
-#### コード
 
 ```ts
 // ツリー構造
@@ -522,8 +486,6 @@ type JsonValue =
 
 テンプレートリテラル構文で文字列リテラル型を組み合わせた型を作れます。イベント名・CSSプロパティ・ルーティング等の文字列パターンを型安全に表現できます。
 
-#### コード
-
 ```ts
 type Color = 'red' | 'green' | 'blue';
 type ColorKey = `bg-${Color}`; // "bg-red" | "bg-green" | "bg-blue"
@@ -547,8 +509,6 @@ type Getters = Getter<PropNames>; // "getName" | "getAge"
 #### 注意
 
 `as Colors` のような型アサションでは過剰なプロパティがあってもエラーにならず、型の安全性が損なわれます。型の検証が目的なら `satisfies` を使ってください。
-
-#### コード
 
 ```ts
 type Colors = Record<string, string | [number, number, number]>;
@@ -579,8 +539,6 @@ palette2.red.toUpperCase(); // 型エラーにならない（危険）
 
 型パラメータ `<T>` を使うと、型を外部から注入できる汎用的なコードが書けます。呼び出し時に型引数を指定するか、引数から推論させます。
 
-#### コード
-
 ```ts
 // ジェネリック関数
 function identity<T>(value: T): T {
@@ -607,8 +565,6 @@ zip([1, 2], ['a', 'b']); // [number, string][]
 
 `extends` で型パラメータに制約を付けると、特定の構造を持つ型のみを受け付けられます。`keyof` と組み合わせることでプロパティアクセスの型安全なユーティリティが作れます。
 
-#### コード
-
 ```ts
 // length プロパティを持つ型のみ受け付ける
 function longest<T extends { length: number }>(a: T, b: T): T {
@@ -631,8 +587,6 @@ getProperty(user, 'name');  // string
 #### 説明
 
 ジェネリクスに `= DefaultType` を付けると、型引数を省略したときのデフォルト型が指定できます。ライブラリの API 設計で便利です。
-
-#### コード
 
 ```ts
 interface Response<T = unknown> {
@@ -660,8 +614,6 @@ const p2: Pair<string, number> = { first: 'x', second: 1 };
 #### 説明
 
 クラスやインターフェースにも型パラメータを持たせられます。データ構造（スタック・キュー・リポジトリ）のような汎用コンテナで活用されます。
-
-#### コード
 
 ```ts
 class Stack<T> {
@@ -698,8 +650,6 @@ interface Repository<T, ID> {
 
 TypeScript の `private` はコンパイル時のチェックのみです。実行時は JavaScript のオブジェクトなのでアクセスできます。真のプライベートが必要な場合は ES2022 の `#` プライベートフィールドを使ってください。
 
-#### コード
-
 ```ts
 class BankAccount {
   private balance: number = 0;
@@ -729,8 +679,6 @@ acc.currentBalance; // OK: getter
 #### 説明
 
 コンストラクタ引数にアクセス修飾子または `readonly` を付けると、プロパティ宣言と代入を自動生成します（parameter properties）。ボイラープレートを大幅に削減できます。
-
-#### コード
 
 ```ts
 // 従来の書き方
@@ -766,8 +714,6 @@ u.name; // 'Alice'
 
 `abstract` クラスは直接インスタンス化できないクラスで、共通の実装とサブクラスに任せる抽象メソッドを定義できます。テンプレートメソッドパターンの実装に使われます。
 
-#### コード
-
 ```ts
 abstract class Shape {
   abstract area(): number;       // サブクラスで実装必須
@@ -794,8 +740,6 @@ new Circle(5).describe();
 #### 説明
 
 `implements` でクラスがインターフェースを満たすことを宣言します。複数のインターフェースを実装でき、クラスが契約（contract）を守ることを型レベルで強制できます。
-
-#### コード
 
 ```ts
 interface Serializable {
@@ -826,8 +770,6 @@ class Config implements Serializable, Cloneable<Config> {
 #### 説明
 
 `typeof` はプリミティブの種別判定、`instanceof` はオブジェクトのクラス判定に使います。条件ブランチ内で TypeScript が自動的に型を絞り込みます。
-
-#### コード
 
 ```ts
 function process(value: string | number | Date) {
@@ -860,8 +802,6 @@ function handle(err: Error) {
 #### 説明
 
 戻り値型に `value is Type` を指定するとカスタム型ガード関数になります。条件ブランチ内で TypeScript が型を絞り込みます。
-
-#### コード
 
 ```ts
 interface Cat { kind: 'cat'; meow(): void }
@@ -899,8 +839,6 @@ const nums = items.filter(isNonNull); // number[]
 
 `as` はコンパイル時のチェックを無効にするだけで、実行時に型変換は行われません。`unknown` を経由する二重アサション（`as unknown as T`）は特に危険で、型システムを完全に迂回します。
 
-#### コード
-
 ```ts
 // 安全な使用例（DOM 操作）
 const input = document.getElementById('name') as HTMLInputElement;
@@ -929,8 +867,6 @@ const bad: number = 'not a number';
 
 `!` は型チェックを迂回するため、値が実際に `null` や `undefined` の場合に実行時エラーになります。可能な限り `if` チェックや `??` によるフォールバックを使ってください。
 
-#### コード
-
 ```ts
 // DOM アクセス
 const el = document.getElementById('app')!; // null でないことを保証
@@ -955,8 +891,6 @@ if (val2 !== undefined) {
 #### 説明
 
 `Partial<T>` は全プロパティをオプションに、`Required<T>` は全プロパティを必須に、`Readonly<T>` は全プロパティを読み取り専用にします。
-
-#### コード
 
 ```ts
 interface User {
@@ -987,8 +921,6 @@ const frozen: Readonly<User> = { id: 1, name: 'Alice' };
 
 `Pick<T, K>` はプロパティの抜き出し、`Omit<T, K>` は指定プロパティの除外、`Record<K, V>` はキー・バリュー型の辞書生成に使います。
 
-#### コード
-
 ```ts
 interface User {
   id: number;
@@ -1018,8 +950,6 @@ type StatusConfig = Record<Status, { label: string; color: string }>;
 
 `Exclude<T, U>` は Union から型を取り除き、`Extract<T, U>` は合致する型だけ残します。`NonNullable<T>` は `null`/`undefined` を除去します。
 
-#### コード
-
 ```ts
 type AllTypes = string | number | boolean | null | undefined;
 
@@ -1045,8 +975,6 @@ type MouseEvents = Extract<EventNames, `${'mouse'}${string}`>;
 #### 説明
 
 `ReturnType<F>` は関数の戻り値型、`Parameters<F>` は引数の型をタプルで、`InstanceType<C>` はコンストラクタからインスタンス型を取り出します。
-
-#### コード
 
 ```ts
 function fetchUser(id: number): Promise<{ name: string; age: number }> {
@@ -1080,8 +1008,6 @@ type ServiceInstance = InstanceType<typeof MyService>;
 
 `{ [K in keyof T]: ... }` で既存の型の全プロパティを変換した新しい型を作れます。Utility Types（Partial, Readonlyなど）の多くがこれで実装されています。
 
-#### コード
-
 ```ts
 interface User {
   id: number;
@@ -1108,8 +1034,6 @@ type UserGetters = Getters<User>;
 
 Mapped Types では `+`/`-` で修飾子を追加・削除できます。`-?` でオプション性を除去し、`+readonly` で読み取り専用を追加できます。
 
-#### コード
-
 ```ts
 interface MaybeUser {
   id?: number;
@@ -1135,8 +1059,6 @@ type FrozenUser = { +readonly [K in keyof MaybeUser]: MaybeUser[K] };
 #### 説明
 
 Mapped Types の `as` 句でキーを変換・フィルタできます（TS 4.1+）。`never` を返すとそのキーを除外できます。
-
-#### コード
 
 ```ts
 interface Model {
@@ -1168,8 +1090,6 @@ type UpperModel = {
 
 非ホモモルフィックな Mapped Type では元の型の `?` や `readonly` 修飾子が失われます。修飾子を保持したい場合は必ず `keyof T` の形を使ってください。
 
-#### コード
-
 ```ts
 interface Opt {
   a?: string;
@@ -1194,8 +1114,6 @@ type NonHomoOpt = NonHomo<Opt>;
 #### 説明
 
 `T extends U ? X : Y` で型レベルの条件分岐ができます。型に応じて異なる型を返す汎用的なユーティリティ型を作れます。
-
-#### コード
 
 ```ts
 // 基本形
@@ -1224,8 +1142,6 @@ type F = Flatten<number>;     // number（変換なし）
 
 分配条件型は「型パラメータが裸の（タプルや配列でラップされていない）Union 型」のときに自動的に発生します。意図しない分配が起きる場合は `[T] extends [U]` でラップして無効化できます。
 
-#### コード
-
 ```ts
 type IsString<T> = T extends string ? true : false;
 
@@ -1246,8 +1162,6 @@ type I = MyExclude<'a' | 'b' | 'c', 'b'>; // 'a' | 'c'
 #### 説明
 
 `infer` は Conditional Types の中で型を「推論・抽出」するキーワードです。関数の戻り値型・引数型・Promise の解決型など、既存型から部分的な型を取り出せます。
-
-#### コード
 
 ```ts
 // 関数の戻り値型を抽出（ReturnType の実装）
@@ -1275,8 +1189,6 @@ type R3 = Head<[string, number, boolean]>; // string
 
 実務でよく登場する Conditional Types のパターンをまとめます。`Awaited<T>` や再帰的な `DeepReadonly<T>` などが典型例です。
 
-#### コード
-
 ```ts
 // DeepReadonly: ネストされた全プロパティを readonly に
 type DeepReadonly<T> = T extends (infer U)[]
@@ -1302,8 +1214,6 @@ type Resolved = PromiseType<Promise<{ id: number }>>; // { id: number }
 
 バッククォートと `${}` で文字列リテラル型を組み合わせた型を作れます。Union 型を埋め込むと自動的に全組み合わせが展開されます。
 
-#### コード
-
 ```ts
 type Greeting = `Hello, ${string}!`;
 const g: Greeting = 'Hello, Alice!'; // OK
@@ -1325,8 +1235,6 @@ type SpacingClass = `m-${Spacing}` | `p-${Spacing}`;
 #### 説明
 
 TypeScript 組み込みの文字列操作ユーティリティ型です。テンプレートリテラル型と組み合わせると動的な命名規則に対応できます。
-
-#### コード
 
 ```ts
 type U = Uppercase<'hello'>;     // "HELLO"
@@ -1351,8 +1259,6 @@ type UpperEnv = UpperKeys<Env>;
 #### 説明
 
 `on${Capitalize<EventName>}` パターンを使うと、イベント名からハンドラー名を型安全に生成できます。
-
-#### コード
 
 ```ts
 type Events = 'click' | 'focus' | 'blur' | 'mouseenter';
@@ -1384,8 +1290,6 @@ emitter.on('login', ({ userId }) => console.log(userId));
 
 ドットパス型のような再帰的テンプレートリテラル型は型チェック時間が増大します。深いネストや広い型に適用する場合はパフォーマンスに注意してください。
 
-#### コード
-
 ```ts
 // ネストしたオブジェクトの全ドットパスを生成
 type Paths<T, P extends string = ''> = {
@@ -1412,8 +1316,6 @@ type ConfigPath = Paths<Config>;
 
 `as const` を付けると、値がリテラル型として推論され、すべてのプロパティが `readonly` になります。マジックナンバーや設定オブジェクトの型安全な定数化に使われます。
 
-#### コード
-
 ```ts
 // as const なし: string, number として広く推論される
 const configA = { host: 'localhost', port: 3000 };
@@ -1435,8 +1337,6 @@ type Route = typeof ROUTES[number]; // "/" | "/about" | "/contact"
 #### 説明
 
 `satisfies` は値が型を満たすことを検証しつつ、推論された具体的な型を保持します。`as` 型アサションと異なり型安全性を損なわずに型チェックできます（TS 4.9+）。
-
-#### コード
 
 ```ts
 type Palette = Record<string, string | readonly [number, number, number]>;
@@ -1463,8 +1363,6 @@ const config = {
 #### 説明
 
 `<const T>` とすると、型引数が `as const` を付けたように推論されます（TS 5.0+）。配列や文字列をそのままリテラル型として推論させたいときに便利です。
-
-#### コード
 
 ```ts
 // 通常: T は string[] と推論
@@ -1497,8 +1395,6 @@ type Routes = typeof routes[number]; // "/home" | "/about"
 
 `readonly T[]` は `T[]` のサブタイプではありません（逆方向）。`T[]` を期待する場所に `readonly T[]` を渡すとエラーになります。引数の型を可能な限り `readonly` にするのが安全です。
 
-#### コード
-
 ```ts
 // readonly 配列
 function processItems(items: readonly string[]): void {
@@ -1530,8 +1426,6 @@ swap(['a', 1] as const); // readonly [1, "a"]
 
 `verbatimModuleSyntax` が有効な場合、型として使われるインポートには必ず `import type` を使う必要があります。通常の `import` で型のみを使うとエラーになります。
 
-#### コード
-
 ```ts
 // 型のみのインポート（実行時に消える）
 import type { User, ApiResponse } from './types';
@@ -1552,8 +1446,6 @@ import { type Config, createConfig } from './config';
 #### 説明
 
 `declare module` を使うと既存のモジュールの型を拡張（Module Augmentation）できます。Express の `Request` 型にカスタムプロパティを追加する場合などに使われます。
-
-#### コード
 
 ```ts
 // express の Request 型を拡張
@@ -1578,8 +1470,6 @@ function handler(req: Request, res: Response) {
 #### 説明
 
 `.d.ts` ファイルに `declare` キーワードを使ってモジュールの型情報を宣言します。JavaScript ライブラリに型を追加する際や、グローバル変数の型定義に使います。
-
-#### コード
 
 ```ts
 // my-lib.d.ts
@@ -1611,8 +1501,6 @@ declare function gtag(command: string, ...args: unknown[]): void;
 
 `@types/xxx` は DefinitelyTyped で管理されるコミュニティ型定義パッケージです。TypeScript はデフォルトで `node_modules/@types` を自動認識します。`tsconfig.json` の `types`/`typeRoots` で制御できます。
 
-#### コード
-
 ```ts
 // インストール例
 // npm install -D @types/node @types/express
@@ -1641,8 +1529,6 @@ declare module 'some-untyped-lib' {
 
 `strict` で型チェックを最大化し、`target` で出力 JS バージョン、`module` でモジュール形式を指定します。`paths` でモジュールのエイリアスを設定できます。
 
-#### コード
-
 ```ts
 // tsconfig.json の主要設定例
 {
@@ -1669,8 +1555,6 @@ declare module 'some-untyped-lib' {
 
 `strict: true` は複数の厳格チェックを一括有効化します。各チェックの意味を理解して適切に有効化することが重要です。
 
-#### コード
-
 ```ts
 // strict: true は以下を全て有効にする
 // - strictNullChecks: null/undefined を別の型として扱う
@@ -1693,8 +1577,6 @@ function good(x: unknown) { return x; } // OK
 
 `isolatedModules` は各ファイルを独立してトランスパイルできることを保証します（esbuild/SWC との互換性）。`verbatimModuleSyntax` はより厳格な `import type` の強制を行います（TS 5.0+）。
 
-#### コード
-
 ```ts
 // isolatedModules: true が有効な場合
 // 型のみの export は 'export type' にする必要がある
@@ -1713,8 +1595,6 @@ import { someValue, type AnotherType } from './module'; // OK
 #### 説明
 
 複数のパッケージからなるモノレポで、各パッケージの TypeScript プロジェクトを `references` でリンクできます。インクリメンタルビルドが効き、型が別パッケージから参照できます。
-
-#### コード
 
 ```ts
 // packages/core/tsconfig.json
@@ -1745,8 +1625,6 @@ import { someValue, type AnotherType } from './module'; // OK
 #### 説明
 
 メソッドチェーンで段階的にオブジェクトを構築する Builder パターンを、ジェネリクスを使って型安全に実装できます。必須フィールドが揃ったときだけ `build()` を呼べるようにする設計が典型例です。
-
-#### コード
 
 ```ts
 type Optional<T, Keys extends keyof T> = Omit<T, Keys> & Partial<Pick<T, Keys>>;
@@ -1794,8 +1672,6 @@ const query = new QueryBuilder()
 
 関数の引数をオブジェクトにまとめ（オプションバッグ）、`Partial` や `Required` を使ってデフォルト値と必須値を分離するパターンです。
 
-#### コード
-
 ```ts
 interface FetchOptions {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -1836,8 +1712,6 @@ async function apiFetch(
 
 Branded Types は実行時には通常の `string`/`number` です。型強制（`as UserId`）を行う生成関数でのみ生成し、それ以外では直接 `as` でブランドを付けないようにしてください。
 
-#### コード
-
 ```ts
 // Brand を付ける
 type Branded<T, B> = T & { readonly _brand: B };
@@ -1867,8 +1741,6 @@ getUser(uid);  // OK
 #### 説明
 
 `Result<T, E>` 型（Either パターン）を使うと、成功値とエラーを Union 型で表現し、例外に頼らない型安全なエラーハンドリングができます。
-
-#### コード
 
 ```ts
 type Success<T> = { ok: true; value: T };

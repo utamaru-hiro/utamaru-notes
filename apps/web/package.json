@@ -11,6 +11,7 @@
     "validate-content": "tsx scripts/validate-guides.ts"
   },
   "dependencies": {
+    "marked": "^18.0.4",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",

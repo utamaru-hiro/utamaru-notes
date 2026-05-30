@@ -155,6 +155,7 @@ export function parseGuideMarkdown(
           code: stripTrailingBlankLines(openCodeFence.lines).join('\n'),
         });
         openCodeFence = null;
+        currentField = 'description';
         continue;
       }
 
@@ -163,8 +164,8 @@ export function parseGuideMarkdown(
     }
 
     if (isFenceLine(rawLine)) {
-      if (currentField !== 'code') {
-        fail('コードブロックは「#### コード」または「##### コード」セクションの中に置いてください', lineNumber);
+      if (!currentItem) {
+        fail('コードブロックは項目（###）の中に記述してください', lineNumber);
       }
 
       const lang = rawLine.replace(/^```/, '').trim();
@@ -172,6 +173,7 @@ export function parseGuideMarkdown(
         fail('コードブロックには言語識別子が必要です', lineNumber);
       }
 
+      flushTextBlock();
       openCodeFence = {
         lang,
         lines: [],
@@ -267,13 +269,7 @@ export function parseGuideMarkdown(
       currentField = currentItem ? 'description' : 'sectionLead';
     }
 
-    if (currentField === 'code') {
-      fail('「#### コード」セクションには言語指定付きコードブロックのみを記述してください', lineNumber);
-    }
-
-    if (currentField !== 'code') {
-      appendTextLine(currentField, rawLine);
-    }
+    appendTextLine(currentField, rawLine);
   }
 
   if (openCodeFence) {
