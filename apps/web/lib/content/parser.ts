@@ -236,10 +236,8 @@ export function parseGuideMarkdown(
           flushTextBlock();
           // currentItem is guaranteed non-null after the fail() check above
           currentItem!.blocks.push({ type: 'heading', level: depth as 5 | 6, text });
-          // コードフィールド内でH5/H6が使われた場合、続くテキストを説明として扱う
-          if (currentField === 'code') {
-            currentField = 'description';
-          }
+          // H5/H6の後は常にdescriptionモードにリセット（コード・注意等の後でも正しく動作させる）
+          currentField = 'description';
           break;
         }
         default:
