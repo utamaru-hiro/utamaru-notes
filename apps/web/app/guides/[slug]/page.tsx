@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { Fragment } from 'react';
 
 import GuideProgressBar from '@/components/GuideProgressBar';
 import GuideTocDrawer from '@/components/GuideTocDrawer';
@@ -85,55 +86,59 @@ export default async function GuidePage({
                     <article key={item.id} className="item-card">
                       <h3>{item.title}</h3>
 
-                      {item.description ? (
-                        <div className="item-copy">
-                          {item.description.split('\n\n').map((paragraph, index) => (
-                            <p key={index}>{paragraph}</p>
-                          ))}
-                        </div>
-                      ) : null}
+                      {item.fieldOrder.map((field) => (
+                        <Fragment key={field}>
+                          {field === 'description' && item.description ? (
+                            <div className="item-copy">
+                              {item.description.split('\n\n').map((paragraph, index) => (
+                                <p key={index}>{paragraph}</p>
+                              ))}
+                            </div>
+                          ) : null}
 
-                      {item.warn ? (
-                        <>
-                          <div className="item-label">注意</div>
-                          <div className="item-warn">{item.warn}</div>
-                        </>
-                      ) : null}
+                          {field === 'warn' && item.warn ? (
+                            <>
+                              <div className="item-label">注意</div>
+                              <div className="item-warn">{item.warn}</div>
+                            </>
+                          ) : null}
 
-                      {item.codeBlocks.length > 0 ? (
-                        <>
-                          <div className="item-label">コード</div>
-                          {item.codeBlocks.map((_, index) => {
-                            const key = `${item.id}-${index}`;
-                            const html = highlightedBlocks.get(key) ?? '';
-                            return (
-                              <div
-                                key={index}
-                                className="code-block-wrap"
-                                dangerouslySetInnerHTML={{ __html: html }}
-                              />
-                            );
-                          })}
-                        </>
-                      ) : null}
+                          {field === 'code' && item.codeBlocks.length > 0 ? (
+                            <>
+                              <div className="item-label">コード</div>
+                              {item.codeBlocks.map((_, index) => {
+                                const key = `${item.id}-${index}`;
+                                const html = highlightedBlocks.get(key) ?? '';
+                                return (
+                                  <div
+                                    key={index}
+                                    className="code-block-wrap"
+                                    dangerouslySetInnerHTML={{ __html: html }}
+                                  />
+                                );
+                              })}
+                            </>
+                          ) : null}
 
-                      {item.output ? (
-                        <>
-                          <div className="item-label">出力</div>
-                          <div className="item-output">{item.output}</div>
-                        </>
-                      ) : null}
+                          {field === 'output' && item.output ? (
+                            <>
+                              <div className="item-label">出力</div>
+                              <div className="item-output">{item.output}</div>
+                            </>
+                          ) : null}
 
-                      {item.supplement ? (
-                        <>
-                          <div className="item-label">補足</div>
-                          <div className="item-copy">
-                            {item.supplement.split('\n\n').map((paragraph, index) => (
-                              <p key={index}>{paragraph}</p>
-                            ))}
-                          </div>
-                        </>
-                      ) : null}
+                          {field === 'supplement' && item.supplement ? (
+                            <>
+                              <div className="item-label">補足</div>
+                              <div className="item-copy">
+                                {item.supplement.split('\n\n').map((paragraph, index) => (
+                                  <p key={index}>{paragraph}</p>
+                                ))}
+                              </div>
+                            </>
+                          ) : null}
+                        </Fragment>
+                      ))}
                     </article>
                   ))}
                 </div>

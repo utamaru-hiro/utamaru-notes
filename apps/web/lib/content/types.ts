@@ -18,6 +18,8 @@ export interface GuideCodeBlock {
   code: string;
 }
 
+export type GuideItemField = 'description' | 'warn' | 'code' | 'output' | 'supplement';
+
 export interface GuideItem {
   id: string;
   title: string;
@@ -26,6 +28,7 @@ export interface GuideItem {
   output?: string;
   supplement?: string;
   codeBlocks: GuideCodeBlock[];
+  fieldOrder: GuideItemField[];
   searchText: string;
 }
 

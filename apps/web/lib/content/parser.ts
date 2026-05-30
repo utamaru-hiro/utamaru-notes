@@ -1,10 +1,11 @@
 import type {
-  GuideCodeBlock,
-  GuideDocument,
-  GuideItem,
-  GuideMeta,
-  GuideSection,
-  ParseGuideMarkdownOptions,
+    GuideCodeBlock,
+    GuideDocument,
+    GuideItem,
+    GuideItemField,
+    GuideMeta,
+    GuideSection,
+    ParseGuideMarkdownOptions,
 } from './types';
 
 type TextField = 'sectionLead' | 'description' | 'warn' | 'output' | 'supplement';
@@ -12,6 +13,7 @@ type ActiveField = TextField | 'code';
 
 type MutableItem = {
   title: string;
+  fieldOrder: GuideItemField[];
   descriptionLines: string[];
   warnLines: string[];
   outputLines: string[];
@@ -64,6 +66,11 @@ export function parseGuideMarkdown(
   let currentField: ActiveField | null = null;
   let openCodeFence: OpenCodeFence | null = null;
 
+  const trackField = (field: GuideItemField) => {
+    if (!currentItem || currentItem.fieldOrder.includes(field)) return;
+    currentItem.fieldOrder.push(field);
+  };
+
   const fail = (message: string, line: number): never => {
     throw new GuideMarkdownParseError(message, line, options.sourcePath);
   };
@@ -76,6 +83,11 @@ export function parseGuideMarkdown(
     }
 
     if (!currentItem) return;
+
+    // Track field order on first non-empty content (handles implicit description without H4)
+    if (value.trim()) {
+      trackField(target as GuideItemField);
+    }
 
     switch (target) {
       case 'description':
@@ -112,6 +124,7 @@ export function parseGuideMarkdown(
       output: output || undefined,
       supplement: supplement || undefined,
       codeBlocks: currentItem.codeBlocks,
+      fieldOrder: currentItem.fieldOrder,
       searchText: createSearchText([
         currentSection.title,
         currentItem.title,
@@ -165,6 +178,7 @@ export function parseGuideMarkdown(
           lang: openCodeFence.lang,
           code: stripTrailingBlankLines(openCodeFence.lines).join('\n'),
         });
+        trackField('code');
         openCodeFence = null;
         continue;
       }
@@ -218,6 +232,7 @@ export function parseGuideMarkdown(
           finalizeItem(sectionIndex);
           currentItem = {
             title: text,
+            fieldOrder: [],
             descriptionLines: [],
             warnLines: [],
             outputLines: [],
@@ -238,6 +253,7 @@ export function parseGuideMarkdown(
           }
 
           currentField = nextField;
+          trackField(nextField as GuideItemField);
           break;
         }
         default:
