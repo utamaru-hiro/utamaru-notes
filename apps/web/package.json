@@ -11,6 +11,7 @@
     "validate-content": "tsx scripts/validate-guides.ts"
   },
   "dependencies": {
+    "katex": "^0.17.0",
     "marked": "^18.0.4",
     "next": "16.2.6",
     "react": "19.2.4",
@@ -18,6 +19,7 @@
     "shiki": "^4.1.0"
   },
   "devDependencies": {
+    "@types/katex": "^0.16.8",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

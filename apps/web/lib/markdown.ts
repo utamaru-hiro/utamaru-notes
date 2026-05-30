@@ -1,4 +1,53 @@
+import katex from 'katex';
 import { marked } from 'marked';
+
+// $$...$$ ブロック数式
+marked.use({
+  extensions: [
+    {
+      name: 'blockMath',
+      level: 'block',
+      start(src) {
+        return src.indexOf('$$');
+      },
+      tokenizer(src) {
+        const match = /^\$\$([\s\S]+?)\$\$/.exec(src);
+        if (match) {
+          return { type: 'blockMath', raw: match[0], math: match[1].trim() };
+        }
+        return undefined;
+      },
+      renderer(token) {
+        return katex.renderToString(token.math as string, {
+          displayMode: true,
+          throwOnError: false,
+          output: 'html',
+        });
+      },
+    },
+    {
+      name: 'inlineMath',
+      level: 'inline',
+      start(src) {
+        return src.indexOf('$');
+      },
+      tokenizer(src) {
+        const match = /^\$([^$\n]+?)\$/.exec(src);
+        if (match) {
+          return { type: 'inlineMath', raw: match[0], math: match[1].trim() };
+        }
+        return undefined;
+      },
+      renderer(token) {
+        return katex.renderToString(token.math as string, {
+          displayMode: false,
+          throwOnError: false,
+          output: 'html',
+        });
+      },
+    },
+  ],
+});
 
 // 外部リンクを新しいタブで開くカスタムレンダラー
 marked.use({
