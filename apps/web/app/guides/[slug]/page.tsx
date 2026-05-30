@@ -147,7 +147,7 @@ export default async function GuidePage({
                             );
                           }
                           if (block.type === 'heading') {
-                            const Tag = `h${block.level}` as 'h5' | 'h6';
+                            const Tag = `h${block.level}` as 'h4' | 'h5' | 'h6';
                             return (
                               <Tag key={index} className={`item-subheading-${block.level}`}>
                                 {block.text}

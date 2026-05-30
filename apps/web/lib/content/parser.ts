@@ -267,12 +267,15 @@ export function parseGuideMarkdown(
           }
 
           const nextField = SUBSECTION_LABELS[text];
-          if (!nextField) {
-            fail(`未対応の小見出しです: ${text}`, lineNumber);
-          }
-
           flushTextBlock();
-          currentField = nextField;
+          if (nextField) {
+            // レガシー：#### 説明 / #### 注意 等のフィールド切り替え
+            currentField = nextField;
+          } else {
+            // 通常の見出しとして description テキストブロックに埋め込む
+            currentItem!.blocks.push({ type: 'heading', level: 4, text });
+            currentField = 'description';
+          }
           break;
         }
         case 5:

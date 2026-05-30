@@ -16,7 +16,7 @@ export interface GuideMeta {
 export type GuideItemBlock =
   | { type: 'description' | 'warn' | 'output' | 'supplement'; text: string }
   | { type: 'code'; lang: string; code: string }
-  | { type: 'heading'; level: 5 | 6; text: string };
+  | { type: 'heading'; level: 4 | 5 | 6; text: string };
 
 export interface GuideItem {
   id: string;

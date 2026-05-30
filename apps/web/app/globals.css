@@ -407,6 +407,13 @@ a {
   border: 1px solid rgba(49, 120, 198, 0.16);
 }
 
+.item-subheading-4 {
+  margin: 24px 0 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fg);
+}
+
 .item-subheading-5 {
   margin: 20px 0 6px;
   font-size: 0.95rem;
