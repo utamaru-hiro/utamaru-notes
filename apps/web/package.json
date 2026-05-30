@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "tsx scripts/copy-content-images.ts && next dev",
+    "build": "tsx scripts/copy-content-images.ts && next build",
     "lint": "eslint . --max-warnings=0",
     "start": "next start",
     "type-check": "tsc --noEmit --project tsconfig.json",
