@@ -30,6 +30,18 @@ type OpenCodeFence = {
   openedAtLine: number;
 };
 
+type OpenCallout = {
+  type: TextBlockType;
+  lines: string[];
+};
+
+const CALLOUT_TYPES: Record<string, TextBlockType> = {
+  warning: 'warn',
+  note: 'supplement',
+  tip: 'supplement',
+  output: 'output',
+};
+
 const SUBSECTION_LABELS: Record<string, ActiveField> = {
   説明: 'description',
   注意: 'warn',
@@ -62,6 +74,14 @@ export function parseGuideMarkdown(
   let currentItem: MutableItem | null = null;
   let currentField: ActiveField | null = null;
   let openCodeFence: OpenCodeFence | null = null;
+  let openCallout: OpenCallout | null = null;
+
+  const flushCallout = () => {
+    if (!openCallout || !currentItem) { openCallout = null; return; }
+    const text = normalizeMarkdownBlock(openCallout.lines);
+    if (text) currentItem.blocks.push({ type: openCallout.type, text });
+    openCallout = null;
+  };
 
   const fail = (message: string, line: number): never => {
     throw new GuideMarkdownParseError(message, line, options.sourcePath);
@@ -138,6 +158,32 @@ export function parseGuideMarkdown(
   for (let index = 0; index < lines.length; index += 1) {
     const lineNumber = index + 1;
     const rawLine = lines[index];
+
+    // コールアウト行（> テキスト）の処理
+    if (openCallout) {
+      if (rawLine.startsWith('> ') || rawLine === '>') {
+        openCallout.lines.push(rawLine.startsWith('> ') ? rawLine.slice(2) : '');
+        continue;
+      }
+      // > で始まらない行 → コールアウト終了してフォールスルー
+      flushCallout();
+      currentField = 'description';
+    }
+
+    // コールアウト開始行 > [!type]
+    const calloutMatch = /^> \[!(\w+)\]/.exec(rawLine);
+    if (calloutMatch) {
+      if (!currentItem) {
+        fail('コールアウトは項目（###）の中に記述してください', lineNumber);
+      }
+      const calloutType = CALLOUT_TYPES[calloutMatch[1].toLowerCase()];
+      if (!calloutType) {
+        fail(`未対応のコールアウト種別です: ${calloutMatch[1]}`, lineNumber);
+      }
+      flushTextBlock();
+      openCallout = { type: calloutType, lines: [] };
+      continue;
+    }
 
     if (openCodeFence) {
       if (isFenceLine(rawLine)) {
@@ -275,6 +321,8 @@ export function parseGuideMarkdown(
   if (openCodeFence) {
     fail('コードブロックが閉じられていません', openCodeFence.openedAtLine);
   }
+
+  flushCallout();
 
   finalizeSection();
 
