@@ -430,6 +430,25 @@ a {
   color: var(--muted);
 }
 
+.item-copy figure {
+  margin: 16px 0;
+}
+
+.item-copy figure figcaption {
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 6px;
+}
+
+.item-copy svg,
+.guide-diagram {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
 .code-block-wrap {
   margin: 12px 0 0;
   border-radius: 16px;

@@ -10,6 +10,11 @@ marked.use({
       const targetAttr = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
       return `<a href="${href}"${titleAttr}${targetAttr}>${text}</a>`;
     },
+    image({ href, text }) {
+      const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+      const src = href.startsWith('/') ? `${base}${href}` : href;
+      return `<img src="${src}" alt="${text}" class="guide-diagram" loading="lazy"/>`;
+    },
   },
   gfm: true,
 });
