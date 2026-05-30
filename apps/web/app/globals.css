@@ -648,7 +648,7 @@ a {
     transform: none;
     top: 24px;
     left: max(16px, calc((100vw - 1200px) / 2));
-    height: calc(100dvh - 48px);
+    height: calc(100dvh - 24px - 48px);
     width: 280px;
     border-radius: 20px;
     border: 1px solid var(--border);
