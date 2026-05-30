@@ -82,8 +82,8 @@ TypeScript は多くの場面で型を自動推論するため、型アノテー
 
 ```ts
 // 変数: 右辺から推論
-const x = 42;        // number
-const s = 'hello';   // string
+const x = 42;        // 42（リテラル型）
+const s = 'hello';   // "hello"（リテラル型）
 const arr = [1, 2];  // number[]
 
 // 関数の戻り値: return 文から推論
@@ -127,10 +127,10 @@ const print = (msg: string): void => {
 
 ### オプション引数・デフォルト引数
 
-`?` を付けるとオプション引数（`undefined` を許容）になります。デフォルト引数は値が渡されなかったときに使われ、型は自動推論されます。オプション引数はデフォルト引数の後には置けません。
+`?` を付けるとオプション引数（`undefined` を許容）になります。デフォルト引数は値が渡されなかったときに使われ、型は自動推論されます。必須引数はオプション引数の後には置けません。
 
 > [!warning]
-> オプション引数（`?`）と `| undefined` の共用体型は微妙に異なります。`?` は引数の省略を許容しますが、`| undefined` の場合は省略はできず `undefined` を明示的に渡す必要があります（`exactOptionalPropertyTypes` 有効時）。
+> オプション引数（`?`）と `| undefined` の共用体型は微妙に異なります。`?` は引数の省略を許容しますが、`| undefined` の場合は省略はできず `undefined` を明示的に渡す必要があります。これはコンパイラオプションに関係なく TypeScript の基本的な動作です（`exactOptionalPropertyTypes` はオブジェクトのプロパティに影響するオプションであり、関数引数には影響しません）。
 
 ```ts
 // オプション引数
@@ -479,8 +479,9 @@ palette.green.toUpperCase(); // OK
 // palette.red.toUpperCase(); // エラー: red は number[]
 
 // as による型アサションとの違い
-const palette2 = { red: [255, 0, 0] } as Colors;
-palette2.red.toUpperCase(); // 型エラーにならない（危険）
+// as は型チェックを強制キャストで回避できる（危険）
+const palette2 = { red: 123 } as Colors; // 本来不正な値でもコンパイルが通る
+palette2.red; // string | [number, number, number] として扱われる（実際は number）
 ```
 
 ## ジェネリクス
@@ -504,7 +505,7 @@ function first<T>(arr: T[]): T | undefined {
 }
 
 function zip<A, B>(a: A[], b: B[]): [A, B][] {
-  return a.map((v, i) => [v, b[i]]);
+  return a.map((v, i) => [v, b[i]] as [A, B]);
 }
 zip([1, 2], ['a', 'b']); // [number, string][]
 ```
@@ -1012,7 +1013,7 @@ type WrappedOpt = Wrapped<Opt>;
 // 非ホモモルフィック: 任意のキー型 → 修飾子は引き継がれない
 type NonHomo<T> = { [K in keyof T & string]: T[K] };
 type NonHomoOpt = NonHomo<Opt>;
-// { a: string; b: number }  ← ? が消える（注意！）
+// { a: string | undefined; b: number }  ← ? は消えるが undefined は残る（注意！）
 ```
 
 ## Conditional Types
@@ -1430,7 +1431,7 @@ declare module 'some-untyped-lib' {
 // - strictFunctionTypes: 関数型の反変チェック
 // - strictBindCallApply: bind/call/apply の型チェック
 // - strictPropertyInitialization: クラスプロパティの初期化チェック
-// - noImplicitThis: this の型推論を強制
+// - noImplicitThis: this の暗黙的 any を禁止
 // - alwaysStrict: 各ファイルに 'use strict' を追加
 // - useUnknownInCatchVariables (TS 4.4+): catch 変数を unknown に
 
