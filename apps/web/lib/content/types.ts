@@ -13,22 +13,15 @@ export interface GuideMeta {
   cardSummary: string;
 }
 
-export interface GuideCodeBlock {
-  lang: string;
-  code: string;
-}
-
-export type GuideItemField = 'description' | 'warn' | 'code' | 'output' | 'supplement';
+export type GuideItemBlock =
+  | { type: 'description' | 'warn' | 'output' | 'supplement'; text: string }
+  | { type: 'code'; lang: string; code: string }
+  | { type: 'heading'; level: 5 | 6; text: string };
 
 export interface GuideItem {
   id: string;
   title: string;
-  description?: string;
-  warn?: string;
-  output?: string;
-  supplement?: string;
-  codeBlocks: GuideCodeBlock[];
-  fieldOrder: GuideItemField[];
+  blocks: GuideItemBlock[];
   searchText: string;
 }
 

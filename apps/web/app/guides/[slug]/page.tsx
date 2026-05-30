@@ -48,10 +48,13 @@ export default async function GuidePage({
   const highlightedBlocks: Map<string, string> = new Map();
   for (const section of guide.sections) {
     for (const item of section.items) {
-      for (let i = 0; i < item.codeBlocks.length; i++) {
-        const { code, lang } = item.codeBlocks[i];
-        const key = `${item.id}-${i}`;
-        highlightedBlocks.set(key, await highlightCode(code, lang));
+      let codeIndex = 0;
+      for (const block of item.blocks) {
+        if (block.type === 'code') {
+          const key = `${item.id}-code-${codeIndex}`;
+          highlightedBlocks.set(key, await highlightCode(block.code, block.lang));
+          codeIndex++;
+        }
       }
     }
   }
@@ -86,59 +89,71 @@ export default async function GuidePage({
                     <article key={item.id} className="item-card">
                       <h3>{item.title}</h3>
 
-                      {item.fieldOrder.map((field) => (
-                        <Fragment key={field}>
-                          {field === 'description' && item.description ? (
-                            <div className="item-copy">
-                              {item.description.split('\n\n').map((paragraph, index) => (
-                                <p key={index}>{paragraph}</p>
-                              ))}
-                            </div>
-                          ) : null}
-
-                          {field === 'warn' && item.warn ? (
-                            <>
-                              <div className="item-label">注意</div>
-                              <div className="item-warn">{item.warn}</div>
-                            </>
-                          ) : null}
-
-                          {field === 'code' && item.codeBlocks.length > 0 ? (
-                            <>
-                              <div className="item-label">コード</div>
-                              {item.codeBlocks.map((_, index) => {
-                                const key = `${item.id}-${index}`;
-                                const html = highlightedBlocks.get(key) ?? '';
-                                return (
-                                  <div
-                                    key={index}
-                                    className="code-block-wrap"
-                                    dangerouslySetInnerHTML={{ __html: html }}
-                                  />
-                                );
-                              })}
-                            </>
-                          ) : null}
-
-                          {field === 'output' && item.output ? (
-                            <>
-                              <div className="item-label">出力</div>
-                              <div className="item-output">{item.output}</div>
-                            </>
-                          ) : null}
-
-                          {field === 'supplement' && item.supplement ? (
-                            <>
-                              <div className="item-label">補足</div>
-                              <div className="item-copy">
-                                {item.supplement.split('\n\n').map((paragraph, index) => (
-                                  <p key={index}>{paragraph}</p>
+                      {(() => {
+                        let codeIndex = 0;
+                        return item.blocks.map((block, index) => {
+                          if (block.type === 'description') {
+                            return (
+                              <div key={index} className="item-copy">
+                                {block.text.split('\n\n').map((paragraph, i) => (
+                                  <p key={i}>{paragraph}</p>
                                 ))}
                               </div>
-                            </>
-                          ) : null}
-                        </Fragment>
-                      ))}
+                            );
+                          }
+                          if (block.type === 'warn') {
+                            return (
+                              <Fragment key={index}>
+                                <div className="item-label">注意</div>
+                                <div className="item-warn">{block.text}</div>
+                              </Fragment>
+                            );
+                          }
+                          if (block.type === 'code') {
+                            const key = `${item.id}-code-${codeIndex}`;
+                            const html = highlightedBlocks.get(key) ?? '';
+                            codeIndex++;
+                            return (
+                              <Fragment key={index}>
+                                <div className="item-label">コード</div>
+                                <div
+                                  className="code-block-wrap"
+                                  dangerouslySetInnerHTML={{ __html: html }}
+                                />
+                              </Fragment>
+                            );
+                          }
+                          if (block.type === 'output') {
+                            return (
+                              <Fragment key={index}>
+                                <div className="item-label">出力</div>
+                                <div className="item-output">{block.text}</div>
+                              </Fragment>
+                            );
+                          }
+                          if (block.type === 'supplement') {
+                            return (
+                              <Fragment key={index}>
+                                <div className="item-label">補足</div>
+                                <div className="item-copy">
+                                  {block.text.split('\n\n').map((paragraph, i) => (
+                                    <p key={i}>{paragraph}</p>
+                                  ))}
+                                </div>
+                              </Fragment>
+                            );
+                          }
+                          if (block.type === 'heading') {
+                            const Tag = `h${block.level}` as 'h5' | 'h6';
+                            return (
+                              <Tag key={index} className={`item-subheading-${block.level}`}>
+                                {block.text}
+                              </Tag>
+                            );
+                          }
+                          return null;
+                        });
+                      })()}
                     </article>
                   ))}
                 </div>

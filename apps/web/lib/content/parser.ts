@@ -1,24 +1,21 @@
 import type {
-    GuideCodeBlock,
     GuideDocument,
     GuideItem,
-    GuideItemField,
+    GuideItemBlock,
     GuideMeta,
     GuideSection,
     ParseGuideMarkdownOptions,
 } from './types';
 
-type TextField = 'sectionLead' | 'description' | 'warn' | 'output' | 'supplement';
-type ActiveField = TextField | 'code';
+type TextBlockType = 'description' | 'warn' | 'output' | 'supplement';
+type ActiveField = 'sectionLead' | TextBlockType | 'code';
+
+type CurrentTextBlock = { type: TextBlockType; lines: string[] };
 
 type MutableItem = {
   title: string;
-  fieldOrder: GuideItemField[];
-  descriptionLines: string[];
-  warnLines: string[];
-  outputLines: string[];
-  supplementLines: string[];
-  codeBlocks: GuideCodeBlock[];
+  blocks: GuideItemBlock[];
+  currentTextBlock: CurrentTextBlock | null;
 };
 
 type MutableSection = {
@@ -66,74 +63,52 @@ export function parseGuideMarkdown(
   let currentField: ActiveField | null = null;
   let openCodeFence: OpenCodeFence | null = null;
 
-  const trackField = (field: GuideItemField) => {
-    if (!currentItem || currentItem.fieldOrder.includes(field)) return;
-    currentItem.fieldOrder.push(field);
-  };
-
   const fail = (message: string, line: number): never => {
     throw new GuideMarkdownParseError(message, line, options.sourcePath);
   };
 
-  const appendTextLine = (target: TextField, value: string) => {
+  const flushTextBlock = () => {
+    if (!currentItem?.currentTextBlock) return;
+    const { type, lines } = currentItem.currentTextBlock;
+    const text = normalizeMarkdownBlock(lines);
+    if (text) {
+      currentItem.blocks.push({ type, text });
+    }
+    currentItem.currentTextBlock = null;
+  };
+
+  const appendTextLine = (target: ActiveField, value: string) => {
     if (target === 'sectionLead') {
       if (!currentSection) return;
       currentSection.leadLines.push(value);
       return;
     }
 
-    if (!currentItem) return;
+    if (!currentItem || target === 'code') return;
 
-    // Track field order on first non-empty content (handles implicit description without H4)
-    if (value.trim()) {
-      trackField(target as GuideItemField);
+    if (!currentItem.currentTextBlock) {
+      currentItem.currentTextBlock = { type: target as TextBlockType, lines: [] };
     }
-
-    switch (target) {
-      case 'description':
-        currentItem.descriptionLines.push(value);
-        break;
-      case 'warn':
-        currentItem.warnLines.push(value);
-        break;
-      case 'output':
-        currentItem.outputLines.push(value);
-        break;
-      case 'supplement':
-        currentItem.supplementLines.push(value);
-        break;
-      default:
-        break;
-    }
+    currentItem.currentTextBlock.lines.push(value);
   };
 
   const finalizeItem = (sectionIndex: number) => {
     if (!currentSection || !currentItem) return;
 
+    flushTextBlock();
+
     const itemIndex = currentSection.items.length + 1;
-    const description = normalizeMarkdownBlock(currentItem.descriptionLines);
-    const warn = normalizeMarkdownBlock(currentItem.warnLines);
-    const output = normalizeMarkdownBlock(currentItem.outputLines);
-    const supplement = normalizeMarkdownBlock(currentItem.supplementLines);
+    const searchParts: string[] = [
+      currentSection.title,
+      currentItem.title,
+      ...currentItem.blocks.map((b) => (b.type === 'code' ? b.code : b.text)),
+    ];
 
     currentSection.items.push({
       id: `section-${sectionIndex}-item-${itemIndex}`,
       title: currentItem.title,
-      description: description || undefined,
-      warn: warn || undefined,
-      output: output || undefined,
-      supplement: supplement || undefined,
-      codeBlocks: currentItem.codeBlocks,
-      fieldOrder: currentItem.fieldOrder,
-      searchText: createSearchText([
-        currentSection.title,
-        currentItem.title,
-        description,
-        warn,
-        output,
-        supplement,
-        currentItem.codeBlocks.map((codeBlock) => codeBlock.code).join('\n'),
-      ]),
+      blocks: currentItem.blocks,
+      searchText: createSearchText(searchParts),
     });
 
     currentItem = null;
@@ -174,11 +149,11 @@ export function parseGuideMarkdown(
           );
         }
 
-        currentItem.codeBlocks.push({
+        currentItem.blocks.push({
+          type: 'code',
           lang: openCodeFence.lang,
           code: stripTrailingBlankLines(openCodeFence.lines).join('\n'),
         });
-        trackField('code');
         openCodeFence = null;
         continue;
       }
@@ -232,12 +207,8 @@ export function parseGuideMarkdown(
           finalizeItem(sectionIndex);
           currentItem = {
             title: text,
-            fieldOrder: [],
-            descriptionLines: [],
-            warnLines: [],
-            outputLines: [],
-            supplementLines: [],
-            codeBlocks: [],
+            blocks: [],
+            currentTextBlock: null,
           };
           currentField = 'description';
           break;
@@ -252,8 +223,19 @@ export function parseGuideMarkdown(
             fail(`未対応の小見出しです: ${text}`, lineNumber);
           }
 
+          flushTextBlock();
           currentField = nextField;
-          trackField(nextField as GuideItemField);
+          break;
+        }
+        case 5:
+        case 6: {
+          if (!currentItem) {
+            fail('小見出しの前に項目見出しが必要です', lineNumber);
+          }
+
+          flushTextBlock();
+          // currentItem is guaranteed non-null after the fail() check above
+          currentItem!.blocks.push({ type: 'heading', level: depth as 5 | 6, text });
           break;
         }
         default:

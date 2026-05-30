@@ -340,6 +340,22 @@ a {
   border: 1px solid rgba(49, 120, 198, 0.16);
 }
 
+.item-subheading-5 {
+  margin: 20px 0 6px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding-left: 10px;
+  border-left: 3px solid var(--accent, #888);
+  color: var(--fg);
+}
+
+.item-subheading-6 {
+  margin: 14px 0 4px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
 .code-block-wrap {
   margin: 12px 0 0;
   border-radius: 16px;
