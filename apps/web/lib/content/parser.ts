@@ -164,7 +164,7 @@ export function parseGuideMarkdown(
 
     if (isFenceLine(rawLine)) {
       if (currentField !== 'code') {
-        fail('コードブロックは「#### コード」セクションの中に置いてください', lineNumber);
+        fail('コードブロックは「#### コード」または「##### コード」セクションの中に置いてください', lineNumber);
       }
 
       const lang = rawLine.replace(/^```/, '').trim();
@@ -234,10 +234,15 @@ export function parseGuideMarkdown(
           }
 
           flushTextBlock();
-          // currentItem is guaranteed non-null after the fail() check above
-          currentItem!.blocks.push({ type: 'heading', level: depth as 5 | 6, text });
-          // H5/H6の後は常にdescriptionモードにリセット（コード・注意等の後でも正しく動作させる）
-          currentField = 'description';
+
+          const subField = SUBSECTION_LABELS[text];
+          if (subField) {
+            // 「##### コード」「###### 注意」等はH4と同じフィールド切り替えとして扱う
+            currentField = subField;
+          } else {
+            currentItem!.blocks.push({ type: 'heading', level: depth as 5 | 6, text });
+            currentField = 'description';
+          }
           break;
         }
         default:
