@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="260" viewBox="0 0 960 260" role="img" aria-labelledby="title desc">
+  <title id="title">Series connection block diagram</title>
+  <desc id="desc">Input U enters G1 then G2 and becomes output Y, with an intermediate signal X between the two blocks.</desc>
+  <rect width="960" height="260" fill="#fffaf1"/>
+  <g font-family="Helvetica, Arial, sans-serif" fill="#2f2412">
+    <text x="74" y="110" font-size="28" font-weight="700">U(s)</text>
+    <text x="405" y="110" font-size="28" font-weight="700">X(s)</text>
+    <text x="806" y="110" font-size="28" font-weight="700">Y(s)</text>
+    <rect x="210" y="76" width="170" height="92" rx="18" fill="#ffe8b7" stroke="#8a5a00" stroke-width="4"/>
+    <rect x="520" y="76" width="170" height="92" rx="18" fill="#ffe8b7" stroke="#8a5a00" stroke-width="4"/>
+    <text x="270" y="130" font-size="30" font-weight="700">G₁(s)</text>
+    <text x="580" y="130" font-size="30" font-weight="700">G₂(s)</text>
+    <text x="232" y="212" font-size="24">X = G₁U</text>
+    <text x="547" y="212" font-size="24">Y = G₂X</text>
+  </g>
+  <g stroke="#2f2412" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M118 122 H210"/>
+    <path d="M380 122 H520"/>
+    <path d="M690 122 H792"/>
+    <polygon points="210,122 196,114 196,130" fill="#2f2412"/>
+    <polygon points="520,122 506,114 506,130" fill="#2f2412"/>
+    <polygon points="792,122 778,114 778,130" fill="#2f2412"/>
+  </g>
+</svg>

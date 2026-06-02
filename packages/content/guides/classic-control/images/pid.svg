@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">Qualitative roles of P I D actions</title>
+  <desc id="desc">Three panels showing P speeding up, I removing bias, and D adding damping.</desc>
+  <rect width="960" height="420" fill="#fffaf1"/>
+  <g font-family="Helvetica, Arial, sans-serif" fill="#2f2412">
+    <text x="138" y="72" font-size="28" font-weight="700">P action</text>
+    <text x="420" y="72" font-size="28" font-weight="700">I action</text>
+    <text x="704" y="72" font-size="28" font-weight="700">D action</text>
+    <text x="98" y="344" font-size="20">faster rise, more overshoot</text>
+    <text x="392" y="344" font-size="20">removes steady-state bias</text>
+    <text x="688" y="344" font-size="20">adds damping, reduces oscillation</text>
+  </g>
+  <g stroke="#2f2412" stroke-width="3" fill="none">
+    <rect x="70" y="96" width="240" height="210" rx="18"/>
+    <rect x="360" y="96" width="240" height="210" rx="18"/>
+    <rect x="650" y="96" width="240" height="210" rx="18"/>
+  </g>
+  <g stroke="#d2d2d2" stroke-width="2" fill="none">
+    <path d="M95 260 H285"/>
+    <path d="M95 150 H285"/>
+    <path d="M385 260 H575"/>
+    <path d="M385 150 H575"/>
+    <path d="M675 260 H865"/>
+    <path d="M675 150 H865"/>
+  </g>
+  <g stroke="#8a5a00" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M96 260 L132 258 L164 210 L196 126 L226 152 L256 144 L284 150"/>
+    <path d="M386 260 L418 258 L450 220 L482 182 L516 160 L546 152 L576 150"/>
+    <path d="M676 260 L708 258 L740 190 L770 136 L798 155 L828 149 L864 150"/>
+  </g>
+</svg>

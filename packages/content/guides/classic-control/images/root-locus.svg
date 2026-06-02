@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">Basic root locus sketch</title>
+  <desc id="desc">Complex plane with open-loop poles, zero, real-axis locus, and asymptotes.</desc>
+  <rect width="960" height="420" fill="#fffaf1"/>
+  <g stroke="#2f2412" stroke-width="4" fill="none">
+    <path d="M100 210 H860"/>
+    <path d="M480 50 V370"/>
+  </g>
+  <g font-family="Helvetica, Arial, sans-serif" fill="#2f2412">
+    <text x="830" y="196" font-size="24">Re(s)</text>
+    <text x="496" y="76" font-size="24">Im(s)</text>
+    <text x="158" y="124" font-size="22">open-loop poles</text>
+    <text x="634" y="124" font-size="22">open-loop zero</text>
+    <text x="560" y="338" font-size="22">asymptotes</text>
+  </g>
+  <g stroke="#8a5a00" stroke-width="6" fill="none" stroke-linecap="round">
+    <path d="M180 210 H710"/>
+    <path d="M280 210 C320 150 380 110 480 70"/>
+    <path d="M280 210 C320 270 380 310 480 350"/>
+    <path d="M520 210 C580 170 620 150 690 140"/>
+    <path d="M520 210 C580 250 620 270 690 280"/>
+    <path d="M520 210 L660 70" stroke-dasharray="10 10"/>
+    <path d="M520 210 L660 350" stroke-dasharray="10 10"/>
+  </g>
+  <g stroke="#2f2412" stroke-width="6">
+    <line x1="162" y1="192" x2="198" y2="228"/>
+    <line x1="198" y1="192" x2="162" y2="228"/>
+    <line x1="242" y1="192" x2="278" y2="228"/>
+    <line x1="278" y1="192" x2="242" y2="228"/>
+    <line x1="322" y1="192" x2="358" y2="228"/>
+    <line x1="358" y1="192" x2="322" y2="228"/>
+  </g>
+  <g stroke="#c06f00" stroke-width="6" fill="none">
+    <circle cx="710" cy="210" r="18"/>
+  </g>
+</svg>

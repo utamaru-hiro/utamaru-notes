@@ -6,33 +6,43 @@ type Props = {
   slug: string;
 };
 
+function getSavedScrollPosition(storageKey: string): number | null {
+  if (typeof window === 'undefined') return null;
+  const raw = window.localStorage.getItem(storageKey);
+  if (raw === null) return null;
+
+  const y = parseInt(raw, 10);
+  return !Number.isNaN(y) && y > 200 ? y : null;
+}
+
+function getScrollProgress(): number {
+  if (typeof window === 'undefined') return 0;
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  if (scrollable <= 0) return 0;
+  return Math.min(100, (window.scrollY / scrollable) * 100);
+}
+
 export default function GuideProgressBar({ slug }: Props) {
   const storageKey = `guide-scroll-${slug}`;
-  const [progress, setProgress] = useState(0);
-  const [savedY, setSavedY] = useState<number | null>(null);
-  const [currentY, setCurrentY] = useState(0);
+  const [progress, setProgress] = useState(() => getScrollProgress());
+  const [savedY] = useState<number | null>(() => getSavedScrollPosition(storageKey));
+  const [currentY, setCurrentY] = useState(() => (typeof window === 'undefined' ? 0 : window.scrollY));
   const throttleRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // 初回マウント: localStorage から前回位置を復元
   useEffect(() => {
-    const raw = localStorage.getItem(storageKey);
-    if (raw !== null) {
-      const y = parseInt(raw, 10);
-      if (!Number.isNaN(y) && y > 200) {
-        setSavedY(y);
-        // 少し遅らせてページ描画後にスムーズスクロール
-        const timer = setTimeout(() => {
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }, 300);
-        return () => clearTimeout(timer);
-      }
-    }
-  }, [storageKey]);
+    if (savedY === null) return;
+
+    // 少し遅らせてページ描画後にスムーズスクロール
+    const timer = setTimeout(() => {
+      window.scrollTo({ top: savedY, behavior: 'smooth' });
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [savedY]);
 
   const calcProgress = useCallback(() => {
-    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    if (scrollable <= 0) return 0;
-    return Math.min(100, (window.scrollY / scrollable) * 100);
+    return getScrollProgress();
   }, []);
 
   // スクロールイベント: 進捗更新 + localStorage 保存（150ms throttle）
@@ -46,10 +56,6 @@ export default function GuideProgressBar({ slug }: Props) {
         throttleRef.current = null;
       }, 150);
     };
-
-    // 初期 progress
-    setProgress(calcProgress());
-    setCurrentY(window.scrollY);
 
     window.addEventListener('scroll', handler, { passive: true });
     return () => {
