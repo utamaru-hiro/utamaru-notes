@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="440" viewBox="0 0 960 440" role="img" aria-labelledby="title desc">
+  <title id="title">S-plane stability regions</title>
+  <desc id="desc">Complex plane divided into stable left half-plane and unstable right half-plane, with example pole types annotated.</desc>
+  <rect width="960" height="440" fill="#fffaf1"/>
+  <!-- Stable region shading -->
+  <rect x="100" y="40" width="360" height="360" fill="#d4edda" opacity="0.45"/>
+  <!-- Unstable region shading -->
+  <rect x="460" y="40" width="400" height="360" fill="#f8d7da" opacity="0.45"/>
+  <!-- Axes -->
+  <g stroke="#2f2412" stroke-width="4" fill="none">
+    <path d="M100 220 H880"/>
+    <path d="M460 40 V400"/>
+    <!-- Axis arrows -->
+    <polygon points="880,220 864,212 864,228" fill="#2f2412"/>
+    <polygon points="460,40 452,56 468,56" fill="#2f2412"/>
+  </g>
+  <!-- Axis labels -->
+  <g font-family="Helvetica, Arial, sans-serif" fill="#2f2412">
+    <text x="840" y="210" font-size="24">Re(s)</text>
+    <text x="476" y="58" font-size="24">Im(s)</text>
+    <!-- Region labels -->
+    <text x="150" y="100" font-size="22" fill="#1a5c2a" font-weight="700">安定領域</text>
+    <text x="150" y="126" font-size="20" fill="#1a5c2a">（左半平面）</text>
+    <text x="550" y="100" font-size="22" fill="#8b1a1a" font-weight="700">不安定領域</text>
+    <text x="550" y="126" font-size="20" fill="#8b1a1a">（右半平面）</text>
+    <!-- Imaginary axis label -->
+    <text x="332" y="380" font-size="19" fill="#6b4a00" text-anchor="middle">虚軸上：持続振動（安定限界）</text>
+  </g>
+  <!-- Left real axis poles (exponential decay) -->
+  <g stroke="#1a5c2a" stroke-width="6">
+    <line x1="222" y1="202" x2="258" y2="238"/>
+    <line x1="258" y1="202" x2="222" y2="238"/>
+  </g>
+  <text x="168" y="278" font-size="19" fill="#1a5c2a" font-family="Helvetica, Arial, sans-serif">実軸上の極 → 指数減衰</text>
+  <!-- Left complex conjugate poles -->
+  <g stroke="#1a5c2a" stroke-width="6">
+    <line x1="162" y1="142" x2="198" y2="178"/>
+    <line x1="198" y1="142" x2="162" y2="178"/>
+    <line x1="162" y1="262" x2="198" y2="298"/>
+    <line x1="198" y1="262" x2="162" y2="298"/>
+  </g>
+  <text x="212" y="165" font-size="19" fill="#1a5c2a" font-family="Helvetica, Arial, sans-serif">複素共役極 → 減衰振動</text>
+  <!-- Imaginary axis poles -->
+  <g stroke="#c06f00" stroke-width="6">
+    <line x1="442" y1="132" x2="478" y2="168"/>
+    <line x1="478" y1="132" x2="442" y2="168"/>
+    <line x1="442" y1="272" x2="478" y2="308"/>
+    <line x1="478" y1="272" x2="442" y2="308"/>
+  </g>
+  <!-- Right half plane pole (unstable) -->
+  <g stroke="#8b1a1a" stroke-width="6">
+    <line x1="602" y1="202" x2="638" y2="238"/>
+    <line x1="638" y1="202" x2="602" y2="238"/>
+  </g>
+  <text x="656" y="228" font-size="19" fill="#8b1a1a" font-family="Helvetica, Arial, sans-serif">右半平面の極 → 発散</text>
+  <!-- Origin label -->
+  <text x="466" y="244" font-size="20" fill="#2f2412" font-family="Helvetica, Arial, sans-serif">O</text>
+</svg>
