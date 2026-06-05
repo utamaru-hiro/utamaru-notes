@@ -24,10 +24,18 @@ function getScrollProgress(): number {
 
 export default function GuideProgressBar({ slug }: Props) {
   const storageKey = `guide-scroll-${slug}`;
-  const [progress, setProgress] = useState(() => getScrollProgress());
-  const [savedY] = useState<number | null>(() => getSavedScrollPosition(storageKey));
-  const [currentY, setCurrentY] = useState(() => (typeof window === 'undefined' ? 0 : window.scrollY));
+  const [progress, setProgress] = useState(0);
+  const [savedY, setSavedY] = useState<number | null>(null);
+  const [currentY, setCurrentY] = useState(0);
   const throttleRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // 初回マウント: 進捗・スクロール位置・localStorage を初期化
+  useEffect(() => {
+    setProgress(getScrollProgress());
+    setCurrentY(window.scrollY);
+    const saved = getSavedScrollPosition(storageKey);
+    setSavedY(saved);
+  }, [storageKey]);
 
   // 初回マウント: localStorage から前回位置を復元
   useEffect(() => {
