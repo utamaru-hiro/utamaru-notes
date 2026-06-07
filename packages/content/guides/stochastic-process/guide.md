@@ -232,4 +232,55 @@ $$
 となる。
 [証明終]
 
+**情報量**
+
+$$I(X)=-\log p(X)\quad(\ge0)$$
+
 **エントロピー**
+
+$$H \equiv \langle I(X) \rangle = - \sum_{k=1}^{\infty} p_k \log p_k$$
+
+連続確率密度の場合は
+
+$$H \equiv \langle I(X) \rangle = - \int_{-\infty}^{\infty} p(x) \log p(x)\,dx$$
+
+#### 2次元確率変数の平均
+
+$$\langle f(X,Y) \rangle = \iint_{-\infty}^{\infty} f(x,y)p(x,y)\,dxdy$$
+
+**条件付き平均**
+
+$$\langle f(X,Y)|Y=y \rangle=\int_{-\infty}^{\infty}f(x,y)p(x|y)\,dx$$
+
+**分散・共分散・相関
+
+$(X,Y)$の平均値、分散を
+
+$$\mu_x \equiv \langle X \rangle, \qquad \sigma_x^2 \equiv R_{xx}=\langle (X-\mu_x)^2 \rangle$$
+
+$$\mu_y \equiv \langle Y \rangle, \qquad \sigma_y^2 \equiv R_{yy}=\langle (Y-\mu_y)^2 \rangle$$
+
+とおく。$X$と$Y$にまたがる2次の中心モーメント
+
+$$
+\begin{split}
+R_{xy}=R_{yx}&= \langle (X-\mu_x)(Y-\mu_y) \rangle \\
+&=\langle XY \rangle-\langle X \rangle \langle Y \rangle
+\end{split}
+$$
+
+を$X$と$Y$の**共分散**あるいは**相関**とよぶ。
+
+**2次相関行列**
+
+$$\mathbf{R}=\begin{bmatrix}R_{xx} R_{xy} \\ R_{yx} R_{yy}\end{bmatrix}$$
+
+**相関係数**
+
+$$
+\rho_{xy} \equiv \frac{R_{xy}}{\sigma_x\sigma_y}=\frac{\langle (X-\mu_x)(Y-\mu_y) \rangle}{[\langle (X-\mu_x)^2\rangle \langle (Y-\mu_y)^2 \rangle]^{1/2}}
+$$
+
+相関係数の絶対値は1より小さい
+
+$$-1 \le \rho_{xy} \le 1, \qquad \rho_{xy} \equiv \cos{\theta_{xy}}$$
