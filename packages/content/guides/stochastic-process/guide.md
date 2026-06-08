@@ -252,7 +252,7 @@ $$\langle f(X,Y) \rangle = \iint_{-\infty}^{\infty} f(x,y)p(x,y)\,dxdy$$
 
 $$\langle f(X,Y)|Y=y \rangle=\int_{-\infty}^{\infty}f(x,y)p(x|y)\,dx$$
 
-**分散・共分散・相関
+**分散・共分散・相関**
 
 $(X,Y)$の平均値、分散を
 
@@ -284,3 +284,281 @@ $$
 相関係数の絶対値は1より小さい
 
 $$-1 \le \rho_{xy} \le 1, \qquad \rho_{xy} \equiv \cos{\theta_{xy}}$$
+
+**独立変数の和 - 平均と分散**
+
+$N$ 個の独立な確率変数 $X_n$ の和
+
+$$X=X_1+X_2+\cdots+X_N$$
+
+の平均値と分散は次の通り。
+
+$$
+\begin{split}
+\langle X \rangle &\equiv \bar{\mu}=\mu_1+\cdots+\mu_N \\
+
+\langle X^2 \rangle - \langle X \rangle^2 &\equiv \bar{\sigma}^2=\sigma_1^2 + \cdots + \sigma_N^2
+\end{split}
+$$
+
+特に全ての平均と分散が$\mu,\,\sigma^2$とひとしければ
+
+$$\bar{\mu}=N\mu,\quad \bar{\sigma}^2=N\sigma^2$$
+
+#### 多次元確率変数の相関行列
+
+**相関行列**
+
+$$R_{mn}=\langle X_mX_n \rangle - \langle X_m \rangle\langle X_n \rangle
+$$
+
+とした時に、
+
+$$
+\mathbf{R} \equiv \begin{bmatrix}
+R_{11} & R_{12} & \cdots & R_{1N} \\
+R_{21} & R_{22} & \cdots & R_{2N} \\
+\vdots & \vdots & \ddots & \vdots \\
+R_{N1} & R_{N2} & \cdots & R_{NN}
+\end{bmatrix}
+$$
+
+を相関行列または共分散行列という。
+
+**相関係数**
+
+$$\rho_{mn} \equiv \cos{\theta_{mn}}=\frac{R_{mn}}{\sqrt{R_{mm}R_{nn}}}$$
+
+### 特性関数・モーメント母関数
+
+#### 特性関数
+
+**連続確率変数の場合**
+
+確率密度のFourier変換を**特性関数**と呼ぶ。
+
+$$\Phi(\lambda)=\langle \mathrm{e}^{i\lambda X} \rangle=\int_{-\infty}^{\infty}\mathrm{e}^{i\lambda x}p(x)dx, \quad -\infty \lt \lambda \lt \infty$$
+
+Fourier逆変換は分布を表す。
+
+$$p(x)=\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathrm{e}^{-i\lambda x}\Phi(\lambda)d\lambda$$
+
+次が成り立つ。
+
+$$
+\Phi(0)=1, \quad \bar{\Phi(\lambda)}=\Phi(-\lambda), \quad \lvert \Phi(\lambda) \rvert \le 1
+$$
+
+**特性関数のメリット**
+
+1. 常に存在する
+1. 特性関数が同じなら分布も同じ
+1. 和の分布が積になる
+1. 収束の議論に非常に相性がいい
+1. モーメントを取り出せる
+
+5の議論については次が成り立つ。
+
+$$\Phi_X'(0)=i\langle X \rangle, \quad \Phi_X''(0)=-\langle X^2 \rangle$$
+
+**離散確率変数の場合**
+
+状態空間が整数 $R=\{-\infty \lt n \lt \infty \}$で、確率分布が $p_n$ の場合、Fourier級数は次の形で与えられる。
+
+$$
+\Phi(\Lambda) \equiv \langle \mathrm{e}^{i\Lambda X} \rangle = \sum_{n=-\infty}^{\infty}p_n\mathrm{e}^{in\Lambda}, \quad -\pi \le \Lambda \lt \pi
+$$
+
+逆変換は、
+
+$$
+p_n=\frac{1}{2\pi}\int_{-\infty}^{\infty} \mathrm{e}^{-in\Lambda}\Phi(\Lambda)d\Lambda
+$$
+
+特に、状態空間が正の整数 $R_+=\{0,1,2,\cdots\}$の場合には、$\mathrm{e}^{i\Lambda} \to z$と置き換えたものを**確率母関数**とよぶ。
+
+$$
+\psi(z) \equiv \langle z^X \rangle=\sum_{k=0}^{\infty}p_kz^k, \quad |z| \le 1
+$$
+
+この場合、確率分布はべき展開の$z^k$の係数として求められる。
+
+**特性関数の特別な場合**
+
+$N$次元の独立な確率変数の特性関数は
+
+$$\Phi(\lambda_1,\cdots,\lambda_N)=\Phi_1(\lambda_1)\cdots\Phi_N(\lambda_N)$$
+
+$N$個の独立な確率変数の和は
+
+$$\Phi(\lambda)=\Phi_1(\lambda)\cdots\Phi_N(\lambda)$$
+
+#### モーメント母関数
+
+確率分布のラプラス変換を**モーメント母関数**という。
+
+**連続確率変数の場合**
+
+$$
+\varphi(z)=\langle \mathrm{e}^{zX} \rangle=\int_{-\infty}^{\infty} \mathrm{e}^{zx}p(x)dx
+$$
+
+別の観点として、$\mathrm{e}^{zX}$のTaylor展開を代入すると、
+
+$$
+\varphi(z)=\langle \sum_{n=0}^{\infty}\frac{(zX)^{n}}{n!} \rangle=\sum_{n=0}^{\infty}\frac{M_n}{n!}z^n
+$$
+
+ただし、$M_n$はn次モーメントを表す。
+
+$$
+M_n=\langle X^n \rangle=\left[ \frac{d^n\varphi(z)}{dz^n} \right]_{z=0}
+$$
+
+**離散確率変数の場合**
+
+n次の**階乗モーメント**
+
+$$
+\begin{split}
+\langle X^{(n)} \rangle&=\langle X(X-1)\cdots(X-n+1) \rangle \\
+&=\sum_{k=0}^{\infty}k(k-1)\cdots(k-n+1)p_k \\
+&=\left[ \frac{d^n\psi(z)}{dz^n} \right]_{z=1}
+\end{split}
+$$
+
+ただし、$\psi(z)$は確率母関数。
+
+#### キュムラント
+
+モーメント母関数$\psi(z)$の対数$\log{\psi(z)}$を、キュムラント母関数とよぶ。母関数のべき展開
+
+$$
+C_{X}(z)=\log{\varphi(z)}=\sum_{n=1}^{\infty}\frac{C_n}{n!}z^n
+$$
+
+の係数$C_n$をn次のキュムラントと呼ぶ。
+モーメント$\langle X^n \rangle$に対応して、
+
+$$
+C_n=\langle X^n \rangle_{c}
+$$
+
+と書き、$\langle \,\, \rangle_c$を**キュムラント平均**と呼ぶことがある。
+
+**キュムラントとモーメントの関係**
+
+$$
+\begin{split}
+C_1&=M_1 \\
+C_2&=M_2-M_1^2 \\
+C_3&=M_3-3M_2M_1+2M_1^3 \\
+\vdots
+\end{split}
+$$
+
+一般に$C_n$はn次以下のモーメントで現れる。
+明らかに$C_1$は平均値、$C_2$は分散に等しい。
+
+キュムラント展開を用いるとモーメント母関数は次のようにかける。
+
+$$
+\varphi(z)=\exp{\left[ \sum_{n=1}^{\infty}\frac{C_n}{n!}z^n \right]}
+$$
+
+**キュムラント母関数のメリット**
+
+1. 独立な和で足し算になる
+独立な確率変数 $X, Y$ に対して、モーメント母関数は
+
+$$
+\varphi_{X+Y}(z)=\varphi_X(z)\varphi_Y(z)
+$$
+
+なので、キュムラント母関数では
+
+$$
+C_{X+Y}(z)=C_X(z)+C_Y(z)
+$$
+
+となる。
+
+2. キュムラントが直接読める
+$$
+C_n=C_{X}^{(n)}(0)
+$$
+でn次キュムラントがそのまま得られる。
+
+3. 分布の形（歪み・裾）を整理しやすい
+3次・4次キュムラントは歪度・尖度と関係が深い
+
+4. 正規分布との比較が明快
+正規分布は3次以上のキュムラントが0。
+つまり3次以上のキュムラントを見れば、どこまでがガウス近似で、どこから逸脱するかをみやすい
+
+#### 特性関数・モーメント母関数・キュムラント母関数の使い分け
+
+3つとも、確率分布を「計算しやすい関数」に写すための道具である。
+使い分けは、**何をしたいか**で決めると分かりやすい。
+
+1. 一般性を優先するなら特性関数 $\Phi(\lambda)$
+
+$$
+\Phi(\lambda)=\langle \mathrm{e}^{i\lambda X} \rangle
+$$
+
+を用いる。
+特性関数は常に定義でき、分布の同一性判定や収束の議論（中心極限定理など）に強い。
+また、独立な和で積になる
+
+$$
+\Phi_{X+Y}(\lambda)=\Phi_X(\lambda)\Phi_Y(\lambda)
+$$
+
+ため、和の分布解析にも適している。
+
+2. モーメントを直接計算したいならモーメント母関数 $\varphi(z)$
+
+$$
+\varphi(z)=\langle \mathrm{e}^{zX} \rangle
+$$
+
+は、$z=0$ まわりの微分でモーメントを直接与える。
+
+$$
+M_n=\left[\frac{d^n\varphi(z)}{dz^n}\right]_{z=0}
+$$
+
+したがって、平均・分散・高次モーメントを計算する用途で扱いやすい。
+ただし分布によっては存在しない場合があるので、定義域の確認が必要である。
+
+3. 独立和や高次統計量の整理にはキュムラント母関数 $C_X(z)$
+
+$$
+C_X(z)=\log \varphi(z)
+$$
+
+を用いると、独立な和が加法になる。
+
+$$
+C_{X+Y}(z)=C_X(z)+C_Y(z)
+$$
+
+また、
+
+$$
+C_n=C_X^{(n)}(0)
+$$
+
+より、平均・分散・歪み・尖度に対応する量を系統的に取り出せる。
+特に正規分布は3次以上のキュムラントが0なので、ガウス近似からのずれを評価しやすい。
+
+4. 実務的な目安
+
+- 収束性や理論的な同定を重視する: 特性関数
+- モーメント計算を主目的とする: モーメント母関数
+- 独立和や近似展開（非ガウス性評価）を重視する: キュムラント母関数
+
+以上より、3者は競合ではなく補完関係にある。
+対象の分布と目的に応じて使い分けるのがよい。
+
