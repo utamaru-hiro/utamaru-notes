@@ -44,6 +44,8 @@ const CALLOUT_TYPES: Record<string, TextBlockType> = {
   theorem: 'info',
   proposition: 'info',
   lemma: 'info',
+  definition: 'info',
+  def: 'info',
   output: 'output',
 };
 
@@ -51,6 +53,8 @@ const CALLOUT_TITLE_PREFIXES: Record<string, string> = {
   theorem: '定理',
   proposition: '命題',
   lemma: '系',
+  definition: '定義',
+  def: '定義',
 };
 
 const SUBSECTION_LABELS: Record<string, ActiveField> = {

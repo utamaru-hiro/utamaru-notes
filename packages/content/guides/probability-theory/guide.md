@@ -42,6 +42,84 @@ $M$ が上界を持たないとき $\sup{M}=+\infty$ 、下界を持たないと
 > [!warning]
 > $M$ が実数でない集合の場合は常に成り立つとは限らない
 
+#### 数列
+
+自然数 $n=1,2,\cdots,n,\cdots$ の各々に、実数が１つずつ対応しているとき
+
+$$
+a_1,a_2,\cdots,a_n,\cdots
+$$
+
+を**数列**といい、 $\{a_n\}$ で表す。 $\{a_n\}$ の一部分
+
+$$
+a_{n_1},a_{n_2},\cdots,a_{n_k},\cdots \qquad (1 \le n_1 \le n_2 \le \cdots \le n_k \le \cdots)
+$$
+
+を $\{a_n\}$ の**部分列**といい、 $\{a_{n_k}\}$ で表す。
+
+#### 極限
+
+数列 $\{a_n\}$ で $n$ が限りなく大きくなるにつれて、 $a_n$ が限りなく一定の実数 $\alpha$ に近づくとき
+
+$$
+\lim_{n \to \infty}a_n = \alpha \quad または \quad a_n \to \alpha \quad (n \to \infty)
+$$
+
+と表し、 $\alpha$ を $\{a_n\}$ の**極限値**といい、 $\{a_n\}$ は $\alpha$ に**収束する**という。
+どんなに小さな正数 $\varepsilon$ が与えられても、 $\varepsilon$ に対応して十分大きな自然数 $n_0$ を定めると
+
+$$
+n_0より大きいすべてのnに対して \quad |a_n-\alpha| \lt \varepsilon
+$$
+
+が成り立つということである。
+
+$\{a_n\}$ が収束するための必要十分条件は、どんなに小さな $\varepsilon$ が与えられても、 $\varepsilon$ に対応して十分大きな自然数 $n_0$ を定めると
+
+$$
+n_0より大きいすべてのm,nに対して \quad |a_m-a_n| \lt \varepsilon
+$$
+
+が成り立つことである。この条件を満たす数列を**コーシー列**という。
+
+収束しない数列は**発散する**という。
+
+$$
+a_n \to \pm \infty \quad (n \to \infty)
+$$
+
+#### 上極限・下極限
+
+有界な数列 $\{a_n\}$ に対し、
+
+$$
+\overline{a}_n=\sup{\{a_n,a_{n+1},\cdots\}}, \qquad \underline{a}_n=\inf{\{a_n,a_{n+1},\cdots\}}
+$$
+
+とおく。このとき $\underline{a}_n \le a_n \le \overline{a}_n$ で、しかも
+
+$$
+\overline{a}_1 \ge \overline{a}_2 \ge \cdots \ge \overline{a}_n \ge \cdots, \qquad \underline{a}_1 \le \underline{a}_2 \le \cdots \le \underline{a}_n \le \cdots
+$$
+
+となっている。これらの数列の極限をそれぞれ $\{a_n\}$ の**上極限**、**下極限**といい
+
+$$
+\begin{split}
+\lim_{n \to \infty}{\sup{a_n}}&=\lim_{n \to \infty}\overline{a}_n=\inf{\overline{a}_n} \\
+\lim_{n \to \infty}{\inf{a_n}}&=\lim_{n \to \infty}\underline{a}_n=\sup{\underline{a}_n}
+\end{split}
+$$
+
+とかく。上極限と下極限は、任意の数列に対し常に意味をもち、ただ一つ存在することが知られている。
+
+> [!theorem] 1.1.2
+> $\lim_{n \to \infty}a_n$ が ($\pm \infty$も含めて)存在するための必要十分条件は
+> $$ \limsup_{n \to \infty} a_n = \liminf_{n \to \infty} a_n$$
+> の成り立つことである。このとき
+> $$ \lim_{n \to \infty}a_n = \limsup_{n \to \infty} a_n = \liminf_{n \to \infty} a_n$$
+
 ### 1.2 関数の極限
 ### 1.3 微分法
 ### 1.4 積分法
@@ -55,6 +133,201 @@ $M$ が上界を持たないとき $\sup{M}=+\infty$ 、下界を持たないと
 ## 第２章　確率論の基礎概念
 
 ### 2.1 離散型の確率モデル
+
+確率モデルとは、興味の対象となる偶然変量がフィルター付きの**確率空間**で記述される模型のことである。この模型は
+
+- 基本事象からなる標本空間
+- フィールドという集合族で定義される確率
+- 増大情報を表す部分フィールドの列からなるフィルトレーション
+
+という道具を用いてつくられる。
+
+ある株式の時刻 $t=1,2,\cdots,T$ における株価を $S_t$ とする。このとき、株価の値に注目して、 $T$ までに起こりうる全ての状態を $\Omega$ とおけば
+
+$$
+\Omega=\{\omega \mid \omega=(S_1, S_2, \cdots, S_T)\}
+$$
+
+と表すことができる。
+
+このような $\Omega$ は将来起こりうる株価の状態をリストアップしたものである。未知な将来は $\Omega$ のどれかによって表され、時間が経つほどに、実際に起こった状態からたくさんの情報が得られるようになっている。
+
+一般に、実験や観察を**試行**という。試行には起こりうるいくつかの結果があるが、その１つ１つを**基本事象**という。基本事象の全体からなる集合、すなわち、起こりうる結果をリストアップした全体集合を**標本空間**といい、 $\Omega$ で表す。
+
+$\Omega$ の部分集合を**事象**といい、アルファベット大文字 $A,B,C,\cdots$ などで表す。 $A$ でない事象は $A$ の**余事象**といい、 $A^c$ で表す。
+
+特に、 $\Omega$ 自身と空集合 $\phi$ はともに $\Omega$ の部分集合であり、それぞれ**全事象**、**空事象**とよばれる。
+
+> [!warn] 集合の演算について
+> 省略
+
+#### フィールド
+
+前述の株価の状態に注目し、時刻 $t$ で投資家が利用できる情報を $\mathcal{F}_t$ とおくと、この $\mathcal{F}_t$ は時刻 $t$ とそれ以前の株価の状態から成り立っている。
+
+たとえば $T=2$ としよう。このとき、時刻 $t=0$ では $S_1$ と $S_2$ の情報が得られないから、 $\mathcal{F}_0=\{\phi, \Omega\}$ 。すなわち、 $t=0$ での情報は $\Omega$ に含まれているどれかが起こる、ということだけである。
+
+また、時刻 $t=1$ で株価の上昇 $(u)$ があったとすれば、実際の状態は
+
+$$
+A=\{(u, S_2) \mid S_2=uまたはd\}=\{(u,u),(u,d)\}
+$$
+
+であって、$A$ の余事象 $A^c$ ではない、したがって、 $t=1$ での情報は
+
+$$
+\mathcal{F}_1=\{\phi,\Omega,A,A^c\}
+$$
+
+と表される。この場合、以前の情報を忘れていないから、 $\mathcal{F}_0 \subset \mathcal{F}_1$ となっていることに注意されたい。
+
+このように、時刻 $t$ で、投資家は $\Omega$ のどの部分が実際の情報を含んでいるのかを知ることになる。一般に、 $\mathcal{F}_t$ は集合の"集まり"で、フィールドと呼ばれる $\mathcal{F}$ の仲間である。
+
+> [!def] 2.1.1
+> 次の性質を満たす $\mathcal{F}$ を**フィールド**という。  
+> $(1)\quad \phi, \Omega \in \mathcal{F}$  
+> $(2)\quad A \in \mathcal{F},\,B \in \mathcal{F}\,\Rightarrow\,A \cup B \in \mathcal{F},\,A \cap B \in \mathcal{F},\,A \setminus B \in \mathcal{F}$  
+
+- $\{\phi,\Omega\}$ を**自明なフィールド**といい、 $\mathcal{F}_0$ と表す。
+
+- $\{\phi,\Omega,A,A^c\}$ を**集合$A$から生成されたフィールド**といい、$\mathcal{F}_A$ と表す。
+
+- $\Omega$ の部分集合からなる全体 $\{A \mid A \subset \Omega\}$ を $2^{\Omega}$ あるいは $\mathcal{P}(\Omega)$と表す。
+
+> [!def] 2.1.2
+> $\Omega$ が互いに排反な $D_1,D_2,\cdots,D_k$ の和からなるとき、すなわち  
+> $$D_i \cap D_j = \phi \quad (i \ne j), \quad \bigcup_{i=1}^kD_i=\Omega$$
+> であるとき、 $\{D_1,D_2,\cdots,D_k\}$ を $\Omega$ の**分割**という。  
+
+一般に、**分割から生成されたフィールド**は $D_i$ の有限個の和事象とその余事象から構成されている。もしも $\Omega$ が有限個の集合から成り立っていれば、フィールドは分割によって生成される。
+
+#### フィルトレーション
+
+次に、フィールド $\mathcal{F}_1$ がフィールド $\mathcal{F}_2$ に含まれる場合を考える。このとき、
+
+$$
+\mathcal{F}_1 \subset \mathcal{F}_2 \Longleftrightarrow 任意のAに対して、A \in \mathcal{F}_1 ならば A \in \mathcal{F}_2
+$$
+
+この場合、 $\mathcal{F}_2$ を生成する分割は $\mathcal{F}_1$ を生成する分割よりも細かい（時刻 $t=1,2$ ならば、時間経過で知識や情報は詳細になる）。
+
+> [!def] 2.1.3
+> 次のようなフィールドの集まり $\mathbb{F}$ を**フィルトレーション**という。  
+> $$\mathbb{F}=\{\mathcal{F}_0, \mathcal{F}_1,\cdots,\mathcal{F}_t,\cdots,\mathcal{F}_T\}, \quad \mathcal{F}_t \subset \mathcal{F}_{t+1}$$
+> $\mathbb{F}$ は情報の流れをモデル化するのに用いられる。  
+> 上式は、観察者にとって、時間が経てば経つほどに、たくさんの詳細な情報を知ることができ、 $\Omega$ の分割はさらに細かくなっていくということを意味している。  
+> 株価の推移にたとえれば、 $\mathbb{F}$ は投資家に必要な株価の情報を記述している。  
+
+#### 可測
+
+もしも事象のフィールド $\mathcal{F}$ が特定されるならば、 $\mathcal{F}$ に属する集合は**可測**であるという（たとえば、 $\mathcal{F} = 2^{\Omega}$ のとき、 $\Omega$ の任意の部分集合 $A$ は $\mathcal{F}$ に属するから可測）。
+
+> [!def] 2.1.4
+> 標本空間 $\Omega$ は有限個の要素からなり、 $\Omega$ 上の関数 $X$ は値 $x_i,\,i=1,2,\cdots,k$ をとるとする。  
+> また、 $\Omega$ 上の関数 $X$ は、すべての集合 $\{\omega \mid X(\omega)=x_i\},\,i=1,2,\cdots,k$ が $\mathcal{F}$ に属するとき、 **$\mathcal{F}$ -可測**または $(\Omega,\mathcal{F})$ 上の**確率変数**であるという。  
+
+言い換えれば、可測であるということは、もしも $\mathcal{F}$ で記述される情報を得たならば、すなわち、 $\mathcal{F}$ のどの事象が起こったのかを知ったならば、 $X$ のどの値が起こったのかを知ることができる、ということである。
+
+#### 確率過程
+
+> [!def] 2.1.5
+> 確率変数の集まり $\{X_t \mid t=0,1,\cdots,T\}$ を**確率過程**という。この場合、任意に固定した $t$ に対して、 $X_t$ は $(\Omega,\mathcal{F}_t)$ 上の確率変数である。
+
+> [!def] 2.1.6
+> すべての $t=1,2,\cdots,T$ に対して、 $X_t$ が $(\Omega,\mathcal{F}_t)$ 上の確率変数であるとき、すなわち、 $X_t$ が $\mathcal{F}_t$ -可測であるとき、確率過程 $\{X_t\}$ はフィルトレーション $\mathbb{F}=\{\mathcal{F}_t \mid t=0,1,\cdots,T\}$ に**適合している**という。
+
+たとえば、
+
+$$
+\begin{split}
+X_1&=X, \quad X_2=Y \quad (X,Y \subset \Omega)\\
+\mathcal{F}_1&=\{\phi,\Omega,X,X^c\} \\
+\mathcal{F}_2&=\{\phi,\Omega,2^{\Omega}\} \\
+(\mathcal{F}_1 &\subset \mathcal{F}_2)
+\end{split}
+$$
+
+とすると、 $X_1$ は $\mathcal{F}_1$ -可測、 $X_2$ は $\mathcal{F}_2$ -可測である。
+したがって、確率過程 $\{X_t \mid t=1,2\}=\{X_1,X_2\}$ は $\mathbb{F}=\{\mathcal{F}_1,\mathcal{F}_2\}$ に適合している。
+
+$\Omega$ の部分集合全体からなるフィールド $2^{\Omega}$ をもつ標本空間を $(\Omega,2^{\Omega})$ とし、そこで定義された確率変数 $X$ のとりうる値を $x_i,i=1,2,\cdots,k$ とする。このとき $X=x_i$ となる事象、すなわち、集合
+
+$$
+A_i=\{\omega \mid X(\omega)=x_i\} \subset \Omega, \quad i=1,2,\cdots,k
+$$
+
+を考える。 $\{A_1,A_2,\cdots,A_k\}$ は $\Omega$ の分割になっているが、この分割によって生成されたフィールドは **$X$ から生成されたフィールド**とよばれ、 $\mathcal{F}_X$ または $\sigma(X)$ と表される。
+
+$(\Omega,\mathcal{F})$ と確率過程 $\{X_t\}$ が与えられているとき、確率変数 $X_s,s=0,1,\cdots,t$ から生成されたフィールドを $\mathcal{F}_t=\sigma(X_s,\,0 \le s \le t)$ と表す。これは時刻 $t$ までの観察結果から利用できる全ての情報である。明らかに、 $\mathcal{F}_t \subset \mathcal{F}_{t+1}$ であるから、これらの集まりはフィルトレーションとなる。このようなフィルトレーションを $\{X_t\}$ の**自然なフィルトレーション**という。
+
+#### 確率空間
+
+$\Omega$ が有限個の基本事象 $\omega$ からなるとき、各 $\omega$ に対して、その起こりやすさの尺度として**確率** $P(\omega)$ を割り当てることができる。 $P(\omega)$ の与え方はさまざまに設定できるが、次の2点を満たす必要がある。
+
+$$
+\begin{split}
+(1)& \quad P(\omega) \ge 0 \\
+(2)& \quad \sum_{\omega}P(\omega)=P(\Omega)=1
+\end{split}
+$$
+
+> [!def] 2.1.8
+> $\Omega$ は有限個の基本事象からなるとし、確率変数 $X$ 、すなわち、 $\omega \in \Omega$ から実数の集まり $\mathbb{R}$ への関数 $X:\omega \rightarrow \mathbb{R}$、を考える。 $X$ は有限個の値を取り得るので、それらを $x_i,\,\,i=1,2,\cdots,k$ とし、事象 $\{\omega \mid X(\omega)=x_i\}$ を単に $\{X=x_i\}$ と表し、その確率を $p_i=P(X=x_i)$ とかく。すなわち、
+> $$p_i=P(X=x_i)=\sum_{\omega \mid X(\omega)=x_i}P(\omega)$$
+> （$X(\omega)=x_i$ となる $\omega$ に関する和）  
+> このような確率の組 $\{p_i\}$ を $X$ の**確率分布**という。
+
+> [!def] 2.1.9
+> $X$ が $(\Omega, \mathcal{F})$ 上の確率変数で、 $P$ が確率のとき、
+> $$ E[X]=\sum_{\omega}X(\omega)P(\omega) $$
+> によって与えられる値 $E[X]$ を $X$ の**平均**または**期待値**という。 $X$ の確率分布を用いてかけば、
+> $$ E[X]=\sum_{i=1}^k x_iP(X=x_i) $$
+> と表される。
+
+> [!def] 2.1.10
+> 事象 $A$ に対して
+> $$ I_A(\omega)= \begin{cases} 1 & \text{if \,\, $\omega \in A$} \\ 0 & \text{if \,\, $\omega \notin A$} \end{cases} $$
+> とおき、確率変数 $I_A$ を事象 $A$ の**インディケータ**という。 $I_A$ を $I(A)$ ともかく。
+
+以降においては、 $\Omega$ を有限個の基本事象からなる標本空間とし、 $\mathcal{F}=2^{\Omega}$、$P$ を $\Omega$ 上の確率とする。これら３つの組 $(\Omega, \mathcal{F}, P)$ を**確率空間**という。
+
+#### 条件付き確率
+
+> [!def] 2.1.11
+> $A, D$ を事象とし、 $P(D) \gt 0$ とする。このとき $D$ が起こったと言う前提のもとに $A$ が起こる**条件付き確率**( $D$ に対する $A$ の条件付き確率) $P(A|D)$ を次のように定義する。
+> $$P(A|D)=\frac{P(A\cap D)}{P(D)}$$
+
+条件付き確率を書き直すと**乗法公式**が得られる。
+
+$$
+P(A\cap D)=P(D)P(A|D)
+$$
+
+> [!theorem] 2.1.13
+> $\{D_1,D_2,\cdots,D_k\}$ を定義2.1.2で与えられた $\Omega$ の分割とし、 $P(D_i) \gt 0,i=1,2,\cdots,k$ とする。このとき次が成り立つ。
+> $$(1) 全確率の公式 \quad P(A)=\sum_{i=0}^{k}P(D_i)P(A|D_i)$$
+> $$(2) ベイズの公式 \quad P(A) \gt 0 ならば P(D_i|A)=\frac{P(D_i)P(A|D_i)}{\sum_{i=1}^{k}P(D_i)P(A|D_i)}$$
+> $P(D_i)$ を**事前確率** 、 $P(D_i|A)$ を**事後確率**という。
+
+> [!def] 2.1.14
+> $\mathcal{G}$　を定義2.1.2で与えられた $\Omega$ の分割 $\{D_1,D_2,\cdots,D_k\}$ から生成されたフィールドとし、 $P(D_i) \gt 0,i=1,2,\cdots,k$ とする。このとき、**$\mathcal{G}$ に対する $A$ の条件付き確率**は、 $D_i$ 上で値 $P(A|D_i)$ をとる確率変数のことであり、これを $P(A|\mathcal{G})$ とかく。すなわち
+> $$P(A|\mathcal{G})(\omega)=\sum_{i=1}^kP(A|D_i)I_{D_i}(\omega)$$
+> 特に、 $\mathcal{G}=\{\phi,\Omega\}$ （自明なフィールド）ならば、次のようになる。
+> $$P(A|\mathcal{G})=P(A|\Omega)I_{\Omega}=\frac{P(A \cap \Omega)}{P(\Omega)}=P(A)$$
+
+> [!def] 2.1.15
+> 確率変数 $Y$ の値を $y_1,y_2,\cdots,y_k$ とする。このとき、 $D_i=\{\omega \mid Y(\omega)=y_i\},\,i=1,2,\cdots,k$ は $\Omega$ の分割になる。そこで、 $\mathcal{F}_Y$ を $Y$ から生成されたフィールドとするとき、 **$\mathcal{F}_Y$ に対する $A$ の条件付き確率** $P(A|\mathcal{F}_Y$ を $P(A|Y)$ と表す。すなわち
+> $$P(A|\mathcal{F}_Y)=P(A|Y)$$
+
+> [!def] 2.1.16
+> 確率変数 $X$ の値を $x_1,x_2,\cdots,x_p$ とするとき、事象を $A_1=\{X=x_1\},\,\,A_2=\{X=x_2\},\cdots,A_p=\{X=x_p\}$ とおく。 $\Omega$ の分割 $\{D_1,D_2,\cdots,D_k\}$ によって生成されたフィールドを $\mathcal{G}$ とする。このとき
+> $$E[X|\mathcal{G}]=\sum_{i=1}^{p}x_iP(A_i|\mathcal{G})$$
+> によって与えられる $E[X|\mathcal{G}]$ を、 **$\mathcal{G}$ に対する $X$ の条件付き平均**という。
+
+> [!def] 2.1.19
+> $X, Y$ が確率変数で、いずれも有限個の値をとるとき、 $Y$ に対する $X$ の条件付き平均 $E[X|Y]$ は、
+> $$E[X|Y] = E[X|\mathcal{F}_Y]$$
+
 ### 2.2 連続型の確率モデル
 ### 2.3 確率変数の平均
 ### 2.4 確率変数の変換と収束

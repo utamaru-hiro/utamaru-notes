@@ -38,7 +38,7 @@ function renderCalloutHeader(type: 'warn' | 'output' | 'supplement' | 'info', ti
   } as const;
 
   const hideIconForMathCallout =
-    type === 'info' && !!title && /^(定理|命題|系)(\s|$)/.test(title);
+    type === 'info' && !!title && /^(定理|命題|系|定義)(\s|$)/.test(title);
   const showIcon = !hideIconForMathCallout;
 
   return (
