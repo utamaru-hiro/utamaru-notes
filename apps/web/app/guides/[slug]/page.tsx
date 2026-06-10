@@ -8,6 +8,51 @@ import { getGuide, getGuideSlugs } from '@/lib/guides';
 import { highlightCode } from '@/lib/highlight';
 import { renderMarkdown } from '@/lib/markdown';
 
+type TocHeading = {
+  id: string;
+  title: string;
+};
+
+type TocItem = TocHeading & {
+  h4: TocHeading[];
+};
+
+type TocSection = TocHeading & {
+  num: number;
+  h3: TocItem[];
+};
+
+function renderCalloutHeader(type: 'warn' | 'output' | 'supplement' | 'info', title?: string) {
+  const labelByType = {
+    warn: '注意',
+    output: '出力',
+    supplement: '補足',
+    info: '情報',
+  } as const;
+
+  const iconByType = {
+    warn: '⚠',
+    output: '⌘',
+    supplement: '✦',
+    info: 'ℹ',
+  } as const;
+
+  const hideIconForMathCallout =
+    type === 'info' && !!title && /^(定理|命題|系)(\s|$)/.test(title);
+  const showIcon = !hideIconForMathCallout;
+
+  return (
+    <div
+      className={`item-callout-head${showIcon ? '' : ' item-callout-head-no-icon'}`}
+      aria-label={title ? `${labelByType[type]}: ${title}` : labelByType[type]}
+      title={title ? `${labelByType[type]}: ${title}` : labelByType[type]}
+    >
+      {showIcon ? <span className="item-callout-icon" aria-hidden="true">{iconByType[type]}</span> : null}
+      {title ? <span className="item-callout-title">{title}</span> : null}
+    </div>
+  );
+}
+
 export async function generateStaticParams() {
   const slugs = await getGuideSlugs();
   return slugs.map((slug) => ({ slug }));
@@ -60,9 +105,34 @@ export default async function GuidePage({
     }
   }
 
+  const tocSections: TocSection[] = guide.sections.map((section) => ({
+    id: section.id,
+    num: section.num,
+    title: section.title,
+    h3: section.items.map((item) => {
+      let h4Index = 0;
+      const h4: TocHeading[] = [];
+      for (const block of item.blocks) {
+        if (block.type === 'heading' && block.level === 4) {
+          h4Index += 1;
+          h4.push({
+            id: `${item.id}-h4-${h4Index}`,
+            title: block.text,
+          });
+        }
+      }
+
+      return {
+        id: item.id,
+        title: item.title,
+        h4,
+      };
+    }),
+  }));
+
   return (
     <main className="page-shell guide-page-shell">
-      <GuideTocDrawer sections={guide.sections} />
+      <GuideTocDrawer sections={tocSections} />
 
       <div className="guide-layout">
         <div className="guide-main">
@@ -73,7 +143,6 @@ export default async function GuidePage({
             </div>
             <h1>{guide.title}</h1>
             <p className="hero-lead">{guide.lead}</p>
-            <div className="guide-version">{guide.version}</div>
           </header>
 
           <div className="section-list">
@@ -88,10 +157,11 @@ export default async function GuidePage({
                 <div className="item-list">
                   {section.items.map((item) => (
                     <article key={item.id} className="item-card">
-                      <h3>{item.title}</h3>
+                      <h3 id={item.id}>{item.title}</h3>
 
                       {(() => {
                         let codeIndex = 0;
+                        let h4Index = 0;
                         return item.blocks.map((block, index) => {
                           if (block.type === 'description') {
                             return (
@@ -104,13 +174,13 @@ export default async function GuidePage({
                           }
                           if (block.type === 'warn') {
                             return (
-                              <Fragment key={index}>
-                                <div className="item-label">注意</div>
+                              <div key={index} className="item-callout-box item-warn">
+                                {renderCalloutHeader('warn', block.title)}
                                 <div
-                                  className="item-warn"
+                                  className="item-callout-body"
                                   dangerouslySetInnerHTML={{ __html: renderMarkdown(block.text) }}
                                 />
-                              </Fragment>
+                              </div>
                             );
                           }
                           if (block.type === 'code') {
@@ -129,16 +199,16 @@ export default async function GuidePage({
                           }
                           if (block.type === 'output') {
                             return (
-                              <Fragment key={index}>
-                                <div className="item-label">出力</div>
-                                <div className="item-output">{block.text}</div>
-                              </Fragment>
+                              <div key={index} className="item-callout-box item-output">
+                                {renderCalloutHeader('output', block.title)}
+                                <div className="item-callout-body">{block.text}</div>
+                              </div>
                             );
                           }
                           if (block.type === 'supplement') {
                             return (
                               <Fragment key={index}>
-                                <div className="item-label">補足</div>
+                                {renderCalloutHeader('supplement', block.title)}
                                 <div
                                   className="item-copy"
                                   dangerouslySetInnerHTML={{ __html: renderMarkdown(block.text) }}
@@ -146,10 +216,29 @@ export default async function GuidePage({
                               </Fragment>
                             );
                           }
+                          if (block.type === 'info') {
+                            return (
+                              <div key={index} className="item-callout-box item-info">
+                                {renderCalloutHeader('info', block.title)}
+                                <div
+                                  className="item-callout-body"
+                                  dangerouslySetInnerHTML={{ __html: renderMarkdown(block.text) }}
+                                />
+                              </div>
+                            );
+                          }
                           if (block.type === 'heading') {
                             const Tag = `h${block.level}` as 'h4' | 'h5' | 'h6';
+                            const headingId =
+                              block.level === 4
+                                ? `${item.id}-h4-${++h4Index}`
+                                : undefined;
                             return (
-                              <Tag key={index} className={`item-subheading-${block.level}`}>
+                              <Tag
+                                key={index}
+                                id={headingId}
+                                className={`item-subheading-${block.level}`}
+                              >
                                 {block.text}
                               </Tag>
                             );

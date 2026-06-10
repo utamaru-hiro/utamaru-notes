@@ -7,6 +7,14 @@ type TocSection = {
   id: string;
   num: number;
   title: string;
+  h3: {
+    id: string;
+    title: string;
+    h4: {
+      id: string;
+      title: string;
+    }[];
+  }[];
 };
 
 type GuideTocDrawerProps = {
@@ -62,11 +70,32 @@ export default function GuideTocDrawer({ sections }: GuideTocDrawerProps) {
           </button>
         </div>
 
-        <nav>
+        <nav className="toc-nav">
           {sections.map((section) => (
-            <a key={section.id} href={`#${section.id}`} onClick={closeDrawer}>
-              {section.num}. {section.title}
-            </a>
+            <div key={section.id} className="toc-group">
+              <a className="toc-link toc-link-h2" href={`#${section.id}`} onClick={closeDrawer}>
+                {section.title}
+              </a>
+
+              {section.h3.map((item) => (
+                <div key={item.id} className="toc-subgroup">
+                  <a className="toc-link toc-link-h3" href={`#${item.id}`} onClick={closeDrawer}>
+                    {item.title}
+                  </a>
+
+                  {item.h4.map((heading) => (
+                    <a
+                      key={heading.id}
+                      className="toc-link toc-link-h4"
+                      href={`#${heading.id}`}
+                      onClick={closeDrawer}
+                    >
+                      {heading.title}
+                    </a>
+                  ))}
+                </div>
+              ))}
+            </div>
           ))}
         </nav>
       </aside>

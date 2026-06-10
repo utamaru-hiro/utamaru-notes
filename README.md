@@ -15,30 +15,16 @@
 
 - `slug`
 - `title`
-- `version`
 - `lead`
 - `heroEmoji`
-- `accent`
-- `accent2`
-- `bgGradientTop`
-- `bgRadialLeft`
-- `bgRadialRight`
-- `badgeGradient`
 - `cardSummary`
 
 ```ts
 export const guideMeta = {
   slug: 'typescript',
   title: 'TypeScript ガイド',
-  version: 'v1.0',
   lead: '型安全な JavaScript 開発のための入門ガイド',
   heroEmoji: '📘',
-  accent: '#0d9488',
-  accent2: '#14b8a6',
-  bgGradientTop: 'linear-gradient(180deg, #f0fdfa 0%, #ffffff 60%)',
-  bgRadialLeft: 'radial-gradient(circle at 20% 20%, rgba(20,184,166,0.12), transparent 55%)',
-  bgRadialRight: 'radial-gradient(circle at 80% 10%, rgba(13,148,136,0.12), transparent 50%)',
-  badgeGradient: 'linear-gradient(135deg, #0d9488, #14b8a6)',
   cardSummary: 'TypeScript の基本構文と実践ポイントを学ぶ',
 } as const;
 ```
@@ -67,7 +53,7 @@ const x: number = 1;
 > [!warning]
 > 注意事項をここに書く。
 
-> [!tip]
+> [!info]
 > 補足情報をここに書く。
 
 > [!output]
@@ -76,8 +62,11 @@ const x: number = 1;
 
 | 種別 | 表示ラベル |
 |---|---|
-| `[!warning]` | 注意 |
-| `[!tip]` / `[!note]` | 補足 |
+| `[!warning]` / `[!warn]` | 注意 |
+| `[!information]` / `[!info]` | info |
+| `[!theorem]` | info（タイトル先頭に「定理」付与） |
+| `[!proposition]` | info（タイトル先頭に「命題」付与） |
+| `[!lemma]` | info（タイトル先頭に「系」付与） |
 | `[!output]` | 出力 |
 
 コールアウト内は複数行を `> ` プレフィックスで継続できます。空行（`>` のない行）で終了します。
@@ -102,7 +91,7 @@ const example = 'code';
 > [!warning]
 > 注意事項。
 
-> [!tip]
+> [!info]
 > 補足情報。
 ```
 
@@ -112,7 +101,7 @@ const example = 'code';
 
 - `#### 説明` — 説明ブロック（省略可、直接書くのを推奨）
 - `#### 注意` — `> [!warning]` 推奨
-- `#### 補足` — `> [!tip]` 推奨
+- `#### 補足` — `> [!info]` 推奨
 - `#### 出力` — `> [!output]` 推奨
 - `#### コード` — 不要（fenced code block を直書き推奨）
 

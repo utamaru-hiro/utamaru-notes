@@ -87,15 +87,8 @@ export function parseGuideMetaSource(source: string, sourcePath?: string): Guide
   const meta: GuideMeta = {
     slug: requireMetaValue(values, 'slug', sourcePath),
     title: requireMetaValue(values, 'title', sourcePath),
-    version: requireMetaValue(values, 'version', sourcePath),
     lead: requireMetaValue(values, 'lead', sourcePath),
     heroEmoji: requireMetaValue(values, 'heroEmoji', sourcePath),
-    accent: requireMetaValue(values, 'accent', sourcePath),
-    accent2: requireMetaValue(values, 'accent2', sourcePath),
-    bgGradientTop: requireMetaValue(values, 'bgGradientTop', sourcePath),
-    bgRadialLeft: requireMetaValue(values, 'bgRadialLeft', sourcePath),
-    bgRadialRight: requireMetaValue(values, 'bgRadialRight', sourcePath),
-    badgeGradient: requireMetaValue(values, 'badgeGradient', sourcePath),
     cardSummary: requireMetaValue(values, 'cardSummary', sourcePath),
   };
 

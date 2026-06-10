@@ -7,7 +7,7 @@ import type {
     ParseGuideMarkdownOptions,
 } from './types';
 
-type TextBlockType = 'description' | 'warn' | 'output' | 'supplement';
+type TextBlockType = 'description' | 'warn' | 'output' | 'supplement' | 'info';
 type ActiveField = 'sectionLead' | TextBlockType | 'code';
 
 type CurrentTextBlock = { type: TextBlockType; lines: string[] };
@@ -32,14 +32,25 @@ type OpenCodeFence = {
 
 type OpenCallout = {
   type: TextBlockType;
+  title: string | null;
   lines: string[];
 };
 
 const CALLOUT_TYPES: Record<string, TextBlockType> = {
   warning: 'warn',
-  note: 'supplement',
-  tip: 'supplement',
+  warn: 'warn',
+  information: 'info',
+  info: 'info',
+  theorem: 'info',
+  proposition: 'info',
+  lemma: 'info',
   output: 'output',
+};
+
+const CALLOUT_TITLE_PREFIXES: Record<string, string> = {
+  theorem: '定理',
+  proposition: '命題',
+  lemma: '系',
 };
 
 const SUBSECTION_LABELS: Record<string, ActiveField> = {
@@ -79,7 +90,9 @@ export function parseGuideMarkdown(
   const flushCallout = () => {
     if (!openCallout || !currentItem) { openCallout = null; return; }
     const text = normalizeMarkdownBlock(openCallout.lines);
-    if (text) currentItem.blocks.push({ type: openCallout.type, text });
+    if (text || openCallout.title) {
+      currentItem.blocks.push({ type: openCallout.type, text, title: openCallout.title ?? undefined });
+    }
     openCallout = null;
   };
 
@@ -170,18 +183,28 @@ export function parseGuideMarkdown(
       currentField = 'description';
     }
 
-    // コールアウト開始行 > [!type]
-    const calloutMatch = /^> \[!(\w+)\]/.exec(rawLine);
+    // コールアウト開始行 > [!type] [任意タイトル]
+    const calloutMatch = /^> \[!(\w+)\](?:\s+(.*))?$/.exec(rawLine);
     if (calloutMatch) {
       if (!currentItem) {
         fail('コールアウトは項目（###）の中に記述してください', lineNumber);
       }
-      const calloutType = CALLOUT_TYPES[calloutMatch[1].toLowerCase()];
+      const calloutKey = calloutMatch[1].toLowerCase();
+      const calloutType = CALLOUT_TYPES[calloutKey];
       if (!calloutType) {
         fail(`未対応のコールアウト種別です: ${calloutMatch[1]}`, lineNumber);
       }
+      const rawTitle = calloutMatch[2]?.trim() || '';
+      const titlePrefix = CALLOUT_TITLE_PREFIXES[calloutKey];
+      const title = titlePrefix
+        ? (rawTitle ? `${titlePrefix} ${rawTitle}` : titlePrefix)
+        : (rawTitle || null);
       flushTextBlock();
-      openCallout = { type: calloutType, lines: [] };
+      openCallout = {
+        type: calloutType,
+        title,
+        lines: [],
+      };
       continue;
     }
 

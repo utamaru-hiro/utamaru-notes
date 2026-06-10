@@ -209,7 +209,7 @@ print("カーネル形状:", W.shape)
 print("バイアス形状:", b.shape)
 ```
 
-> [!tip]
+> [!info]
 > `kernel` と `bias` はモデルが学習を通じて自動的に調整します。学習前の値は初期化ルールに従ってランダムに設定されます。
 
 ### 重み行列のランダム初期化
@@ -229,7 +229,7 @@ layers.Dense(128, activation="relu", kernel_initializer="he_normal")       # ReL
 layers.Dense(128, activation="relu", kernel_initializer="lecun_normal")    # SELU 向け
 ```
 
-> [!tip]
+> [!info]
 > ReLU 系の活性化関数には `he_normal` / `he_uniform`（He 初期化）がよく合います。負の入力でゼロになる ReLU の性質を考慮して分散を設計しているためです。
 
 ### 訓練プロセス
@@ -290,7 +290,7 @@ SGD はシンプルですが、全パラメータに同じ学習率を使うた�
 | RMSprop | 軸ごとに学習率を調整。RNN との相性がよい |
 | Adam | Momentum と RMSprop を組み合わせた定番。多くの場面でデフォルト候補 |
 
-> [!tip]
+> [!info]
 > 実用上は SGD の代わりに **Adam** がよく使われます。Adam は勾配の1次・2次モーメント（移動平均）を使って各パラメータの学習率を個別に適応させるため、チューニングが少なくても安定して収束しやすいです。
 
 ### 誤差逆伝播法
@@ -324,7 +324,7 @@ $$\delta^{(1)} = \frac{\partial L}{\partial z^{(1)}} = \bigl(W^{(2)}\bigr)^\top 
 - $(W^{(2)})^\top \delta^{(2)}$ — 出力層の誤差を、重み行列の転置を通じて隠れ層へ「逆流」させる
 - $\odot \text{relu}'(z^{(1)})$ — ReLU の勾配（$z > 0$ なら 1、それ以外は 0）をアダマール積（要素ごとの積）で掛ける
 
-> [!note]
+> [!info]
 > $\odot$ はアダマール積（要素ごとの乗算）を表します。ReLU の微分は $\text{relu}'(z) = \mathbf{1}[z > 0]$（ステップ関数）です。
 
 #### パラメータの更新式
@@ -338,7 +338,7 @@ $$\frac{\partial L}{\partial W^{(1)}} = \delta^{(1)} \cdot x^\top$$
 
 $$W \leftarrow W - \eta \cdot \frac{\partial L}{\partial W}$$
 
-> [!tip]
+> [!info]
 > TensorFlow の `tf.GradientTape` や PyTorch の `loss.backward()` は、このバックプロパゲーション計算を自動微分（automatic differentiation）によって実行します。各演算の連鎖律を計算グラフ上で自動追跡するため、手計算なしに任意の深さのネットワークで勾配を取得できます。
 
 ## プロンプトエンジニアリング
@@ -355,14 +355,14 @@ $$W \leftarrow W - \eta \cdot \frac{\partial L}{\partial W}$$
 
 ### Chain-of-Thought（CoT）
 
-> [!tip]
+> [!info]
 > ## RAG（Retrieval-Augmented Generation）
 
 ### RAG の全体像
 
 ### 埋め込み（Embedding）とベクトル検索
 
-> [!tip]
+> [!info]
 > ### チャンク戦略
 
 > [!warning]
@@ -377,7 +377,7 @@ $$W \leftarrow W - \eta \cdot \frac{\partial L}{\partial W}$$
 
 ### ReAct パターン
 
-> [!tip]
+> [!info]
 > ## ファインチューニング
 
 ### フルファインチューニング vs LoRA

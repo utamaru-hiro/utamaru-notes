@@ -1,20 +1,13 @@
 export interface GuideMeta {
   slug: string;
   title: string;
-  version: string;
   lead: string;
   heroEmoji: string;
-  accent: string;
-  accent2: string;
-  bgGradientTop: string;
-  bgRadialLeft: string;
-  bgRadialRight: string;
-  badgeGradient: string;
   cardSummary: string;
 }
 
 export type GuideItemBlock =
-  | { type: 'description' | 'warn' | 'output' | 'supplement'; text: string }
+  | { type: 'description' | 'warn' | 'output' | 'supplement' | 'info'; text: string; title?: string }
   | { type: 'code'; lang: string; code: string }
   | { type: 'heading'; level: 4 | 5 | 6; text: string };
 
