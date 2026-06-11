@@ -329,6 +329,81 @@ $$
 > $$E[X|Y] = E[X|\mathcal{F}_Y]$$
 
 ### 2.2 連続型の確率モデル
+
+前節では離散型の確率モデルを扱った。本説では、実数の区間内に連続的に変化する値をとり得る連続型の確率モデルを扱う。そのためには、 $\Omega$ の加算個の集合の和 $\bigcup$ と積 $\bigcap$ の演算に関して閉じているフィールドが必要になる。
+
+#### 可測空間
+
+> [!def] 2.2.1
+> 次の性質を満たすフィールド $\mathcal{F}$ を** $\sigma$ -フィールド**という。
+> $$
+> \begin{split}
+> (1)&\,\,\phi, \Omega \in \mathcal{F} \\
+> (2)&\,\,A \in \mathcal{F}ならば、A^c \in \mathcal{F} \\
+> (3)&\,\,A_1,A_2,\cdots,A_n,\cdots \in \mathcal{F}ならば、 \bigcup_{n=1}^{\infty}A_n \in \mathcal{F} \\
+> (4)&\,\,A_1,A_2,\cdots,A_n,\cdots \in \mathcal{F}ならば、 \bigcap_{n=1}^{\infty}A_n \in \mathcal{F} \\
+> \end{split}
+> $$
+
+$\Omega$ の任意の部分集合 $B$ が $\mathcal{F}$ に属するとき、 $B$ を可測集合という。
+$\mathcal{F}$ を $\Omega$ 上の $\sigma$ -フィールドとするとき、組 $(\Omega, \mathcal{F})$ を可測空間という。
+
+#### 確率空間
+
+> [!def] 2.2.2
+> $(\Omega, \mathcal{F})$ 上で与えられて、次の性質を満たし、非負の値をとる関数 $P: \mathcal{F} \rightarrow [0,1]$ を**確率測度**または単に**確率**という。
+> $$
+> \begin{split}
+> (1)\,\,&A \in \mathcal{F}ならば、P(A) \ge 0 \\
+> (2)\,\,&P(\Omega)=1 \\
+> (3)\,\,&A_1,A_2,\cdots,A_n,\cdots \in \mathcal{F}が互いに排反ならば、 \\
+> &P\left(\bigcup_{n=1}^{\infty}A_n\right)=\sum_{n=1}^{\infty}P(A_n)
+> \end{split}
+> $$
+> 性質(3)は**加算加法性**または$\sigma$**-加法性**と呼ばれる。
+
+$(\Omega,\mathcal{F})$ 上の確率を $P$ とするとき、組 $(\Omega, \mathcal{F}, P)$ を**確率空間**という。
+
+> [!warn] 確率 $P$ の定義から次の性質が得られる。
+> $$
+> \begin{split}
+> (1)\,\,&P(A^c)=1-P(A) \\
+> (2)\,\,&P(\omega)=0 \\
+> (3)\,\,&P(A\cup B)=P(A)+P(B)-P(A \cap B) \\
+> (4)\,\,&単調性\quad A \subset B \Rightarrow P(A) \le P(B) \\
+> (5)\,\,&劣加法性\quad P\left(\bigcup_{n=1}^{\infty}A_n\right) \le \sum_{n=1}^{\infty}P(A_n)
+> \end{split}
+> $$
+
+#### $\sigma$-フィールドの生成
+
+> [!def] 2.2.5
+> $\mathcal{A}$ を $\Omega$ の部分集合の集まりの一つとする。このとき、次の性質を満たす $\mathcal{S}$ を **$\mathcal{A}$から生成された $\sigma$ -フィールド**といい、 $\mathcal{S}=\sigma(\mathcal{A})$ とかく。
+> $$
+> \begin{split}
+> (1)\,\,&\mathcal{S} \supset \mathcal{A} \\
+> (2)\,\,&もしも\mathcal{S}'が\mathcal{A}を含む他の\sigma-フィールドならば、\mathcal{S}' \supset \mathcal{S} \\
+> \end{split}
+> $$
+> 言い換えれば、 $\sigma (\mathcal{A})$ は $\mathcal{A}$ を含む "最小の $\sigma$ -フィールド"である。
+
+$\sigma$-フィールドに確率を定義することは、基本事象 $\omega$ がたくさんあり難しい（連続無限個である可能性がある）。
+
+確率の与え方として標準的なのは、まず１つのフィールド上で確率を定義し、そこから拡張する方法である。
+
+この方法を保証してくれるのが、次の**カラテオドリの拡張定理**である。
+
+> [!theorem] カラテオドリの拡張定理
+> フィールド $\mathcal{A}$ で定義された確率 $P$ は、 $\mathcal{A}$ から生成された $\sigma$ -フィールド $\sigma(\mathcal{A})$ 上の確率になるように、ただ１通りに拡張できる。
+
+#### ボレル $\sigma$ -フィールド
+
+連続型の確率変数を考えるときに、最も重要なフィールドは**ボレル $\sigma$ -フィールド**である。
+これは、すべての実数区間および加算子の区間の和集合からなる区間から得られ、無駄のないよう、すべての区間を含む最小の $\sigma$ -フィールドになっている。
+
+> [!def] 2.2.7
+> $\Omega = \mathbb{R}$ と仮定し、 $\mathcal{A}=\{[a,b] \mid -\infty \le a \le b \lt \infty\}$ とする。このとき $\mathcal{A}$ から生成された $\sigma$ -フィールド $\sigma(\mathcal{A})$ を $\mathcal{B}(\mathbb{R})$ または単に $\mathcal{B}$ で表し、 **$\mathbb{R}$ のボレル $\sigma$** -フィールドという。すなわち、 $\mathcal{B}=\sigma(\mathcal{A})$ 。さらに、 $B \in \mathcal{B}$ のとき、 $B$ を $\mathbb{R}$ の**ボレル集合**という。
+
 ### 2.3 確率変数の平均
 ### 2.4 確率変数の変換と収束
 ### 2.5 独立性と共分散
