@@ -375,6 +375,38 @@ $(\Omega,\mathcal{F})$ 上の確率を $P$ とするとき、組 $(\Omega, \math
 > \end{split}
 > $$
 
+#### 確率の連続性
+
+事象の単調列に対して、次の性質が成り立つ。
+
+$$
+\begin{split}
+(1)\,\,&A_1 \subset A_2 \subset \cdots \subset A_n \subset \cdots\,\,\Rightarrow\,\,P(A_1 \cup A_2 \cup \cdots)=\lim_{n \to \infty}P(A_n) \\
+(1)\,\,&A_1 \supset A_2 \supset \cdots \supset A_n \supset \cdots\,\,\Rightarrow\,\,P(A_1 \cap A_2 \cap \cdots)=\lim_{n \to \infty}P(A_n) \\
+\end{split}
+$$
+
+一般に、事象列 $\{A_n \mid n=1,2,\cdots\}$ に対して
+
+$$
+\limsup_{n}A_n=\bigcap_{n=1}^{\infty}\bigcup_{i=n}^{\infty}A_i, \qquad \liminf_{n}A_n=\bigcup_{n=1}^{\infty}\bigcap_{i=n}^{\infty}A_i
+$$
+
+とおく。それぞれ、**本質的上限**、**本質的下限**という。
+
+> [!warn]
+> $\overline{A}_n \equiv \bigcup_{i=n}^{\infty}A_i=A_n \cup A_{n+1} \cup \cdots$ とすると、 $\overline{A_1} \supset \overline{A_2} \supset \cdots \overline{A_n} \supset \cdots$ となるので、
+> $$
+> \limsup_{n}A_n = \bigcap_{n=1}^{\infty}\bigcup_{i=n}^{\infty}A_i=\bigcap_{n=1}^{\infty}\overline{A_n}
+> $$
+> は $A_n$ を上から抑えていく減少列になる。
+> $\liminf$ も同様で、 $\underline{A_n} \equiv \bigcup_{i=n}^{\infty}A_i=A_n \cap A_{n+1} \cap \cdots$とすると、 $\underline{A_1} \subset \underline{A_2} \subset \cdots \subset \underline{A_n} \subset \cdots$ となるので、
+> $$
+> \liminf_{n}A_n = \bigcup_{n=1}^{\infty}\bigcap_{i=n}^{\infty}A_i=\bigcup_{n=1}^{\infty}\underline{A_n}
+> $$
+> は $A_n$ を下から抑えていく増加列になる。
+
+
 #### $\sigma$-フィールドの生成
 
 > [!def] 2.2.5
@@ -403,6 +435,125 @@ $\sigma$-フィールドに確率を定義することは、基本事象 $\omega
 
 > [!def] 2.2.7
 > $\Omega = \mathbb{R}$ と仮定し、 $\mathcal{A}=\{[a,b] \mid -\infty \le a \le b \lt \infty\}$ とする。このとき $\mathcal{A}$ から生成された $\sigma$ -フィールド $\sigma(\mathcal{A})$ を $\mathcal{B}(\mathbb{R})$ または単に $\mathcal{B}$ で表し、 **$\mathbb{R}$ のボレル $\sigma$** -フィールドという。すなわち、 $\mathcal{B}=\sigma(\mathcal{A})$ 。さらに、 $B \in \mathcal{B}$ のとき、 $B$ を $\mathbb{R}$ の**ボレル集合**という。
+
+#### ルベーグ測度
+
+$\Omega = [0,1]$ とおく。 $[0,1]$ のボレル $\sigma$-フィールドを $\mathcal{B}=\mathcal{B}([0,1])$ とし、 $\mathcal{A}=\{(a,b] \mid 1 \le a \le b \le 1\}$ とする。このとき、 $\mathcal{A}$ 上の集合関数 $\lambda=\mathcal{A} \rightarrow [0,1]$ を
+
+$$
+\lambda(\phi)=0, \qquad \lambda(a,b]=b-a
+$$
+
+と定めれば、 $\lambda$ は $\mathcal{B}$ 上の確率に、ただ１通りに拡張される。この確率を区間 $[0,1]$ 上の**ルベーグ測度**という。
+
+【問 2.2.2】区間 $[0,1]$ において、次を示せ。
+$(1)\,\,任意の点xのルベーグ測度は0$
+$(2)\,\,任意の可算集合のルベーグ測度は0$
+$(3)\,\,有理数からなる集合のルベーグ測度は0$
+$(4)\,\,無理数からなる集合のルベーグ測度は1$
+
+【解答】
+$(1)\,\,x=\bigcap_{n=1}^{\infty}A_n, A_n=\left(x-\frac{1}{n},x+\frac{1}{n}\right)$ と表される。
+$A_n$ は $n$ とともに縮小していくから、 $P({x})=\lim_{n \to \infty}P(A_n)=\lim_{n \to \infty}\frac{2}{n}=0$
+$(2)\,\,$(1)の結果と確率測度の加算加法性による。
+$(3)\,\,$(2)の結果と有理数の集まりは可算集合であることによる。
+$(4)\,\,$無理数の集まりは有理数の集まりの補集合であることによる。
+
+「**ほとんどいたるところで**」「**ほとんどすべての $x$ に対して**」という用語は、ルベーグ測度0の集合を除いた「いたるところで」という意味である。
+
+#### 確率変数
+
+> [!def] 2.2.8
+> $\mathcal{F}$ が $\Omega$ 上の $\sigma$-フィールドのとき、関数 $X: \Omega \rightarrow \mathbb{R}$ が、 $\mathbb{R}$ の任意のボレル集合 $B$ に対して、
+> $$\{X \in B\}=\{\omega \in \Omega \mid X(\omega) \in B\} \in \mathcal{F}$$
+> を満たすならば、 $X$ は **$\mathcal{F}$ -可測**または単に**可測**であるとよばれる。 $(\Omega, \mathcal{F}, P)$ が確率空間のとき、このような $X$ は**確率変数**とよばれる。
+
+**インディケーター**
+
+$(\Omega, \mathcal{F}, P)$ を確率空間とし、 $A \in \mathcal{F}$ とする。 $A$ の**インディケータ**は
+
+$$
+I_A(\omega)= \begin{cases}
+1 & \omega \in Aのとき \\
+0 & \omega \notin Aのとき \\
+\end{cases}
+$$
+
+と与えられる。 $I_A$ は確率変数である。
+
+> [!theorem] 2.2.9
+> 確率変数の定数倍、和、積、商は確率変数になる。また、確率変数の極限および確率変数の合成関数も確率変数になる。すなわち  
+> $(1)\,\,X_nが(\Omega,\mathcal{F})上の確率変数で、X(\omega)=\lim_{n \to \infty}X_n(\omega)ならば、X(\omega)は確率変数$  
+> $(2)\,\,Xが(\Omega,\mathcal{F})上の確率変数で、gが\mathcal{B}-可測な関数ならば、g(X)は確率変数$
+
+**確率変数 $X$ から生成された $\sigma$-フィールド**は離散確率変数の場合と定義が同じなので省略。
+
+実数値関数を $f:\mathbb{R} \rightarrow \mathbb{R}$ とする。 $\mathbb{R}$ の任意のボレル集合 $B$ に対して、$f$ の逆像 $f^{-1}(B)=\{x \mid f(x)=y \in B\}$ がボレル集合であるとき、 $f$ を**ボレル関数**という。
+
+- 連続な実数値関数 $f$ はボレル関数( $\mathcal{B}$-可測)である。
+- 一般に、 $\mathcal{F}_X$-可測な確率変数 $Y$ は、あるボレル関数 $f: \mathbb{R} \rightarrow \mathbb{R}$ で $Y=f(X)$ と表される。
+
+#### 確率分布
+
+確率空間 $(\Omega,\mathcal{F},P)$ 上の確率変数 $X$ とする。このとき、 $\mathbb{R}$ のボレル集合 $B \in \mathcal{B}=\mathcal{B}(\mathbb{R})$ に対して、集合 $\{\omega \in \Omega \mid X(\omega) \in B\}$ を $\{X \in B\}$ と表し、確率 $P(\{X \in B\})$ を $P_X(B)$ と表す。
+
+$$
+P_X(B)=P(X \in B)
+$$
+
+$P_X$ は $(\mathbb{R}, \mathcal{B})$ 上の確率測度になり、 **$X$ の確率分布**または単に**分布**と呼ばれる。
+
+> [!def] 2.2.11
+> $X$ が確率変数のとき
+> $$
+> F(x)=F_X(x)=P_X((-\infty,x])=P(X \le x)
+> $$
+> によって定義される$F:\mathbb{R} \rightarrow [0,1]$ を**Xの分布関数**という。
+
+> [!theorem] 2.2.12
+> 確率変数 $X$ の分布関数 $F(x)$ は次の性質を満たす。  
+> $(1)\,\,a \lt b$ ならば、 $F(b)-F(a)=P_X((a,b])$  
+> $(2)\,\,F(x)$ は右連続で単調非減少  
+> $(3)\,\,\lim_{x \to \infty}F(x)=1, \quad \lim_{x \to -\infty}F(x)=0$
+
+> [!def] 2.2.13
+> 確率変数 $X$ の分布関数 $F(x)$ において、
+> $$F(x)=\int_{-\infty}^{x}f(t)dt$$
+> を満たす関数 $f(x)$ が存在するとき、 $f(x)$ を **$X$ の確率密度関数**または単に**確率密度**という。
+
+微分積分の基本定理から $\frac{dF(x)}{dx}=f(x)$ となる。さらに、 $f(x)$ は非負、かつ $\mathbb{R}$ 上での積分は１である。
+
+$$
+\frac{dF(x)}{dx}=f(x), \quad f(x) \ge 0, \quad \int_{-\infty}^{\infty}f(x)dx=1
+$$
+
+> [!def] 2.2.14
+> $X,Y$ が同じ確率空間 $(\Omega, \mathcal{F}, P)$ における確率変数のとき、 $X \le x$ と $Y \le y \quad (x,y \in \mathbb{R})$ が同時に起こる事象 $\{X \le x,Y \le y\}$ の確率を $P(X \le x, Y \le y)$ と表す。これを $(x, y)$ の２変数関数とみなして $F(x,y)$ とおき、 $X,Y$ の**結合分布関数**という。すなわち
+> $$F(x,y)=P(X \le x, Y \le y)$$
+> $F(x,y)$ が
+> $$F(x,y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f(u,v)dudv$$
+> と表されるとき、 $f(x,y)$ を $X,Y$ の**結合確率密度**または単に**確率密度**という。
+
+特に、 $f$ は関係式
+
+$$
+f(x,y)=\frac{\partial^2F}{\partial x \partial y}(x,y)
+$$
+
+を満たす。また、 $X,Y$ の分布関数をそれぞれ $F_X(x),F_Y(y)$ とおけば、これらは結合分布関数から次のようにして得られる。
+
+$$
+F_X(x)=F(x,\infty), \quad F_Y(y)=F(\infty, y)
+$$
+
+この意味で、 $F_X(x),F_Y(y)$ を**周辺分布関数**という。
+
+これをn次元に拡張して、**確率変数ベクトル$\bm{X}$**も同様に定義できる。
+
+> [!def] 2.2.15
+> $\bm{X}$ が確率変数ベクトルのとき、 $\mathbb{R}^n$ の任意のボレル集合 $B$ に対して、次を満たす関数 $f(\bm{x})=f(x_1,x_2,\cdots,x_n)$ を**確率変数ベクトル $\bm{X}$ の確率密度**という。
+> $$P_{\bm{X}}(B)=P(\bm{X} \in B)=\int_{\bm{x} \in B}f(\bm{x})dx_1dx_2\cdots dx_n$$
+> ただし、積分は $\bm{x}=(x_1,x_2,\cdots,x_n)$ が $B$ に属するような $\mathbb{R}^n$ の部分領域において重積分をするという意味である。
 
 ### 2.3 確率変数の平均
 ### 2.4 確率変数の変換と収束
