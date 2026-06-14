@@ -683,6 +683,41 @@ $$
 > 任意の $\varepsilon \gt 0$ に対して次の式が成り立つとき、 $\{X_n\}$ は $X$ に**確率収束する**という。
 > $$P(|X_n-X| \gt \varepsilon) \to 0\quad(n \to \infty)$$
 
+> [!def] 2.4.8 概収束
+> 確率0の事象に属していない任意の $\omega$ に対して、次の式が成り立つとき、 $\{X_n\}$ は $X$ に**概収束**するという。
+> $$
+> A=\{\omega \mid X_n(\omega) \to X(\omega)\}\quad ならば \quad P(A)=1
+> $$
+
+> [!warn]
+> $n \to \infty$ における上記３種類の収束を次のように表す。  
+> 分布収束 $\quad X_n \xrightarrow{d} X$  
+> 確率収束 $\quad X_n \xrightarrow{P} X$  
+> 概収束　 $\quad X_n \xrightarrow{a.s.} X$  
+
+> [!theorem] 2.4.10
+> 確率変数列の収束については、次の関係が成り立つ。  
+> $(1)\,\,X_n \xrightarrow{a.s.} X$ ならば、 $X_n \xrightarrow{P} X, \quad X_n \xrightarrow{P} X$ ならば、 $X_n \xrightarrow{d} X$  
+> $(2)\,\,X_n \xrightarrow{d} c$ （定数）ならば、 $X_n \xrightarrow{P} c$  
+> $(3)\,\,X_n \xrightarrow{P} X$ ならば、$\{n_k\} \subset \{n\}, n_k \to \infty$ を満たす $\{n\}$ の部分列 $\{n_k\}$ が存在して、 $n_k \to \infty$ のとき $X_{n_k} \xrightarrow{a.s.} X$  
+
+> [!def] 2.4.11 $L^r$-収束
+> 任意の $n$ に対して次の式が成り立つとき、 **$L^r$-収束する**という。  
+> $E[|X_n|^r] \lt \infty \quad$ かつ $\quad E[|X_n -X|^r] \to 0\,\,(n \to \infty)$
+
+> [!theorem] 2.4.12
+> $X_n \xrightarrow{L^2} X$ ならば $X_n \xrightarrow{L^1} X$, $\quad X_n \xrightarrow{L^1} X$ ならば $X_n \xrightarrow{P} X$
+
+#### 一様可積分
+
+> [!def] 2.4.13
+> 確率変数列 $\{X_n\}$ が**一様可積分**であるとは、$a_{m,n}=E[|X_m|I(|X_m| \gt n)]$ とおけば、 $n \to \infty$ のとき、 $a_{m,n}$ が $m$ に関して一様に0に収束することである。すなわち  
+> $$\lim_{n \to \infty}\sup_{m}E[|X_m|I(|X_m|>n)]=0$$
+> が成り立つことである。ただし、 $I(A)$ は $A$ のインディケーター。
+
+> [!theorem] 2.4.14
+> $X_n \xrightarrow{L^r} X$ であることは、 $X_n \xrightarrow{P} X$ かつ $\{|X_n|^r\}$ が一様可積分であることと同値である。
+
 ### 2.5 独立性と共分散
 ### 2.6 正規分布
 ### 2.7 条件付き平均
