@@ -53,10 +53,11 @@ $$
 
 このように、時刻 $t$ で、投資家は $\Omega$ のどの部分が実際の情報を含んでいるのかを知ることになる。一般に、 $\mathcal{F}_t$ は集合の"集まり"で、フィールドと呼ばれる $\mathcal{F}$ の仲間である。
 
-> [!def] 1.1.1
-> 次の性質を満たす $\mathcal{F}$ を**フィールド**という。  
-> $(1)\quad \phi, \Omega \in \mathcal{F}$  
-> $(2)\quad A \in \mathcal{F},\,B \in \mathcal{F}\,\Rightarrow\,A \cup B \in \mathcal{F},\,A \cap B \in \mathcal{F},\,A \setminus B \in \mathcal{F}$  
+<def title="1.1.1">
+次の性質を満たす $\mathcal{F}$ を**フィールド**という。  
+$(1)\quad \phi, \Omega \in \mathcal{F}$  
+$(2)\quad A \in \mathcal{F},\,B \in \mathcal{F}\,\Rightarrow\,A \cup B \in \mathcal{F},\,A \cap B \in \mathcal{F},\,A \setminus B \in \mathcal{F}$  
+</def>
 
 - $\{\phi,\Omega\}$ を**自明なフィールド**といい、 $\mathcal{F}_0$ と表す。
 
@@ -64,10 +65,11 @@ $$
 
 - $\Omega$ の部分集合からなる全体 $\{A \mid A \subset \Omega\}$ を $2^{\Omega}$ あるいは $\mathcal{P}(\Omega)$と表す。
 
-> [!def] 1.1.2
-> $\Omega$ が互いに排反な $D_1,D_2,\cdots,D_k$ の和からなるとき、すなわち  
-> $$D_i \cap D_j = \phi \quad (i \ne j), \quad \bigcup_{i=1}^kD_i=\Omega$$
-> であるとき、 $\{D_1,D_2,\cdots,D_k\}$ を $\Omega$ の**分割**という。  
+<def title="1.1.2">
+$\Omega$ が互いに排反な $D_1,D_2,\cdots,D_k$ の和からなるとき、すなわち  
+$$D_i \cap D_j = \phi \quad (i \ne j), \quad \bigcup_{i=1}^kD_i=\Omega$$
+であるとき、 $\{D_1,D_2,\cdots,D_k\}$ を $\Omega$ の**分割**という。  
+</def>
 
 一般に、**分割から生成されたフィールド**は $D_i$ の有限個の和事象とその余事象から構成されている。もしも $\Omega$ が有限個の集合から成り立っていれば、フィールドは分割によって生成される。
 
@@ -81,30 +83,36 @@ $$
 
 この場合、 $\mathcal{F}_2$ を生成する分割は $\mathcal{F}_1$ を生成する分割よりも細かい（時刻 $t=1,2$ ならば、時間経過で知識や情報は詳細になる）。
 
-> [!def] 1.1.3
-> 次のようなフィールドの集まり $\mathbb{F}$ を**フィルトレーション**という。  
-> $$\mathbb{F}=\{\mathcal{F}_0, \mathcal{F}_1,\cdots,\mathcal{F}_t,\cdots,\mathcal{F}_T\}, \quad \mathcal{F}_t \subset \mathcal{F}_{t+1}$$
-> $\mathbb{F}$ は情報の流れをモデル化するのに用いられる。  
-> 上式は、観察者にとって、時間が経てば経つほどに、たくさんの詳細な情報を知ることができ、 $\Omega$ の分割はさらに細かくなっていくということを意味している。  
-> 株価の推移にたとえれば、 $\mathbb{F}$ は投資家に必要な株価の情報を記述している。  
+<def title="1.1.3">
+次のようなフィールドの集まり $\mathbb{F}$ を**フィルトレーション**という。  
+$$\mathbb{F}=\{\mathcal{F}_0, \mathcal{F}_1,\cdots,\mathcal{F}_t,\cdots,\mathcal{F}_T\}, \quad \mathcal{F}_t \subset \mathcal{F}_{t+1}$$
+$\mathbb{F}$ は情報の流れをモデル化するのに用いられる。  
+上式は、観察者にとって、時間が経てば経つほどに、たくさんの詳細な情報を知ることができ、 $\Omega$ の分割はさらに細かくなっていくということを意味している。  
+株価の推移にたとえれば、 $\mathbb{F}$ は投資家に必要な株価の情報を記述している。  
+</def>
 
 #### 1.1.3 可測
 
 もしも事象のフィールド $\mathcal{F}$ が特定されるならば、 $\mathcal{F}$ に属する集合は**可測**であるという（たとえば、 $\mathcal{F} = 2^{\Omega}$ のとき、 $\Omega$ の任意の部分集合 $A$ は $\mathcal{F}$ に属するから可測）。
 
-> [!def] 1.1.4
-> 標本空間 $\Omega$ は有限個の要素からなり、 $\Omega$ 上の関数 $X$ は値 $x_i,\,i=1,2,\cdots,k$ をとるとする。  
-> また、 $\Omega$ 上の関数 $X$ は、すべての集合 $\{\omega \mid X(\omega)=x_i\},\,i=1,2,\cdots,k$ が $\mathcal{F}$ に属するとき、 **$\mathcal{F}$ -可測**または $(\Omega,\mathcal{F})$ 上の**確率変数**であるという。  
+<def title="1.1.4">
+
+標本空間 $\Omega$ は有限個の要素からなり、 $\Omega$ 上の関数 $X$ は値 $x_i,\,i=1,2,\cdots,k$ をとるとする。  
+また、 $\Omega$ 上の関数 $X$ は、すべての集合 $\{\omega \mid X(\omega)=x_i\},\,i=1,2,\cdots,k$ が $\mathcal{F}$ に属するとき、 **$\mathcal{F}$ -可測**または $(\Omega,\mathcal{F})$ 上の**確率変数**であるという。  
+
+</def>
 
 言い換えれば、可測であるということは、もしも $\mathcal{F}$ で記述される情報を得たならば、すなわち、 $\mathcal{F}$ のどの事象が起こったのかを知ったならば、 $X$ のどの値が起こったのかを知ることができる、ということである。
 
 #### 1.1.4 確率過程
 
-> [!def] 1.1.5
-> 確率変数の集まり $\{X_t \mid t=0,1,\cdots,T\}$ を**確率過程**という。この場合、任意に固定した $t$ に対して、 $X_t$ は $(\Omega,\mathcal{F}_t)$ 上の確率変数である。
+<def title="1.1.5">
+確率変数の集まり $\{X_t \mid t=0,1,\cdots,T\}$ を**確率過程**という。この場合、任意に固定した $t$ に対して、 $X_t$ は $(\Omega,\mathcal{F}_t)$ 上の確率変数である。
+</def>
 
-> [!def] 1.1.6
-> すべての $t=1,2,\cdots,T$ に対して、 $X_t$ が $(\Omega,\mathcal{F}_t)$ 上の確率変数であるとき、すなわち、 $X_t$ が $\mathcal{F}_t$ -可測であるとき、確率過程 $\{X_t\}$ はフィルトレーション $\mathbb{F}=\{\mathcal{F}_t \mid t=0,1,\cdots,T\}$ に**適合している**という。
+<def title="1.1.6">
+すべての $t=1,2,\cdots,T$ に対して、 $X_t$ が $(\Omega,\mathcal{F}_t)$ 上の確率変数であるとき、すなわち、 $X_t$ が $\mathcal{F}_t$ -可測であるとき、確率過程 $\{X_t\}$ はフィルトレーション $\mathbb{F}=\{\mathcal{F}_t \mid t=0,1,\cdots,T\}$ に**適合している**という。
+</def>
 
 たとえば、
 
@@ -141,31 +149,37 @@ $$
 \end{split}
 $$
 
-> [!def] 1.1.8
-> $\Omega$ は有限個の基本事象からなるとし、確率変数 $X$ 、すなわち、 $\omega \in \Omega$ から実数の集まり $\mathbb{R}$ への関数 $X:\omega \rightarrow \mathbb{R}$、を考える。 $X$ は有限個の値を取り得るので、それらを $x_i,\,\,i=1,2,\cdots,k$ とし、事象 $\{\omega \mid X(\omega)=x_i\}$ を単に $\{X=x_i\}$ と表し、その確率を $p_i=P(X=x_i)$ とかく。すなわち、
-> $$p_i=P(X=x_i)=\sum_{\omega \mid X(\omega)=x_i}P(\omega)$$
-> （$X(\omega)=x_i$ となる $\omega$ に関する和）  
-> このような確率の組 $\{p_i\}$ を $X$ の**確率分布**という。
+<def title="1.1.8">
 
-> [!def] 1.1.9
-> $X$ が $(\Omega, \mathcal{F})$ 上の確率変数で、 $P$ が確率のとき、
-> $$ E[X]=\sum_{\omega}X(\omega)P(\omega) $$
-> によって与えられる値 $E[X]$ を $X$ の**平均**または**期待値**という。 $X$ の確率分布を用いてかけば、
-> $$ E[X]=\sum_{i=1}^k x_iP(X=x_i) $$
-> と表される。
+$\Omega$ は有限個の基本事象からなるとし、確率変数 $X$ 、すなわち、 $\omega \in \Omega$ から実数の集まり $\mathbb{R}$ への関数 $X:\omega \rightarrow \mathbb{R}$、を考える。 $X$ は有限個の値を取り得るので、それらを $x_i,\,\,i=1,2,\cdots,k$ とし、事象 $\{\omega \mid X(\omega)=x_i\}$ を単に $\{X=x_i\}$ と表し、その確率を $p_i=P(X=x_i)$ とかく。すなわち、
+$$p_i=P(X=x_i)=\sum_{\omega \mid X(\omega)=x_i}P(\omega)$$
+（$X(\omega)=x_i$ となる $\omega$ に関する和）  
+このような確率の組 $\{p_i\}$ を $X$ の**確率分布**という。
+</def>
 
-> [!def] 1.1.10
-> 事象 $A$ に対して
-> $$ I_A(\omega)= \begin{cases} 1 & \text{if \,\, $\omega \in A$} \\ 0 & \text{if \,\, $\omega \notin A$} \end{cases} $$
-> とおき、確率変数 $I_A$ を事象 $A$ の**インディケータ**という。 $I_A$ を $I(A)$ ともかく。
+<def title="1.1.9">
+
+$X$ が $(\Omega, \mathcal{F})$ 上の確率変数で、 $P$ が確率のとき、
+$$ E[X]=\sum_{\omega}X(\omega)P(\omega) $$
+によって与えられる値 $E[X]$ を $X$ の**平均**または**期待値**という。 $X$ の確率分布を用いてかけば、
+$$ E[X]=\sum_{i=1}^k x_iP(X=x_i) $$
+と表される。
+</def>
+
+<def title="1.1.10">
+事象 $A$ に対して
+$$ I_A(\omega)= \begin{cases} 1 & \text{if \,\, $\omega \in A$} \\ 0 & \text{if \,\, $\omega \notin A$} \end{cases} $$
+とおき、確率変数 $I_A$ を事象 $A$ の**インディケータ**という。 $I_A$ を $I(A)$ ともかく。
+</def>
 
 以降においては、 $\Omega$ を有限個の基本事象からなる標本空間とし、 $\mathcal{F}=2^{\Omega}$、$P$ を $\Omega$ 上の確率とする。これら３つの組 $(\Omega, \mathcal{F}, P)$ を**確率空間**という。
 
 #### 1.1.6 条件付き確率
 
-> [!def] 1.1.11
-> $A, D$ を事象とし、 $P(D) \gt 0$ とする。このとき $D$ が起こったと言う前提のもとに $A$ が起こる**条件付き確率**( $D$ に対する $A$ の条件付き確率) $P(A|D)$ を次のように定義する。
-> $$P(A|D)=\frac{P(A\cap D)}{P(D)}$$
+<def title="1.1.11">
+$A, D$ を事象とし、 $P(D) \gt 0$ とする。このとき $D$ が起こったと言う前提のもとに $A$ が起こる**条件付き確率**( $D$ に対する $A$ の条件付き確率) $P(A|D)$ を次のように定義する。
+$$P(A|D)=\frac{P(A\cap D)}{P(D)}$$
+</def>
 
 条件付き確率を書き直すと**乗法公式**が得られる。
 
@@ -173,30 +187,35 @@ $$
 P(A\cap D)=P(D)P(A|D)
 $$
 
-> [!theorem] 1.1.13
-> $\{D_1,D_2,\cdots,D_k\}$ を定義1.1.2で与えられた $\Omega$ の分割とし、 $P(D_i) \gt 0,i=1,2,\cdots,k$ とする。このとき次が成り立つ。
-> $$(1) 全確率の公式 \quad P(A)=\sum_{i=0}^{k}P(D_i)P(A|D_i)$$
-> $$(2) ベイズの公式 \quad P(A) \gt 0 ならば P(D_i|A)=\frac{P(D_i)P(A|D_i)}{\sum_{i=1}^{k}P(D_i)P(A|D_i)}$$
-> $P(D_i)$ を**事前確率** 、 $P(D_i|A)$ を**事後確率**という。
+<theorem title="1.1.13">
+$\{D_1,D_2,\cdots,D_k\}$ を定義1.1.2で与えられた $\Omega$ の分割とし、 $P(D_i) \gt 0,i=1,2,\cdots,k$ とする。このとき次が成り立つ。
+$$(1) 全確率の公式 \quad P(A)=\sum_{i=0}^{k}P(D_i)P(A|D_i)$$
+$$(2) ベイズの公式 \quad P(A) \gt 0 ならば P(D_i|A)=\frac{P(D_i)P(A|D_i)}{\sum_{i=1}^{k}P(D_i)P(A|D_i)}$$
+$P(D_i)$ を**事前確率** 、 $P(D_i|A)$ を**事後確率**という。
+</theorem>
 
-> [!def] 1.1.14
-> $\mathcal{G}$　を定義1.1.2で与えられた $\Omega$ の分割 $\{D_1,D_2,\cdots,D_k\}$ から生成されたフィールドとし、 $P(D_i) \gt 0,i=1,2,\cdots,k$ とする。このとき、**$\mathcal{G}$ に対する $A$ の条件付き確率**は、 $D_i$ 上で値 $P(A|D_i)$ をとる確率変数のことであり、これを $P(A|\mathcal{G})$ とかく。すなわち
-> $$P(A|\mathcal{G})(\omega)=\sum_{i=1}^kP(A|D_i)I_{D_i}(\omega)$$
-> 特に、 $\mathcal{G}=\{\phi,\Omega\}$ （自明なフィールド）ならば、次のようになる。
-> $$P(A|\mathcal{G})=P(A|\Omega)I_{\Omega}=\frac{P(A \cap \Omega)}{P(\Omega)}=P(A)$$
+<def title="1.1.14">
+$\mathcal{G}$　を定義1.1.2で与えられた $\Omega$ の分割 $\{D_1,D_2,\cdots,D_k\}$ から生成されたフィールドとし、 $P(D_i) \gt 0,i=1,2,\cdots,k$ とする。このとき、**$\mathcal{G}$ に対する $A$ の条件付き確率**は、 $D_i$ 上で値 $P(A|D_i)$ をとる確率変数のことであり、これを $P(A|\mathcal{G})$ とかく。すなわち
+$$P(A|\mathcal{G})(\omega)=\sum_{i=1}^kP(A|D_i)I_{D_i}(\omega)$$
+特に、 $\mathcal{G}=\{\phi,\Omega\}$ （自明なフィールド）ならば、次のようになる。
+$$P(A|\mathcal{G})=P(A|\Omega)I_{\Omega}=\frac{P(A \cap \Omega)}{P(\Omega)}=P(A)$$
+</def>
 
-> [!def] 1.1.15
-> 確率変数 $Y$ の値を $y_1,y_2,\cdots,y_k$ とする。このとき、 $D_i=\{\omega \mid Y(\omega)=y_i\},\,i=1,2,\cdots,k$ は $\Omega$ の分割になる。そこで、 $\mathcal{F}_Y$ を $Y$ から生成されたフィールドとするとき、 **$\mathcal{F}_Y$ に対する $A$ の条件付き確率** $P(A|\mathcal{F}_Y$ を $P(A|Y)$ と表す。すなわち
-> $$P(A|\mathcal{F}_Y)=P(A|Y)$$
+<def title="1.1.15">
+確率変数 $Y$ の値を $y_1,y_2,\cdots,y_k$ とする。このとき、 $D_i=\{\omega \mid Y(\omega)=y_i\},\,i=1,2,\cdots,k$ は $\Omega$ の分割になる。そこで、 $\mathcal{F}_Y$ を $Y$ から生成されたフィールドとするとき、 **$\mathcal{F}_Y$ に対する $A$ の条件付き確率** $P(A|\mathcal{F}_Y$ を $P(A|Y)$ と表す。すなわち
+$$P(A|\mathcal{F}_Y)=P(A|Y)$$
+</def>
 
-> [!def] 1.1.16
-> 確率変数 $X$ の値を $x_1,x_2,\cdots,x_p$ とするとき、事象を $A_1=\{X=x_1\},\,\,A_2=\{X=x_2\},\cdots,A_p=\{X=x_p\}$ とおく。 $\Omega$ の分割 $\{D_1,D_2,\cdots,D_k\}$ によって生成されたフィールドを $\mathcal{G}$ とする。このとき
-> $$E[X|\mathcal{G}]=\sum_{i=1}^{p}x_iP(A_i|\mathcal{G})$$
-> によって与えられる $E[X|\mathcal{G}]$ を、 **$\mathcal{G}$ に対する $X$ の条件付き平均**という。
+<def title="1.1.16">
+確率変数 $X$ の値を $x_1,x_2,\cdots,x_p$ とするとき、事象を $A_1=\{X=x_1\},\,\,A_2=\{X=x_2\},\cdots,A_p=\{X=x_p\}$ とおく。 $\Omega$ の分割 $\{D_1,D_2,\cdots,D_k\}$ によって生成されたフィールドを $\mathcal{G}$ とする。このとき
+$$E[X|\mathcal{G}]=\sum_{i=1}^{p}x_iP(A_i|\mathcal{G})$$
+によって与えられる $E[X|\mathcal{G}]$ を、 **$\mathcal{G}$ に対する $X$ の条件付き平均**という。
+</def>
 
-> [!def] 1.1.19
-> $X, Y$ が確率変数で、いずれも有限個の値をとるとき、 $Y$ に対する $X$ の条件付き平均 $E[X|Y]$ は、
-> $$E[X|Y] = E[X|\mathcal{F}_Y]$$
+<def title="1.1.19">
+$X, Y$ が確率変数で、いずれも有限個の値をとるとき、 $Y$ に対する $X$ の条件付き平均 $E[X|Y]$ は、
+$$E[X|Y] = E[X|\mathcal{F}_Y]$$
+</def>
 
 ### 1.2 連続型の確率モデル
 
@@ -204,33 +223,35 @@ $$
 
 #### 1.2.1 可測空間
 
-> [!def] 1.2.1
-> 次の性質を満たすフィールド $\mathcal{F}$ を** $\sigma$ -フィールド**という。
-> $$
-> \begin{split}
-> (1)&\,\,\phi, \Omega \in \mathcal{F} \\
-> (2)&\,\,A \in \mathcal{F}ならば、A^c \in \mathcal{F} \\
-> (3)&\,\,A_1,A_2,\cdots,A_n,\cdots \in \mathcal{F}ならば、 \bigcup_{n=1}^{\infty}A_n \in \mathcal{F} \\
-> (4)&\,\,A_1,A_2,\cdots,A_n,\cdots \in \mathcal{F}ならば、 \bigcap_{n=1}^{\infty}A_n \in \mathcal{F} \\
-> \end{split}
-> $$
+<def title="1.2.1">
+次の性質を満たすフィールド $\mathcal{F}$ を** $\sigma$ -フィールド**という。
+$$
+\begin{split}
+(1)&\,\,\phi, \Omega \in \mathcal{F} \\
+(2)&\,\,A \in \mathcal{F}ならば、A^c \in \mathcal{F} \\
+(3)&\,\,A_1,A_2,\cdots,A_n,\cdots \in \mathcal{F}ならば、 \bigcup_{n=1}^{\infty}A_n \in \mathcal{F} \\
+(4)&\,\,A_1,A_2,\cdots,A_n,\cdots \in \mathcal{F}ならば、 \bigcap_{n=1}^{\infty}A_n \in \mathcal{F} \\
+\end{split}
+$$
+</def>
 
 $\Omega$ の任意の部分集合 $B$ が $\mathcal{F}$ に属するとき、 $B$ を可測集合という。
 $\mathcal{F}$ を $\Omega$ 上の $\sigma$ -フィールドとするとき、組 $(\Omega, \mathcal{F})$ を可測空間という。
 
 #### 1.2.2 確率空間
 
-> [!def] 1.2.2
-> $(\Omega, \mathcal{F})$ 上で与えられて、次の性質を満たし、非負の値をとる関数 $P: \mathcal{F} \rightarrow [0,1]$ を**確率測度**または単に**確率**という。
-> $$
-> \begin{split}
-> (1)\,\,&A \in \mathcal{F}ならば、P(A) \ge 0 \\
-> (2)\,\,&P(\Omega)=1 \\
-> (3)\,\,&A_1,A_2,\cdots,A_n,\cdots \in \mathcal{F}が互いに排反ならば、 \\
-> &P\left(\bigcup_{n=1}^{\infty}A_n\right)=\sum_{n=1}^{\infty}P(A_n)
-> \end{split}
-> $$
-> 性質(3)は**加算加法性**または$\sigma$**-加法性**と呼ばれる。
+<def title="1.2.2">
+$(\Omega, \mathcal{F})$ 上で与えられて、次の性質を満たし、非負の値をとる関数 $P: \mathcal{F} \rightarrow [0,1]$ を**確率測度**または単に**確率**という。
+$$
+\begin{split}
+(1)\,\,&A \in \mathcal{F}ならば、P(A) \ge 0 \\
+(2)\,\,&P(\Omega)=1 \\
+(3)\,\,&A_1,A_2,\cdots,A_n,\cdots \in \mathcal{F}が互いに排反ならば、 \\
+&P\left(\bigcup_{n=1}^{\infty}A_n\right)=\sum_{n=1}^{\infty}P(A_n)
+\end{split}
+$$
+性質(3)は**加算加法性**または$\sigma$**-加法性**と呼ばれる。
+</def>
 
 $(\Omega,\mathcal{F})$ 上の確率を $P$ とするとき、組 $(\Omega, \mathcal{F}, P)$ を**確率空間**という。
 
@@ -279,15 +300,16 @@ $$
 
 #### 1.2.4 σ-フィールドの生成
 
-> [!def] 1.2.5
-> $\mathcal{A}$ を $\Omega$ の部分集合の集まりの一つとする。このとき、次の性質を満たす $\mathcal{S}$ を **$\mathcal{A}$から生成された $\sigma$ -フィールド**といい、 $\mathcal{S}=\sigma(\mathcal{A})$ とかく。
-> $$
-> \begin{split}
-> (1)\,\,&\mathcal{S} \supset \mathcal{A} \\
-> (2)\,\,&もしも\mathcal{S}'が\mathcal{A}を含む他の\sigma-フィールドならば、\mathcal{S}' \supset \mathcal{S} \\
-> \end{split}
-> $$
-> 言い換えれば、 $\sigma (\mathcal{A})$ は $\mathcal{A}$ を含む "最小の $\sigma$ -フィールド"である。
+<def title="1.2.5">
+$\mathcal{A}$ を $\Omega$ の部分集合の集まりの一つとする。このとき、次の性質を満たす $\mathcal{S}$ を **$\mathcal{A}$から生成された $\sigma$ -フィールド**といい、 $\mathcal{S}=\sigma(\mathcal{A})$ とかく。
+$$
+\begin{split}
+(1)\,\,&\mathcal{S} \supset \mathcal{A} \\
+(2)\,\,&もしも\mathcal{S}'が\mathcal{A}を含む他の\sigma-フィールドならば、\mathcal{S}' \supset \mathcal{S} \\
+\end{split}
+$$
+言い換えれば、 $\sigma (\mathcal{A})$ は $\mathcal{A}$ を含む "最小の $\sigma$ -フィールド"である。
+</def>
 
 $\sigma$-フィールドに確率を定義することは、基本事象 $\omega$ がたくさんあり難しい（連続無限個である可能性がある）。
 
@@ -295,16 +317,18 @@ $\sigma$-フィールドに確率を定義することは、基本事象 $\omega
 
 この方法を保証してくれるのが、次の**カラテオドリの拡張定理**である。
 
-> [!theorem] カラテオドリの拡張定理
-> フィールド $\mathcal{A}$ で定義された確率 $P$ は、 $\mathcal{A}$ から生成された $\sigma$ -フィールド $\sigma(\mathcal{A})$ 上の確率になるように、ただ１通りに拡張できる。
+<theorem title="カラテオドリの拡張定理">
+フィールド $\mathcal{A}$ で定義された確率 $P$ は、 $\mathcal{A}$ から生成された $\sigma$ -フィールド $\sigma(\mathcal{A})$ 上の確率になるように、ただ１通りに拡張できる。
+</theorem>
 
 #### 1.2.5 ボレルσ-フィールド
 
 連続型の確率変数を考えるときに、最も重要なフィールドは**ボレル $\sigma$ -フィールド**である。
 これは、すべての実数区間および加算子の区間の和集合からなる区間から得られ、無駄のないよう、すべての区間を含む最小の $\sigma$ -フィールドになっている。
 
-> [!def] 1.2.7
-> $\Omega = \mathbb{R}$ と仮定し、 $\mathcal{A}=\{[a,b] \mid -\infty \le a \le b \lt \infty\}$ とする。このとき $\mathcal{A}$ から生成された $\sigma$ -フィールド $\sigma(\mathcal{A})$ を $\mathcal{B}(\mathbb{R})$ または単に $\mathcal{B}$ で表し、 **$\mathbb{R}$ のボレル $\sigma$** -フィールドという。すなわち、 $\mathcal{B}=\sigma(\mathcal{A})$ 。さらに、 $B \in \mathcal{B}$ のとき、 $B$ を $\mathbb{R}$ の**ボレル集合**という。
+<def title="1.2.7">
+$\Omega = \mathbb{R}$ と仮定し、 $\mathcal{A}=\{[a,b] \mid -\infty \le a \le b \lt \infty\}$ とする。このとき $\mathcal{A}$ から生成された $\sigma$ -フィールド $\sigma(\mathcal{A})$ を $\mathcal{B}(\mathbb{R})$ または単に $\mathcal{B}$ で表し、 **$\mathbb{R}$ のボレル $\sigma$** -フィールドという。すなわち、 $\mathcal{B}=\sigma(\mathcal{A})$ 。さらに、 $B \in \mathcal{B}$ のとき、 $B$ を $\mathbb{R}$ の**ボレル集合**という。
+</def>
 
 #### 1.2.6 ルベーグ測度
 
@@ -333,10 +357,11 @@ $(4)\,\,$無理数の集まりは有理数の集まりの補集合であるこ�
 
 #### 1.2.7 確率変数
 
-> [!def] 1.2.8
-> $\mathcal{F}$ が $\Omega$ 上の $\sigma$-フィールドのとき、関数 $X: \Omega \rightarrow \mathbb{R}$ が、 $\mathbb{R}$ の任意のボレル集合 $B$ に対して、
-> $$\{X \in B\}=\{\omega \in \Omega \mid X(\omega) \in B\} \in \mathcal{F}$$
-> を満たすならば、 $X$ は **$\mathcal{F}$ -可測**または単に**可測**であるとよばれる。 $(\Omega, \mathcal{F}, P)$ が確率空間のとき、このような $X$ は**確率変数**とよばれる。
+<def title="1.2.8">
+$\mathcal{F}$ が $\Omega$ 上の $\sigma$-フィールドのとき、関数 $X: \Omega \rightarrow \mathbb{R}$ が、 $\mathbb{R}$ の任意のボレル集合 $B$ に対して、
+$$\{X \in B\}=\{\omega \in \Omega \mid X(\omega) \in B\} \in \mathcal{F}$$
+を満たすならば、 $X$ は **$\mathcal{F}$ -可測**または単に**可測**であるとよばれる。 $(\Omega, \mathcal{F}, P)$ が確率空間のとき、このような $X$ は**確率変数**とよばれる。
+</def>
 
 **インディケーター**
 
@@ -351,10 +376,11 @@ $$
 
 と与えられる。 $I_A$ は確率変数である。
 
-> [!theorem] 1.2.9
-> 確率変数の定数倍、和、積、商は確率変数になる。また、確率変数の極限および確率変数の合成関数も確率変数になる。すなわち  
-> $(1)\,\,X_nが(\Omega,\mathcal{F})上の確率変数で、X(\omega)=\lim_{n \to \infty}X_n(\omega)ならば、X(\omega)は確率変数$  
-> $(2)\,\,Xが(\Omega,\mathcal{F})上の確率変数で、gが\mathcal{B}-可測な関数ならば、g(X)は確率変数$
+<theorem title="1.2.9">
+確率変数の定数倍、和、積、商は確率変数になる。また、確率変数の極限および確率変数の合成関数も確率変数になる。すなわち  
+$(1)\,\,X_nが(\Omega,\mathcal{F})上の確率変数で、X(\omega)=\lim_{n \to \infty}X_n(\omega)ならば、X(\omega)は確率変数$  
+$(2)\,\,Xが(\Omega,\mathcal{F})上の確率変数で、gが\mathcal{B}-可測な関数ならば、g(X)は確率変数$
+</theorem>
 
 **確率変数 $X$ から生成された $\sigma$-フィールド**は離散確率変数の場合と定義が同じなので省略。
 
@@ -380,23 +406,26 @@ $P_X$ は $(\mathbb{R}, \mathcal{B})$ 上の確率測度になり、 **$X$ の�
 > 確率は $(\Omega, \mathcal{F})$ が可測空間になり、  
 > 確率分布は $(\mathbb{R}, \mathcal{B})$ が可測空間になる。 
 
-> [!def] 1.2.11
-> $X$ が確率変数のとき
-> $$
-> F(x)=F_X(x)=P_X((-\infty,x])=P(X \le x)
-> $$
-> によって定義される$F:\mathbb{R} \rightarrow [0,1]$ を**Xの分布関数**という。
+<def title="1.2.11">
+$X$ が確率変数のとき
+$$
+F(x)=F_X(x)=P_X((-\infty,x])=P(X \le x)
+$$
+によって定義される$F:\mathbb{R} \rightarrow [0,1]$ を**Xの分布関数**という。
+</def>
 
-> [!theorem] 1.2.12
-> 確率変数 $X$ の分布関数 $F(x)$ は次の性質を満たす。  
-> $(1)\,\,a \lt b$ ならば、 $F(b)-F(a)=P_X((a,b])$  
-> $(2)\,\,F(x)$ は右連続で単調非減少  
-> $(3)\,\,\lim_{x \to \infty}F(x)=1, \quad \lim_{x \to -\infty}F(x)=0$
+<theorem title="1.2.12">
+確率変数 $X$ の分布関数 $F(x)$ は次の性質を満たす。  
+$(1)\,\,a \lt b$ ならば、 $F(b)-F(a)=P_X((a,b])$  
+$(2)\,\,F(x)$ は右連続で単調非減少  
+$(3)\,\,\lim_{x \to \infty}F(x)=1, \quad \lim_{x \to -\infty}F(x)=0$
+</theorem>
 
-> [!def] 1.2.13
-> 確率変数 $X$ の分布関数 $F(x)$ において、
-> $$F(x)=\int_{-\infty}^{x}f(t)dt$$
-> を満たす関数 $f(x)$ が存在するとき、 $f(x)$ を **$X$ の確率密度関数**または単に**確率密度**という。
+<def title="1.2.13">
+確率変数 $X$ の分布関数 $F(x)$ において、
+$$F(x)=\int_{-\infty}^{x}f(t)dt$$
+を満たす関数 $f(x)$ が存在するとき、 $f(x)$ を **$X$ の確率密度関数**または単に**確率密度**という。
+</def>
 
 微分積分の基本定理から $\frac{dF(x)}{dx}=f(x)$ となる。さらに、 $f(x)$ は非負、かつ $\mathbb{R}$ 上での積分は１である。
 
@@ -404,12 +433,13 @@ $$
 \frac{dF(x)}{dx}=f(x), \quad f(x) \ge 0, \quad \int_{-\infty}^{\infty}f(x)dx=1
 $$
 
-> [!def] 1.2.14
-> $X,Y$ が同じ確率空間 $(\Omega, \mathcal{F}, P)$ における確率変数のとき、 $X \le x$ と $Y \le y \quad (x,y \in \mathbb{R})$ が同時に起こる事象 $\{X \le x,Y \le y\}$ の確率を $P(X \le x, Y \le y)$ と表す。これを $(x, y)$ の２変数関数とみなして $F(x,y)$ とおき、 $X,Y$ の**結合分布関数**という。すなわち
-> $$F(x,y)=P(X \le x, Y \le y)$$
-> $F(x,y)$ が
-> $$F(x,y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f(u,v)dudv$$
-> と表されるとき、 $f(x,y)$ を $X,Y$ の**結合確率密度**または単に**確率密度**という。
+<def title="1.2.14">
+$X,Y$ が同じ確率空間 $(\Omega, \mathcal{F}, P)$ における確率変数のとき、 $X \le x$ と $Y \le y \quad (x,y \in \mathbb{R})$ が同時に起こる事象 $\{X \le x,Y \le y\}$ の確率を $P(X \le x, Y \le y)$ と表す。これを $(x, y)$ の２変数関数とみなして $F(x,y)$ とおき、 $X,Y$ の**結合分布関数**という。すなわち
+$$F(x,y)=P(X \le x, Y \le y)$$
+$F(x,y)$ が
+$$F(x,y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f(u,v)dudv$$
+と表されるとき、 $f(x,y)$ を $X,Y$ の**結合確率密度**または単に**確率密度**という。
+</def>
 
 特に、 $f$ は関係式
 
@@ -427,10 +457,11 @@ $$
 
 これをn次元に拡張して、**確率変数ベクトル$\bm{X}$**も同様に定義できる。
 
-> [!def] 1.2.15
-> $\bm{X}$ が確率変数ベクトルのとき、 $\mathbb{R}^n$ の任意のボレル集合 $B$ に対して、次を満たす関数 $f(\bm{x})=f(x_1,x_2,\cdots,x_n)$ を**確率変数ベクトル $\bm{X}$ の確率密度**という。
-> $$P_{\bm{X}}(B)=P(\bm{X} \in B)=\int_{\bm{x} \in B}f(\bm{x})dx_1dx_2\cdots dx_n$$
-> ただし、積分は $\bm{x}=(x_1,x_2,\cdots,x_n)$ が $B$ に属するような $\mathbb{R}^n$ の部分領域において重積分をするという意味である。
+<def title="1.2.15">
+$\bm{X}$ が確率変数ベクトルのとき、 $\mathbb{R}^n$ の任意のボレル集合 $B$ に対して、次を満たす関数 $f(\bm{x})=f(x_1,x_2,\cdots,x_n)$ を**確率変数ベクトル $\bm{X}$ の確率密度**という。
+$$P_{\bm{X}}(B)=P(\bm{X} \in B)=\int_{\bm{x} \in B}f(\bm{x})dx_1dx_2\cdots dx_n$$
+ただし、積分は $\bm{x}=(x_1,x_2,\cdots,x_n)$ が $B$ に属するような $\mathbb{R}^n$ の部分領域において重積分をするという意味である。
+</def>
 
 ### 1.3 確率変数の平均
 
@@ -457,36 +488,38 @@ $$
 
 と書き直すことができる。
 
-> [!theorem] 1.3.1
-> $X$ を確率変数とし、 $F(x)$ を $X$ の分布関数とする。さらに、 $h$ を $\mathbb{R}$ 上の可測な関数で $h(X)$ を積分可能とする。このとき
-> $$
-> \begin{split}
-> E[h(X)]&=\int_{\Omega}h(X(\omega))dP(\omega) \\
-> &=\int_{-\infty}^{\infty}h(x)P_X(dx)=\int_{-\infty}^{\infty}h(x)F(dx) \\
-> \end{split}
-> $$
+<theorem title="1.3.1">
+$X$ を確率変数とし、 $F(x)$ を $X$ の分布関数とする。さらに、 $h$ を $\mathbb{R}$ 上の可測な関数で $h(X)$ を積分可能とする。このとき
+$$
+\begin{split}
+E[h(X)]&=\int_{\Omega}h(X(\omega))dP(\omega) \\
+&=\int_{-\infty}^{\infty}h(x)P_X(dx)=\int_{-\infty}^{\infty}h(x)F(dx) \\
+\end{split}
+$$
+</theorem>
 
 この積分を $F$ に関する $h$ の**ルベーグ・スティルチェス積分**という。
 とくに、 $F(x)=x$ に関するルベーグ・スティルチェス積分は**ルベーグ積分**という。
 
-> [!theorem] 1.3.2
-> $X,Y$ が確率変数のとき、平均は次の性質をもつ。
-> $(1)\,\,P(X \ge 0)=1$ で $E[X]$ が存在するとき、$E[X] \ge 0$  
-> $\quad X \ge 0$ のとき、$E[X]=0$ であるための必要十分条件は 
-> $$
-> P(X=0)=1
-> $$ 
-> $(2)\,\,\alpha$ が定数のとき、 $E[\alpha]=\alpha$  
-> $(3)\,\,X$ が有界、すなわち、 $P(|X| \le M)=1$ を満たす定数 $M \gt 0$ が存在するとき、 $E[X]$ は存在する。
-> $\quad$ 一般に、 $|X| \le Y$ かつ $E[Y]$ が存在するとき、 $E[X]$ も存在して  
-> $$E[|X|] \le E[Y]$$
-> $(4)\,\,\alpha,\beta$ が定数、かつ $E[X]$ と $E[Y]$ が存在するとき、
-> $$E[\alpha X + \beta Y]=\alpha E[X] + \beta E[Y]$$
-> $(5)\,\,\alpha,\beta$ が定数、$g,h$ が関数、かつ $g[X]$ と $h[Y]$ が確率変数でそれらの平均が存在するとき、
-> $$E[\alpha g(X) + \beta h(x)]=\alpha E[g(X)] + \beta E[h(Y)]$$
-> $(6)\,\,g,h$ が関数で $g(x) \le h(x), \,\,x \in \mathbb{R}$ を満たし。かつ $g(X),h(X)$ が確率変数でそれらの平均が存在するとき、
-> $$E[g(X)] \le E[h(X)]$$
-> $\quad$ 特に不等式 $-|x| \le x \le |x|$ に注意すれば、 $|E[X]| \le E[|X|]$
+<theorem title="1.3.2">
+$X,Y$ が確率変数のとき、平均は次の性質をもつ。
+$(1)\,\,P(X \ge 0)=1$ で $E[X]$ が存在するとき、$E[X] \ge 0$  
+$\quad X \ge 0$ のとき、$E[X]=0$ であるための必要十分条件は 
+$$
+P(X=0)=1
+$$ 
+$(2)\,\,\alpha$ が定数のとき、 $E[\alpha]=\alpha$  
+$(3)\,\,X$ が有界、すなわち、 $P(|X| \le M)=1$ を満たす定数 $M \gt 0$ が存在するとき、 $E[X]$ は存在する。
+$\quad$ 一般に、 $|X| \le Y$ かつ $E[Y]$ が存在するとき、 $E[X]$ も存在して  
+$$E[|X|] \le E[Y]$$
+$(4)\,\,\alpha,\beta$ が定数、かつ $E[X]$ と $E[Y]$ が存在するとき、
+$$E[\alpha X + \beta Y]=\alpha E[X] + \beta E[Y]$$
+$(5)\,\,\alpha,\beta$ が定数、$g,h$ が関数、かつ $g[X]$ と $h[Y]$ が確率変数でそれらの平均が存在するとき、
+$$E[\alpha g(X) + \beta h(x)]=\alpha E[g(X)] + \beta E[h(Y)]$$
+$(6)\,\,g,h$ が関数で $g(x) \le h(x), \,\,x \in \mathbb{R}$ を満たし。かつ $g(X),h(X)$ が確率変数でそれらの平均が存在するとき、
+$$E[g(X)] \le E[h(X)]$$
+$\quad$ 特に不等式 $-|x| \le x \le |x|$ に注意すれば、 $|E[X]| \le E[|X|]$
+</theorem>
 
 平均の計算式は次のようにも計算できる。
 
@@ -498,13 +531,15 @@ $$
 
 #### 1.4.1 積率母関数
 
-> [!def] 1.4.1
-> $E[|X|^r] \lt \infty$ のとき、 $X^r$ は**可積分**または**積分可能**であるとよばれる。 $E[X^r]$ を $X$ の $r$ 次**積率**または $r$ 次**モーメント**という。とくに $E[|X|^2]$ のとき、 $X$ は**２乗可積分**であるとよばれる。
+<def title="1.4.1">
+$E[|X|^r] \lt \infty$ のとき、 $X^r$ は**可積分**または**積分可能**であるとよばれる。 $E[X^r]$ を $X$ の $r$ 次**積率**または $r$ 次**モーメント**という。とくに $E[|X|^2]$ のとき、 $X$ は**２乗可積分**であるとよばれる。
+</def>
 
-> [!def] 1.4.2
-> $0$ の近傍の $t$ に対して $e^{tX}$ が積分可能なとき、
-> $$m(t)=m_X(t)=E[e^{tX}]$$
-> によって定められる $m(t)$ を $X$ の**積率母関数**という。
+<def title="1.4.2">
+$0$ の近傍の $t$ に対して $e^{tX}$ が積分可能なとき、
+$$m(t)=m_X(t)=E[e^{tX}]$$
+によって定められる $m(t)$ を $X$ の**積率母関数**という。
+</def>
 
 マクローリン展開を使えば、
 
@@ -514,14 +549,16 @@ $$
 
 とかけるので、次の定理が成り立つ。
 
-> [!theorem] 1.4.3
-> $X$ の積率母関数 $m_X(t)$ が存在するとき、すべての自然数 $r$ に対して $E[X^r]$ は存在し、次のように与えられる。
-> $$E[X^r]=\left. \frac{d^r}{dt^r}m_X(t) \right|_{t=0}$$
+<theorem title="1.4.3">
+$X$ の積率母関数 $m_X(t)$ が存在するとき、すべての自然数 $r$ に対して $E[X^r]$ は存在し、次のように与えられる。
+$$E[X^r]=\left. \frac{d^r}{dt^r}m_X(t) \right|_{t=0}$$
+</theorem>
 
 積率母関数は分布を一意的に決定する。
 
-> [!theorem] 1.4.4
-> 確率変数 $X,Y$ の積率母関数 $m_X(t),m_Y(t)$ が存在し、すべての $t$ に対して $m_X(t)=m_Y(t)$ とする。このとき、 $X$ と $Y$ は同じ分布を持つ。
+<theorem title="1.4.4">
+確率変数 $X,Y$ の積率母関数 $m_X(t),m_Y(t)$ が存在し、すべての $t$ に対して $m_X(t)=m_Y(t)$ とする。このとき、 $X$ と $Y$ は同じ分布を持つ。
+</theorem>
 
 正規分布 $N(\mu,\sigma^2)$ の積率母関数は以下。
 
@@ -539,25 +576,29 @@ $$
 (4) $L^r$-収束
 （上記は強い順に並んでいる）
 
-> [!def] 1.4.5 分布収束
-> $X, X_n$ を確率変数、 $F(x), F_n(x)$ を分布関数とする。次の式が成り立つとき、**分布収束する**という。
-> $$\lim_{n \to \infty}F_n(x)=F(x)$$
+<def title="1.4.5 分布収束">
+$X, X_n$ を確率変数、 $F(x), F_n(x)$ を分布関数とする。次の式が成り立つとき、**分布収束する**という。
+$$\lim_{n \to \infty}F_n(x)=F(x)$$
+</def>
 
-> [!theorem] 1.4.6
-> $\{X_n\}$ が $X$ に分布収束することと、次の(1)(2)は同値である。  
-> $(1)\,\,\{X_n\}$ の積率母関数が $X$ の積率母関数に収束する。  
-> $(2)\,\,$任意の有界かつ連続な関数 $g$ に対して、
-> $$E[g(X_n)] \to E[g(X)]\quad(n \to \infty)$$
+<theorem title="1.4.6">
+$\{X_n\}$ が $X$ に分布収束することと、次の(1)(2)は同値である。  
+$(1)\,\,\{X_n\}$ の積率母関数が $X$ の積率母関数に収束する。  
+$(2)\,\,$任意の有界かつ連続な関数 $g$ に対して、
+$$E[g(X_n)] \to E[g(X)]\quad(n \to \infty)$$
+</theorem>
 
-> [!def] 1.4.7 確率収束
-> 任意の $\varepsilon \gt 0$ に対して次の式が成り立つとき、 $\{X_n\}$ は $X$ に**確率収束する**という。
-> $$P(|X_n-X| \gt \varepsilon) \to 0\quad(n \to \infty)$$
+<def title="1.4.7 確率収束">
+任意の $\varepsilon \gt 0$ に対して次の式が成り立つとき、 $\{X_n\}$ は $X$ に**確率収束する**という。
+$$P(|X_n-X| \gt \varepsilon) \to 0\quad(n \to \infty)$$
+</def>
 
-> [!def] 1.4.8 概収束
-> 確率0の事象に属していない任意の $\omega$ に対して、次の式が成り立つとき、 $\{X_n\}$ は $X$ に**概収束**するという。
-> $$
-> A=\{\omega \mid X_n(\omega) \to X(\omega)\}\quad ならば \quad P(A)=1
-> $$
+<def title="1.4.8 概収束">
+確率0の事象に属していない任意の $\omega$ に対して、次の式が成り立つとき、 $\{X_n\}$ は $X$ に**概収束**するという。
+$$
+A=\{\omega \mid X_n(\omega) \to X(\omega)\}\quad ならば \quad P(A)=1
+$$
+</def>
 
 > [!warn]
 > $n \to \infty$ における上記３種類の収束を次のように表す。  
@@ -565,53 +606,61 @@ $$
 > 確率収束 $\quad X_n \xrightarrow{P} X$  
 > 概収束　 $\quad X_n \xrightarrow{a.s.} X$  
 
-> [!theorem] 1.4.10
-> 確率変数列の収束については、次の関係が成り立つ。  
-> $(1)\,\,X_n \xrightarrow{a.s.} X$ ならば、 $X_n \xrightarrow{P} X, \quad X_n \xrightarrow{P} X$ ならば、 $X_n \xrightarrow{d} X$  
-> $(2)\,\,X_n \xrightarrow{d} c$ （定数）ならば、 $X_n \xrightarrow{P} c$  
-> $(3)\,\,X_n \xrightarrow{P} X$ ならば、$\{n_k\} \subset \{n\}, n_k \to \infty$ を満たす $\{n\}$ の部分列 $\{n_k\}$ が存在して、 $n_k \to \infty$ のとき $X_{n_k} \xrightarrow{a.s.} X$  
+<theorem title="1.4.10">
+確率変数列の収束については、次の関係が成り立つ。  
+$(1)\,\,X_n \xrightarrow{a.s.} X$ ならば、 $X_n \xrightarrow{P} X, \quad X_n \xrightarrow{P} X$ ならば、 $X_n \xrightarrow{d} X$  
+$(2)\,\,X_n \xrightarrow{d} c$ （定数）ならば、 $X_n \xrightarrow{P} c$  
+$(3)\,\,X_n \xrightarrow{P} X$ ならば、$\{n_k\} \subset \{n\}, n_k \to \infty$ を満たす $\{n\}$ の部分列 $\{n_k\}$ が存在して、 $n_k \to \infty$ のとき $X_{n_k} \xrightarrow{a.s.} X$  
+</theorem>
 
-> [!def] 1.4.11 $L^r$-収束
-> 任意の $n$ に対して次の式が成り立つとき、 **$L^r$-収束する**という。  
-> $E[|X_n|^r] \lt \infty \quad$ かつ $\quad E[|X_n -X|^r] \to 0\,\,(n \to \infty)$
+<def title="1.4.11 $L^r$-収束">
+任意の $n$ に対して次の式が成り立つとき、 **$L^r$-収束する**という。  
+$E[|X_n|^r] \lt \infty \quad$ かつ $\quad E[|X_n -X|^r] \to 0\,\,(n \to \infty)$
+</def>
 
-> [!theorem] 1.4.12
-> $X_n \xrightarrow{L^2} X$ ならば $X_n \xrightarrow{L^1} X$, $\quad X_n \xrightarrow{L^1} X$ ならば $X_n \xrightarrow{P} X$
+<theorem title="1.4.12">
+$X_n \xrightarrow{L^2} X$ ならば $X_n \xrightarrow{L^1} X$, $\quad X_n \xrightarrow{L^1} X$ ならば $X_n \xrightarrow{P} X$
+</theorem>
 
 #### 1.4.3 一様可積分
 
-> [!def] 1.4.13
-> 確率変数列 $\{X_n\}$ が**一様可積分**であるとは、$a_{m,n}=E[|X_m|I(|X_m| \gt n)]$ とおけば、 $n \to \infty$ のとき、 $a_{m,n}$ が $m$ に関して一様に0に収束することである。すなわち  
-> $$\lim_{n \to \infty}\sup_{m}E[|X_m|I(|X_m|>n)]=0$$
-> が成り立つことである。ただし、 $I(A)$ は $A$ のインディケーター。
+<def title="1.4.13">
+確率変数列 $\{X_n\}$ が**一様可積分**であるとは、$a_{m,n}=E[|X_m|I(|X_m| \gt n)]$ とおけば、 $n \to \infty$ のとき、 $a_{m,n}$ が $m$ に関して一様に0に収束することである。すなわち  
+$$\lim_{n \to \infty}\sup_{m}E[|X_m|I(|X_m|>n)]=0$$
+が成り立つことである。ただし、 $I(A)$ は $A$ のインディケーター。
+</def>
 
-> [!theorem] 1.4.14
-> $X_n \xrightarrow{L^r} X$ であることは、 $X_n \xrightarrow{P} X$ かつ $\{|X_n|^r\}$ が一様可積分であることと同値である。
+<theorem title="1.4.14">
+$X_n \xrightarrow{L^r} X$ であることは、 $X_n \xrightarrow{P} X$ かつ $\{|X_n|^r\}$ が一様可積分であることと同値である。
+</theorem>
 
 #### 1.4.4 収束に関する定理
 
-> [!theorem] 1.4.16
-> $(1)\,\,X_n \ge 0,$ かつ $n \to \infty$ において $X_n$ が単調に増加して、ある $X\,\,(\infty の場合も許して)$ に近づけば、
-> $$\lim_{n \to \infty}E[X_n]=E[X]\qquad（単調収束定理）$$
-> $(2)\,\,X_n \ge 0$（または $X_n \ge c \gt -\infty$）ならば
-> $$E\left[\liminf_{n \to \infty}X_n\right] \le \liminf_{n \to \infty}E[X_n]\qquad（ファトウの補題）$$
-> $(3)\,\,X_n \xrightarrow{P} X$かつすべての $n$ に対して $|X_n| \le Y,\,\,E[Y]\lt \infty$ ならば
-> $$\lim_{n \to \infty}E[X_n]=E[X]\qquad（有界収束定理）$$
+<theorem title="1.4.16">
+$(1)\,\,X_n \ge 0,$ かつ $n \to \infty$ において $X_n$ が単調に増加して、ある $X\,\,(\infty の場合も許して)$ に近づけば、
+$$\lim_{n \to \infty}E[X_n]=E[X]\qquad（単調収束定理）$$
+$(2)\,\,X_n \ge 0$（または $X_n \ge c \gt -\infty$）ならば
+$$E\left[\liminf_{n \to \infty}X_n\right] \le \liminf_{n \to \infty}E[X_n]\qquad（ファトウの補題）$$
+$(3)\,\,X_n \xrightarrow{P} X$かつすべての $n$ に対して $|X_n| \le Y,\,\,E[Y]\lt \infty$ ならば
+$$\lim_{n \to \infty}E[X_n]=E[X]\qquad（有界収束定理）$$
+</theorem>
 
 概収束の判定として、次の定理が知られている。
 
-> [!theorem] 1.4.17
-> すべての $\varepsilon \gt 0$ に対して
-> $$\sum_{n=1}^{\infty}P(\lvert X_n - X \rvert \ge \varepsilon) \lt \infty$$
-> が成り立つならば、 $X_n \xrightarrow{a.s.} X$
+<theorem title="1.4.17">
+すべての $\varepsilon \gt 0$ に対して
+$$\sum_{n=1}^{\infty}P(\lvert X_n - X \rvert \ge \varepsilon) \lt \infty$$
+が成り立つならば、 $X_n \xrightarrow{a.s.} X$
+</theorem>
 
 ### 1.5 共分散
 
-> [!def] 1.5.3
-> 可積分な確率変数 $X,Y$ の平均をそれぞれ $\mu_X=E[X],\,\,\mu_Y=E[Y]$ とおく。このとき、積 $XY$ が可積分ならば、次式で与えられる $C(X,Y)$ を $X$ と $Y$ の**共分散**という。
-> $$C(X,Y)=E[(X-\mu_X)(Y-\mu_Y)]=E[XY]-E[X]E[Y]$$
-> 特に、 $X$ と $X$ 自身の共分散を $X$ の**分散**といい、 $V[X]$ で表す。すなわち
-> $$V[X]=C(X,X)=E[(X-\mu_X)^2]=E[X^2]-E[X]^2$$
+<def title="1.5.3">
+可積分な確率変数 $X,Y$ の平均をそれぞれ $\mu_X=E[X],\,\,\mu_Y=E[Y]$ とおく。このとき、積 $XY$ が可積分ならば、次式で与えられる $C(X,Y)$ を $X$ と $Y$ の**共分散**という。
+$$C(X,Y)=E[(X-\mu_X)(Y-\mu_Y)]=E[XY]-E[X]E[Y]$$
+特に、 $X$ と $X$ 自身の共分散を $X$ の**分散**といい、 $V[X]$ で表す。すなわち
+$$V[X]=C(X,X)=E[(X-\mu_X)^2]=E[X^2]-E[X]^2$$
+</def>
 
 また、 $V[X]=E[(X-\mu_X)^2]\ge0$ だから、
 
@@ -655,30 +704,36 @@ $$
 
 シュワルツの不等式は、２乗可積分な確率変数に対して共分散は存在することを保証している。
 
-> [!theorem] 1.5.4
-> 共分散は次の性質をもつ。 
-> $(1)\,\,C(X,Y)$ は $X,Y$ に関して**対称**である。すなわち
-> $$C(X,Y)=X(Y,X)$$
-> $(2)\,\,C(X,Z)$ は $X,Z$ に関して線形である。たとえば、 $a,b$ が定数のとき
-> $$C(aX+bY,Z)=aC(X,Z)+bC(Y,Z)$$
+<theorem title="1.5.4">
+共分散は次の性質をもつ。 
+$(1)\,\,C(X,Y)$ は $X,Y$ に関して**対称**である。すなわち
+$$C(X,Y)=X(Y,X)$$
+$(2)\,\,C(X,Z)$ は $X,Z$ に関して線形である。たとえば、 $a,b$ が定数のとき
+$$C(aX+bY,Z)=aC(X,Z)+bC(Y,Z)$$
+</theorem>
 
-> [!def] 1.5.5
-> ２乗可積分な $X,Y$ に対して、 $V(X) \neq0,V(Y)\neq0$ のとき
-> $$\rho(X,Y)=\frac{C(X,Y)}{\sqrt{V(X)}\sqrt{V(Y)}}$$
-> によって定められる $\rho(X,Y)$ を $X,Y$ の**相関係数**という。
+<def title="1.5.5">
+２乗可積分な $X,Y$ に対して、 $V(X) \neq0,V(Y)\neq0$ のとき
+$$\rho(X,Y)=\frac{C(X,Y)}{\sqrt{V(X)}\sqrt{V(Y)}}$$
+によって定められる $\rho(X,Y)$ を $X,Y$ の**相関係数**という。
+</def>
 
 > [!warn] 相関係数の性質
 > $(1)\,\,-1 \le \rho(X,Y) \le 1$  
 > $(2)\,\,C(X,Y)=0$ は、 $\rho(X,Y)=0$ と同値である。 $C(X,Y)=0$ のとき、 $X,Y$ には**相関がない**という。
 
-> [!theorem] 1.5.7
-> 確率変数 $X,Y$ が独立なら、次が成り立つ。  
-> $(1)\,\,E[XY]=E[X]E[Y]$  
-> $(2)\,\,C(X,Y)=0$ すなわち、 $X,Y$ は相関がない。  
-> $(3)\,\,V(X + Y)=V(X)+V(Y)$  
+<theorem title="1.5.7">
 
-> [!def] 1.5.8
-> 確率変数ベクトル $\bm{X}=(X_1, X_2, \cdots, X_n)$ の**共分散行列**とは、 $C(X_i,X_j)$ を $i$ 行 $j$ 列成分にもつ $n$次正方行列のことである。
+確率変数 $X,Y$ が独立なら、次が成り立つ。  
+$(1)\,\,E[XY]=E[X]E[Y]$  
+$(2)\,\,C(X,Y)=0$ すなわち、 $X,Y$ は相関がない。  
+$(3)\,\,V(X + Y)=V(X)+V(Y)$  
+</theorem>
+
+<def title="1.5.8">
+
+確率変数ベクトル $\bm{X}=(X_1, X_2, \cdots, X_n)$ の**共分散行列**とは、 $C(X_i,X_j)$ を $i$ 行 $j$ 列成分にもつ $n$次正方行列のことである。
+</def>
 
 ## 第２章 条件付き確率と独立性
 ### 2.1 条件付き確率の素朴な定義

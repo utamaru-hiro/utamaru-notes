@@ -1,6 +1,15 @@
 import katex from 'katex';
 import { marked } from 'marked';
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // $$...$$ ブロック数式
 marked.use({
   extensions: [
@@ -74,4 +83,31 @@ marked.use({
  */
 export function renderMarkdown(text: string): string {
   return marked.parse(text) as string;
+}
+
+/**
+ * プレーンテキスト内の $...$ をインラインKaTeXに変換する。
+ * title属性など markdown パースを通さない短文向け。
+ */
+export function renderInlineMathText(text: string): string {
+  const re = /\$([^$\n]+?)\$/g;
+  let cursor = 0;
+  let out = '';
+  let match = re.exec(text);
+
+  while (match) {
+    const [raw, math] = match;
+    const start = match.index;
+    out += escapeHtml(text.slice(cursor, start));
+    out += katex.renderToString(math.trim(), {
+      displayMode: false,
+      throwOnError: false,
+      output: 'html',
+    });
+    cursor = start + raw.length;
+    match = re.exec(text);
+  }
+
+  out += escapeHtml(text.slice(cursor));
+  return out;
 }

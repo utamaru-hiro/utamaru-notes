@@ -45,20 +45,71 @@ const x: number = 1;
 ```
 ````
 
-## コールアウト
+## コールアウト（推奨: タグ構文）
 
-注意・補足・出力などの強調ブロックはコールアウト構文で記述します。
+数学系（定理・命題・系・定義・例・証明）と出力は、タグ構文で記述することを推奨します。
 
 ```md
-> [!warning]
-> 注意事項をここに書く。
+<theorem title="カラテオドリの拡張定理">
+フィールド $\mathcal{A}$ で定義された確率 $P$ は、
+$\sigma(\mathcal{A})$ 上へ一意に拡張できる。
+</theorem>
 
-> [!info]
-> 補足情報をここに書く。
+<def title="$\mathcal{G}$ に対する条件付き平均">
+$$
+E[X|\mathcal{G}]=\sum_{i=1}^{p}x_iP(A_i|\mathcal{G})
+$$
+</def>
 
-> [!output]
-> 出力結果をここに書く。
+<example title="大数の法則の簡単な例">
+独立同分布な $X_1,\dots,X_n$ の標本平均は、
+$$
+\overline{X}_n=\frac{1}{n}\sum_{i=1}^nX_i
+$$
+で定義される。
+</example>
+
+<proof>
+任意の $\varepsilon>0$ に対して
+$$
+P(|\overline{X}_n-\mu|>\varepsilon)\to0
+$$
+を示せばよい。
+</proof>
+
+<output title="実行結果 $n=100$">
+mean=0.0042
+variance=0.9981
+</output>
 ```
+
+### タグ種別
+
+| タグ | 表示ラベル |
+|---|---|
+| `<theorem>` | info（タイトル先頭に「定理」付与） |
+| `<proposition>` | info（タイトル先頭に「命題」付与） |
+| `<lemma>` | info（タイトル先頭に「系」付与） |
+| `<definition>` / `<def>` | info（タイトル先頭に「定義」付与） |
+| `<example>` | info（タイトル先頭に「例」付与） |
+| `<proof>` | 本文表示（先頭に **[証明]**、末尾に **[証明終]** を自動付与） |
+| `<output>` | 出力 |
+
+### title 属性
+
+- `title="..."` でタイトルを指定できます（省略可）。
+- `title` ではインライン数式 `$...$` が使えます。
+- `title` では `$$...$$` は使えません（本文で使用してください）。
+- `<proof>` は `title` 属性を使わず、本文のみを記述してください。
+
+### 本文内の数式
+
+- タグ本文は通常の Markdown と同じ扱いです。
+- `$...$` と `$$...$$` の両方を使えます。
+
+### 既存コールアウト記法（後方互換）
+
+以下の記法も当面は利用できます。
 
 | 種別 | 表示ラベル |
 |---|---|
@@ -70,7 +121,7 @@ const x: number = 1;
 | `[!definition]` / `[!def]` | info（タイトル先頭に「定義」付与） |
 | `[!output]` | 出力 |
 
-コールアウト内は複数行を `> ` プレフィックスで継続できます。空行（`>` のない行）で終了します。
+`> [!...]` 構文を使う場合、複数行は `> ` プレフィックスで継続できます。空行（`>` のない行）で終了します。
 
 ## 記述例
 
@@ -89,11 +140,20 @@ const x: number = 1;
 const example = 'code';
 ```
 
-> [!warning]
-> 注意事項。
+<theorem title="チェビシェフの不等式">
+任意の $\varepsilon > 0$ に対して
+$$
+P(|X-\mu| \ge \varepsilon) \le \frac{V[X]}{\varepsilon^2}
+$$
+</theorem>
 
-> [!info]
-> 補足情報。
+<proof>
+マルコフの不等式を $Y=(X-\mu)^2$ に適用する。
+</proof>
+
+<output title="実行結果 $n=100$">
+mean=0.0042
+</output>
 ```
 
 ## レガシー構文（後方互換）
@@ -124,5 +184,5 @@ Markdown 規約違反時は、`apps/web/lib/content/parser.ts` の `GuideMarkdow
 例:
 
 ```text
-packages/content/guides/typescript/guide.md:42: コールアウトは項目（###）の中に記述してください
+packages/content/guides/typescript/guide.md:42: コールアウトまたはタグは項目（###）の中に記述してください
 ```

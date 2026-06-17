@@ -7,7 +7,7 @@ export interface GuideMeta {
 }
 
 export type GuideItemBlock =
-  | { type: 'description' | 'warn' | 'output' | 'supplement' | 'info'; text: string; title?: string }
+  | { type: 'description' | 'warn' | 'output' | 'supplement' | 'info' | 'proof'; text: string; title?: string }
   | { type: 'code'; lang: string; code: string }
   | { type: 'heading'; level: 4 | 5 | 6; text: string };
 

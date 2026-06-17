@@ -6,7 +6,7 @@ import GuideProgressBar from '@/components/GuideProgressBar';
 import GuideTocDrawer from '@/components/GuideTocDrawer';
 import { getGuide, getGuideSlugs } from '@/lib/guides';
 import { highlightCode } from '@/lib/highlight';
-import { renderMarkdown } from '@/lib/markdown';
+import { renderInlineMathText, renderMarkdown } from '@/lib/markdown';
 
 type TocHeading = {
   id: string;
@@ -40,15 +40,17 @@ function renderCalloutHeader(type: 'warn' | 'output' | 'supplement' | 'info', ti
   const hideIconForMathCallout =
     type === 'info' && !!title && /^(定理|命題|系|定義)(\s|$)/.test(title);
   const showIcon = !hideIconForMathCallout;
+  const renderedTitle = title ? renderInlineMathText(title) : null;
+  const plainTitle = title ? title.replace(/\$([^$\n]+?)\$/g, '$1') : undefined;
 
   return (
     <div
       className={`item-callout-head${showIcon ? '' : ' item-callout-head-no-icon'}`}
-      aria-label={title ? `${labelByType[type]}: ${title}` : labelByType[type]}
-      title={title ? `${labelByType[type]}: ${title}` : labelByType[type]}
+      aria-label={plainTitle ? `${labelByType[type]}: ${plainTitle}` : labelByType[type]}
+      title={plainTitle ? `${labelByType[type]}: ${plainTitle}` : labelByType[type]}
     >
       {showIcon ? <span className="item-callout-icon" aria-hidden="true">{iconByType[type]}</span> : null}
-      {title ? <span className="item-callout-title">{title}</span> : null}
+      {renderedTitle ? <span className="item-callout-title" dangerouslySetInnerHTML={{ __html: renderedTitle }} /> : null}
     </div>
   );
 }
@@ -214,6 +216,17 @@ export default async function GuidePage({
                                   dangerouslySetInnerHTML={{ __html: renderMarkdown(block.text) }}
                                 />
                               </Fragment>
+                            );
+                          }
+                          if (block.type === 'proof') {
+                            return (
+                              <div key={index} className="item-copy">
+                                <p><strong>[証明]</strong></p>
+                                <div
+                                  dangerouslySetInnerHTML={{ __html: renderMarkdown(block.text) }}
+                                />
+                                <p><strong>[証明終]</strong></p>
+                              </div>
                             );
                           }
                           if (block.type === 'info') {

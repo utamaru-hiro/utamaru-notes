@@ -7,7 +7,7 @@ import type {
     ParseGuideMarkdownOptions,
 } from './types';
 
-type TextBlockType = 'description' | 'warn' | 'output' | 'supplement' | 'info';
+type TextBlockType = 'description' | 'warn' | 'output' | 'supplement' | 'info' | 'proof';
 type ActiveField = 'sectionLead' | TextBlockType | 'code';
 
 type CurrentTextBlock = { type: TextBlockType; lines: string[] };
@@ -31,9 +31,12 @@ type OpenCodeFence = {
 };
 
 type OpenCallout = {
+  source: 'blockquote' | 'tag';
+  tagName?: string;
   type: TextBlockType;
   title: string | null;
   lines: string[];
+  openedAtLine: number;
 };
 
 const CALLOUT_TYPES: Record<string, TextBlockType> = {
@@ -46,8 +49,21 @@ const CALLOUT_TYPES: Record<string, TextBlockType> = {
   lemma: 'info',
   definition: 'info',
   def: 'info',
+  example: 'info',
+  proof: 'proof',
   output: 'output',
 };
+
+const TAG_CALLOUT_KEYS = new Set([
+  'theorem',
+  'proposition',
+  'lemma',
+  'definition',
+  'def',
+  'example',
+  'proof',
+  'output',
+]);
 
 const CALLOUT_TITLE_PREFIXES: Record<string, string> = {
   theorem: '定理',
@@ -55,6 +71,7 @@ const CALLOUT_TITLE_PREFIXES: Record<string, string> = {
   lemma: '系',
   definition: '定義',
   def: '定義',
+  example: '例',
 };
 
 const SUBSECTION_LABELS: Record<string, ActiveField> = {
@@ -64,6 +81,8 @@ const SUBSECTION_LABELS: Record<string, ActiveField> = {
   出力: 'output',
   補足: 'supplement',
 };
+
+const TAG_TITLE_ATTR_RE = /^\s*title\s*=\s*(["'])([\s\S]*?)\1\s*$/;
 
 export class GuideMarkdownParseError extends Error {
   readonly line: number;
@@ -178,13 +197,24 @@ export function parseGuideMarkdown(
 
     // コールアウト行（> テキスト）の処理
     if (openCallout) {
-      if (rawLine.startsWith('> ') || rawLine === '>') {
-        openCallout.lines.push(rawLine.startsWith('> ') ? rawLine.slice(2) : '');
+      if (openCallout.source === 'blockquote') {
+        if (rawLine.startsWith('> ') || rawLine === '>') {
+          openCallout.lines.push(rawLine.startsWith('> ') ? rawLine.slice(2) : '');
+          continue;
+        }
+        // > で始まらない行 → コールアウト終了してフォールスルー
+        flushCallout();
+        currentField = 'description';
+      } else {
+        const closingTag = `</${openCallout.tagName}>`;
+        if (rawLine.trim() === closingTag) {
+          flushCallout();
+          currentField = 'description';
+          continue;
+        }
+        openCallout.lines.push(rawLine);
         continue;
       }
-      // > で始まらない行 → コールアウト終了してフォールスルー
-      flushCallout();
-      currentField = 'description';
     }
 
     // コールアウト開始行 > [!type] [任意タイトル]
@@ -205,11 +235,63 @@ export function parseGuideMarkdown(
         : (rawTitle || null);
       flushTextBlock();
       openCallout = {
+        source: 'blockquote',
         type: calloutType,
         title,
         lines: [],
+        openedAtLine: lineNumber,
       };
       continue;
+    }
+
+    const tagCloseMatch = /^<\/(\w+)\s*>\s*$/.exec(rawLine);
+    if (tagCloseMatch) {
+      const closeKey = tagCloseMatch[1].toLowerCase();
+      if (TAG_CALLOUT_KEYS.has(closeKey)) {
+        fail(`タグが開始されていません: </${tagCloseMatch[1]}>`, lineNumber);
+      }
+    }
+
+    const tagOpenMatch = /^<(\w+)([^>]*)>\s*$/.exec(rawLine);
+    if (tagOpenMatch) {
+      const tagKey = tagOpenMatch[1].toLowerCase();
+      if (TAG_CALLOUT_KEYS.has(tagKey)) {
+        if (!currentItem) {
+          fail('コールアウトまたはタグは項目（###）の中に記述してください', lineNumber);
+        }
+
+        const calloutType = CALLOUT_TYPES[tagKey];
+        if (!calloutType) {
+          fail(`未対応のタグ種別です: ${tagOpenMatch[1]}`, lineNumber);
+        }
+
+        const attrRaw = tagOpenMatch[2]?.trim() ?? '';
+        let rawTitle = '';
+        if (attrRaw) {
+          const attrMatch = TAG_TITLE_ATTR_RE.exec(attrRaw);
+          if (!attrMatch) {
+            fail(`タグ属性は title のみ対応です: <${tagOpenMatch[1]}>`, lineNumber);
+          } else {
+            rawTitle = attrMatch[2].trim();
+          }
+        }
+
+        const titlePrefix = CALLOUT_TITLE_PREFIXES[tagKey];
+        const title = titlePrefix
+          ? (rawTitle ? `${titlePrefix} ${rawTitle}` : titlePrefix)
+          : (rawTitle || null);
+
+        flushTextBlock();
+        openCallout = {
+          source: 'tag',
+          tagName: tagOpenMatch[1],
+          type: calloutType,
+          title,
+          lines: [],
+          openedAtLine: lineNumber,
+        };
+        continue;
+      }
     }
 
     if (openCodeFence) {
@@ -350,6 +432,10 @@ export function parseGuideMarkdown(
 
   if (openCodeFence) {
     fail('コードブロックが閉じられていません', openCodeFence.openedAtLine);
+  }
+
+  if (openCallout?.source === 'tag') {
+    fail(`タグが閉じられていません: <${openCallout.tagName}>`, openCallout.openedAtLine);
   }
 
   flushCallout();
