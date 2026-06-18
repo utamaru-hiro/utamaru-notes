@@ -917,9 +917,13 @@ $$
 <lemma title="2.4">
 
 $A,B\in\mathcal{F}$ として、次の４条件は互いに同値である。
+
 $(1)\,\,A$ と $B$ が独立
+
 $(2)\,\,A^c$ と $B$ が独立
+
 $(3)\,\,A$ と $B^c$ が独立
+
 $(4)\,\,A^c$ と $B^c$ が独立
 
 特に $A\in\mathcal{F}$ に対して $A$ を含む最小の $\sigma$ -加法族を $\mathcal{F}_A=\{0,A,A^c,\Omega\}$ と書くとき、 $A$ と $B$ が独立ならば、任意の $C_1\in\mathcal{F}_A$ と $C_2\in\mathcal{F}_B$ に対して
@@ -989,7 +993,9 @@ P(C_1 \cap C_2 \cap \cdots \cap C_n)=\prod_{k=1}^{n}P(C_k)
 $$
 
 が成立するときにいう。
+
 $(2)\,\,$ また、（一般に非可算）の集合 $\Lambda$ でパラメータづけられた $\mathcal{F}$ の部分 $\sigma$ -加法族の集まり $\{\mathcal{F}_k\}_{k \in \Lambda}$ が独立であるとは、$\Lambda$ の任意の有限部分集合 $\{k_1,k_2,\cdots,k_{\ell}\}$ に対して $\{\mathcal{F}_{k_i}\}_{i=1,2,\cdots,\ell}$ が独立であるときにいう。
+
 $(3)\,\,\{\mathcal{F}_k\}_{k \in \Lambda}$ から任意の組 $i \neq j\,\,(i,j \in \Lambda)$ をとるとき $\mathcal{F}_i$ と $\mathcal{F}_j$ が独立であれば $\{\mathcal{F}_k\}_{k \in \Lambda}$ は**組ごとに独立**(pairwisely independent)という。
 
 </def>
