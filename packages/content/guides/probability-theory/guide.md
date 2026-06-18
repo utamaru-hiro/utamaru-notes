@@ -819,10 +819,310 @@ $(3)\,\,V(X + Y)=V(X)+V(Y)$
 
 ## 第２章 条件付き確率と独立性
 ### 2.1 条件付き確率の素朴な定義
+
+<def title="2.1">
+
+$A,B \in \mathcal{F}$ で $P(B) \gt 0$ とする。事象 $B$ を与えたときの事象 $A$ の**条件付き確率**(conditional probability)とは
+
+$$
+P(A|B)=\frac{P(A \cap B)}{P(B)}
+$$
+
+をいう。あるいは、 $B$ を固定し $A$ が変化すると考えて、
+
+$$
+P(\cdot|B)=\frac{P(\cdot \cap B)}{P(B)}
+$$
+
+を、 $B$ が与えられたときの条件付き確率という。
+
+</def>
+
+<lemma title="2.2">
+
+$(1)\,\,P(A|B)$ は $A$ について確率測度である。すなわち、 $P(B)\gt0$ として
+$\quad (a)\,\,P(A|B)\ge0$
+$\quad (b)\,\,P(\Omega|B)=1$
+$\quad (c)\,\,A_n \in \mathcal{F},\,\,n=1,2,\cdots$ が互いに疎ならば
+$$
+P\left(\left.\bigcup_{n=1}^{\infty}A_n\right|B\right)=\sum_{n=1}^{\infty}P(A_n|B)
+$$
+
+$(2)\,\,$（全確率の公式） $\{B_i\in \mathcal{F}\}_{i\in I}$ が、 $\Omega$ の有限または可算分割で、各 $i \in I$ に対して $P(B_i)\gt0$ を満たすとする。このとき
+
+$$
+P(A)=\sum_{i \in I}P(A|B_i)P(B_i)
+$$
+
+$(3)\,\,$ （ベイズの公式） $\{B_i \in \mathcal{F}\}_{i \in I}$ は上と同じ条件を満たすとして、任意の $j \in I$ に対して
+
+$$
+P(B_i|A)=\frac{P(A|B_i)P(B_i)}{\sum_{i \in I}P(A|B_i)P(B_i)}
+$$
+
+</lemma>
+
+$P(\cdot|B)$ は $(\Omega,\mathcal{F})$ 上の確率測度であるが、この測度に関する期待値を**条件付き期待値**という。すなわち $X=X(\omega)$ を実数値確率変数とするとき
+
+$$
+E[X|B]=\int_{\Omega}X(\omega)P(d\omega | B)
+$$
+
+と定める。
+
+$$
+P(d\omega | B)=\frac{1}{P(B)}1_B(\omega)P(d\omega)
+$$
+
+だから
+
+$$
+E[X|B]=\frac{1}{P(B)}\int_B X(\omega)P(d\omega)
+$$
+
+である。あるいは、事象 $B$ 上の $X$ の期待値 $E[X,B]$ を用いて
+
+$$
+E[X|B]=\frac{E[X,B]}{P(B)}
+$$
+
+と書いてもよい。
+
 ### 2.2 独立性
 #### 2.2.1 事象の独立性
+
+##### ２つの事象の独立性
+
+「事象 $A$ が $B$ によらない」いいかえれば「事象 $A$ と $B$ が独立」ということは、「$B$ で条件をつけても $A$ の確率はもとと変わらない」ということだと考えられる。そこで、まず $P(B)\gt0$ のときには
+
+$$
+P(A|B)=P(A)
+$$
+
+が成立することと定義しよう。この条件は $P(A \cap B)=P(A)P(B)$ と書き換えられることができ、この式は $P(B)=0$ であっても意味を持つから、これを定義に採用して
+
+
+<def title="2.3">
+
+$A,B\in\mathcal{F}$ として、２つの事象 $A$ と $B$ が**独立**であるとは
+
+$$
+P(A\cap B)=P(A)P(B)
+$$
+
+が成立するときにいう。
+
+</def>
+
+<lemma title="2.4">
+
+$A,B\in\mathcal{F}$ として、次の４条件は互いに同値である。
+$(1)\,\,A$ と $B$ が独立
+$(2)\,\,A^c$ と $B$ が独立
+$(3)\,\,A$ と $B^c$ が独立
+$(4)\,\,A^c$ と $B^c$ が独立
+
+特に $A\in\mathcal{F}$ に対して $A$ を含む最小の $\sigma$ -加法族を $\mathcal{F}_A=\{0,A,A^c,\Omega\}$ と書くとき、 $A$ と $B$ が独立ならば、任意の $C_1\in\mathcal{F}_A$ と $C_2\in\mathcal{F}_B$ に対して
+
+$$
+P(C_1 \cap C_2)=P(C_1)P(C_2)
+$$
+
+が成立する。
+
+</lemma>
+
+##### 複数個の事象の独立性
+
+事象の個数が３以上の場合にも、独立性の概念を定義する。
+
+<def title="2.5">
+
+$A_k \in \mathcal{F},\,\,k=1,2,\cdots,n$ として、事象の集まり $\{A_k\}_{k=1,2,\cdots,n}$ が**独立**であるとは、任意の $1 \le \ell \le n$ と任意の $a\le k_1 \lt k_2 \lt \cdots \lt k_{\ell} \le n$ に対して
+
+$$
+P\left(\bigcap_{i=1}^{\ell}A_{k_i}\right)=\prod_{i=1}^{\ell}P(A_{k_i})
+$$
+
+が成立するときにいう。
+
+</def>
+
+<def title="2.7">
+
+（一般に非加算な）集合 $\Lambda$ によってパラメータづけられた事象の集まり $\{A_k\in \mathcal{F}\}_{k \in \Lambda}$ が独立であるとは、 $\Lambda$ の任意の有限部分集合 $\{k_1,k_2,\cdots,k_{\ell}\} \subset \Lambda$ に対して
+
+$$
+P\left(\bigcap_{i=1}^{\ell}A_{k_i}\right)=\prod_{i=1}^{\ell}P(A_{k_i})
+$$
+
+が成立するときにいう。
+
+</def>
+
 #### 2.2.2 σ-加法族の独立性
+
+<def title="2.8">
+
+$\mathcal{F}_1,\,\,\mathcal{F}_2$ を $\mathcal{F}$ の**部分$\sigma$-加法族**、すなわち
+
+$$
+各\mathcal{F}_k\,\,(k=1,2)\,\,は\sigma-加法族で、\mathcal{F}_k \subset \mathcal{F} を満たす
+$$
+
+として $\mathcal{F}_1$ と $\mathcal{F}_2$ が**独立**であるとは、任意の $C_1 \in \mathcal{F}_1,\,\,C_2 \in \mathcal{F}_2$ に対して
+
+$$
+P(C_1 \cap C_2)=P(C_1)P(C_2)
+$$
+
+が成立するときにいう。
+
+</def>
+
+<def title="2.9">
+
+$(1)\,\,\mathcal{F}_1,\mathcal{F}_2,\cdots,\mathcal{F}_n$ を $\mathcal{F}$ の部分 $\sigma$ -加法族として $\mathcal{F}_1,\mathcal{F}_2,\cdots,\mathcal{F}_n$ が独立であるとは、任意の $C_k \in \mathcal{F}_k\,\,(1 \le k \le n)$ に対して
+
+$$
+P(C_1 \cap C_2 \cap \cdots \cap C_n)=\prod_{k=1}^{n}P(C_k)
+$$
+
+が成立するときにいう。
+$(2)\,\,$ また、（一般に非可算）の集合 $\Lambda$ でパラメータづけられた $\mathcal{F}$ の部分 $\sigma$ -加法族の集まり $\{\mathcal{F}_k\}_{k \in \Lambda}$ が独立であるとは、$\Lambda$ の任意の有限部分集合 $\{k_1,k_2,\cdots,k_{\ell}\}$ に対して $\{\mathcal{F}_{k_i}\}_{i=1,2,\cdots,\ell}$ が独立であるときにいう。
+$(3)\,\,\{\mathcal{F}_k\}_{k \in \Lambda}$ から任意の組 $i \neq j\,\,(i,j \in \Lambda)$ をとるとき $\mathcal{F}_i$ と $\mathcal{F}_j$ が独立であれば $\{\mathcal{F}_k\}_{k \in \Lambda}$ は**組ごとに独立**(pairwisely independent)という。
+
+</def>
+
+
 #### 2.2.3 確率変数の独立性
+
+一般の可測空間に値をとる確率変数について独立性の概念を定義する。ここでは、確率変数はすべて同一の確率空間 $(\Omega, \mathcal{F}, P)$ で定義されているものとする。 $k=1,2,\cdots,n$ または $\Lambda$ は一般の集合として $k \in \Lambda$ に対して可測空間 $(S_k, \mathcal{S}_k)$ が与えられているとする。
+
+<def title="2.10">
+
+$(1)\,\,S_k$ -値確率変数列 $(X_k)_{k=1,2,\cdots,n}$ が**独立**とは、任意の $A_1 \in \mathcal{S}_1, A_2 \in \mathcal{S}_2, \cdots, A_n \in \mathcal{S}_n$ に対して
+
+$$
+P(X_k \in A_k, k=1,2,\cdots,n)=\prod_{k=1}^{n}P(X_k \in A_k)
+$$
+
+が成立するときにいう。
+
+$(2)\,\,$ さらに一般に $S_k$ -値確率変数の集まり $(X_k)_{k\in \Lambda}$ が**独立**とは、 $\Lambda$ の任意の有限部分集合 $k_1,k_2,\cdots,k_{\ell} \in \Lambda$ と $A_1 \in \mathcal{S}_{k_1}, A_2 \in \mathcal{S}_{k_2}, \cdots, A_\ell \in \mathcal{S}_{k_\ell}$ に対して
+
+$$
+P(X_{k_i} \in A_i, i=1,2,\cdots,\ell)=\prod_{i=1}^{\ell}P(X_{k_i} \in A_i)
+$$
+
+が成立する時にいう。
+
+</def>
+
+> [!warn] 2.12
+> 確率変数 $X$ が生成する $\sigma$ -加法族を $\sigma(X)$ とすれば、確率変数列の独立性はそれらが生成する $\sigma$ -加法族の独立性と同値である。
+
+<proposition title="2.13">
+
+$S_k=\mathbb{R}$ で各 $X_k$ の分布が確率密度関数 $p_k(x)$ をもつとき、 $(X_k)_{k=1,2,\cdots,n}$ の独立性は、
+
+$$
+P(a_1 \le X_1 \le b_1,a_2 \le X_2 \le b_2,\cdots,a_n \le X_n \le b_n)=\prod_{k=1}^{n}\int_{a_k}^{b_k}p_k(x)dx
+$$
+
+が任意の $a_1 \le b_1,a_2 \le b_2,\cdots,a_n \le b_n$ に対して成立することと同値である。
+
+</proposition>
+
+確率変数列の独立性は、可測関数との合成によって保たれる。
+
+<proposition title="2.14">
+
+$S_k$ -値確率変数列 $(X_k)_{k=1,2,\cdots,n}$ は独立で、 $g_k:S_k \to S_k', k=1,2,\cdots,n$ は可測とする。ただし、 $(S_k', \mathcal{S}_k')$ は他の可測空間とする。このとき $Y_k=g_k(X_k),k=1,2,\cdots,n$ とおけば、 $S_k'$ -確率変数列 $(Y_k)_{k=1,2,\cdots,n}$ は独立である。
+
+</proposition>
+
+<proof>
+
+$k=1,2,\cdots,n$ に対して
+
+$$
+\{Y_k \in A_k\}=\{X_k \in g_k^{-1}(A_k)\},\quad A_k \in \mathcal{S}_k'
+$$
+
+であることに注意すればよい。
+
+</proof>
+
+<example title="2.15">
+
+実数値確率変数 $X$ と $Y$ が独立ならば、 $X^2$ と $Y^2$ は独立である（逆は一般に成立しない）。
+
+</example>
+
+<lemma title="2.16">
+
+$(X_k)_{k=1,2,\cdots,n}$ は独立な実数値確率変数列で、 $g=g(x_1,x_2,\cdots,x_i):\mathbb{R}^i \to \mathbb{R}$ はボレル可測であるとする。ただし、 $i \lt n$ である。このとき $Y=g(X_1,X_2,\cdots,X_i)$ とおけば $Y, X_{i+1},\cdots,X_n$ は独立な確率変数列である。
+
+</lemma>
+
+<proof>
+
+$X=(X_1,X_2,\cdots,X_i)$ は $\mathbb{R}^i$ -値確率変数であり、 $X,X_{i+1}, \cdots, X_n$ が独立であることが示せる。したがって、補題2.14で $S_1=\mathbb{R}^i,S_2=\cdots=S_{n-i+1}=\mathbb{R}$ ととればよい。
+
+</proof>
+
+<proposition title="2.17">
+
+実数値確率変数列 $(X_k)_{k=1,2,\cdots,n}$ は独立で、可積分（すなわち $E[|X_k|]\lt\infty$ を満たす）とする。このとき、これらの積 $X=X_1X_2\cdots X_n$ も可積分で
+
+$$
+E[X]=E[X_1]E[X_2]\cdots E[X_n]
+$$
+
+が成立する。
+
+</proposition>
+
+<proof>
+
+**第１段：** $X_k=X_k^+ - X_k^-$ と分解する。ただし $X_k^{\pm}$ はそれぞれ $X_k$ の正部分および負部分である。各 $k$ ごとに $+,-$ のどちらかをとり、それを $\mathrm{sgn}(k)$ とおけば補題2.14から 
+
+$$
+X_1^{\mathrm{sgn}(1)},X_2^{\mathrm{sgn}(2)},\cdots,X_n^{\mathrm{sgn}(n)}
+$$
+
+は独立になる。したがって、
+
+$$
+E[X]=E\left[\prod_{k=1}^{n}(X_k^+-X_k^-)\right]=\sum_{\mathrm{sgn}}E\left[\prod_{k=1}^{n}\mathrm{sgn}(k)\cdot X_k^{\mathrm{sgn}(k)}\right]
+$$
+
+だから、 $X_k\ge0$ と仮定して結論をいえば十分である。ただし $\sum_{\mathrm{sgn}}$ は写像 $\mathrm{sgn}:\{1,2,\cdots,n\} \to \{+,-\}$ 全体についての和を表す。
+
+**第２段：** TODO
+
+**第３段：** TODO
+
+</proof>
+
+> [!warn] 2.18
+> $X_1,X_2,\cdots,X_n$ が補題2.17の結論
+> $$E[X_1X_2\cdots X_n]=E[X_1]E[X_2]\cdots E[X_n]$$
+> を満たしても、必ずしも独立ではない。
+
+<proposition title="2.19">
+
+実数値確率変数列 $(X_k)_{k=1,2,\cdots,n}$ は組ごとに独立で、 $\rm{Var}(X_k)\lt\infty (k=1,2,\cdots,n)$ を満たすとする。このとき、 $\rm{Var}(\sum_{k=1}^{n}X_k)\lt\infty$ で、
+
+$$
+\rm{Var}\left(\sum_{k=1}^nX_k\right)=\sum_{k=1}^n\rm{Var}(X_k)
+$$
+
+が成立する。
+
+</proposition>
+
 ### 2.3 確率空間の直積
 #### 2.3.1 有限個の確率空間の直積
 #### 2.3.2 無限個の確率空間の直積
