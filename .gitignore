@@ -3,6 +3,7 @@ tmp
 node_modules
 .next/
 out/
+apps/web/next-env.d.ts
 apps/web/public/guides/
 .DS_Store
 *.log

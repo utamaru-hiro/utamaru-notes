@@ -152,14 +152,14 @@ export default async function GuidePage({
               <section key={section.id} id={section.id} className="section-card">
                 <div className="section-head">
                   <div className="section-num">Section {String(section.num).padStart(2, '0')}</div>
-                  <h2>{section.title}</h2>
+                  <h2 dangerouslySetInnerHTML={{ __html: renderInlineMathText(section.title) }} />
                   {section.lead ? <p className="section-lead">{section.lead}</p> : null}
                 </div>
 
                 <div className="item-list">
                   {section.items.map((item) => (
                     <article key={item.id} className="item-card">
-                      <h3 id={item.id}>{item.title}</h3>
+                      <h3 id={item.id} dangerouslySetInnerHTML={{ __html: renderInlineMathText(item.title) }} />
 
                       {(() => {
                         let codeIndex = 0;
@@ -251,9 +251,8 @@ export default async function GuidePage({
                                 key={index}
                                 id={headingId}
                                 className={`item-subheading-${block.level}`}
-                              >
-                                {block.text}
-                              </Tag>
+                                dangerouslySetInnerHTML={{ __html: renderInlineMathText(block.text) }}
+                              />
                             );
                           }
                           return null;
