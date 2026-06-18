@@ -241,6 +241,7 @@ $\mathcal{F}$ を $\Omega$ 上の $\sigma$ -フィールドとするとき、組
 #### 1.2.2 確率空間
 
 <def title="1.2.2">
+
 $(\Omega, \mathcal{F})$ 上で与えられて、次の性質を満たし、非負の値をとる関数 $P: \mathcal{F} \rightarrow [0,1]$ を**確率測度**または単に**確率**という。
 $$
 \begin{split}
@@ -265,6 +266,25 @@ $(\Omega,\mathcal{F})$ 上の確率を $P$ とするとき、組 $(\Omega, \math
 > (5)\,\,&劣加法性\quad P\left(\bigcup_{n=1}^{\infty}A_n\right) \le \sum_{n=1}^{\infty}P(A_n)
 > \end{split}
 > $$
+
+<def title="1.2.3">
+
+確率空間 $(\Omega, \mathcal{F}, P)$ が完備(complete)とは
+
+$$
+N \in \mathcal{F},\,\,P(N)=0,\,\,A \subset N \quad \Rightarrow A \in \mathcal{F}
+$$
+
+を満たすときにいう。すなわち、零集合（測度0の可測集合）の部分集合がすべて可測のときにいう。
+
+</def>
+
+<def title="1.2.4">
+
+確率空間 $(\Omega, \mathcal{F}, P)$ が任意に与えられたとき、完備な確率空間 $(\Omega, \bar{\mathcal{F}}, \bar{P})$ をとり、 $\mathcal{F} \subset \bar{\mathcal{F}}$ かつ
+任意の $A \in \mathcal{F}$ に対して $P(A)=\bar{P}(A)$ が成り立つようにできる。 $(\Omega, \bar{\mathcal{F}}, \bar{P})$ を $(\Omega, \mathcal{F}, P)$ の**完備化**(completion)という。
+
+</def>
 
 #### 1.2.3 確率の連続性
 
@@ -358,6 +378,7 @@ $(4)\,\,$無理数の集まりは有理数の集まりの補集合であるこ�
 #### 1.2.7 確率変数
 
 <def title="1.2.8">
+
 $\mathcal{F}$ が $\Omega$ 上の $\sigma$-フィールドのとき、関数 $X: \Omega \rightarrow \mathbb{R}$ が、 $\mathbb{R}$ の任意のボレル集合 $B$ に対して、
 $$\{X \in B\}=\{\omega \in \Omega \mid X(\omega) \in B\} \in \mathcal{F}$$
 を満たすならば、 $X$ は **$\mathcal{F}$ -可測**または単に**可測**であるとよばれる。 $(\Omega, \mathcal{F}, P)$ が確率空間のとき、このような $X$ は**確率変数**とよばれる。
@@ -377,12 +398,73 @@ $$
 と与えられる。 $I_A$ は確率変数である。
 
 <theorem title="1.2.9">
+
 確率変数の定数倍、和、積、商は確率変数になる。また、確率変数の極限および確率変数の合成関数も確率変数になる。すなわち  
 $(1)\,\,X_nが(\Omega,\mathcal{F})上の確率変数で、X(\omega)=\lim_{n \to \infty}X_n(\omega)ならば、X(\omega)は確率変数$  
 $(2)\,\,Xが(\Omega,\mathcal{F})上の確率変数で、gが\mathcal{B}-可測な関数ならば、g(X)は確率変数$
 </theorem>
 
 **確率変数 $X$ から生成された $\sigma$-フィールド**は離散確率変数の場合と定義が同じなので省略。
+
+<proposition>
+
+$\Omega$ 上の実数値関数 $X=X(\omega)$ について、以下の (1)-(5)は互いに同地である。
+
+$(1)\,\,X$ は確率変数である。
+$(2)\,\,$ 任意の $a \in \mathbb{R}$ に対して $\{X \le a\} \in \mathcal{F}$ が成立する。
+$(3)\,\,$ 任意の $a \in \mathbb{R}$ に対して $\{X \lt a\} \in \mathcal{F}$ が成立する。
+$(4)\,\,$ 任意の $a \in \mathbb{R}$ に対して $\{X \ge a\} \in \mathcal{F}$ が成立する。
+$(5)\,\,$ 任意の $a \in \mathbb{R}$ に対して $\{X \gt a\} \in \mathcal{F}$ が成立する。
+
+</proposition>
+
+<proof>
+
+$(2) \Leftrightarrow (5),\,\,(3) \Leftrightarrow (4)$ は、それぞれ $\{X \le a\}^c=\{X \gt a\},\,\,\{X \lt a\}^c=\{X \ge a\}$ だから明らかである。
+$(2) \Leftrightarrow (5)$ を示すには、それぞれ
+
+$$
+\{X \lt a\}=\bigcup_{n=1}^{\infty}\{X \le a-\frac{1}{n}\}
+$$
+$$
+\{X \le a\}=\bigcap_{n=1}^{\infty}\{X \lt a+\frac{1}{n}\}
+$$
+に注意すれば良い。以上から $(2)-(5)$ が同値であることがわかった。
+
+$(1) \Rightarrow (2)$ は、 $A=\left(-\infty,a\right]$ ととれば $A \in \mathcal{B}(\mathbb{R})$ だから、 $(1)$ から
+
+$$
+\{X \le a\}=X^{-1}(A) \in \mathcal{F}
+$$
+
+がわかる。
+
+最後に $(1) \Leftarrow (2)$ を示そう。そのために、
+
+$$
+\mathcal{B}_0=\{A \in \mathcal{B}(\mathbb{R}) \mid X^{-1}(A) \in \mathcal{F}\}
+$$
+
+とおく。条件 $(2)$ から、任意の無限閉区間は $\left(-\infty,a\right] \in \mathcal{B}_0$ を満たす。一方、 $\mathcal{B}_0$ が $\sigma$ -加法族であることが容易に言える。実際、
+
+- $X^{-1}(\mathbb{R})=\Omega \in \mathcal{F}$ だから $\mathbb{R} \in \mathcal{B}_0$ である
+- $A \in \mathcal{B}_0 \Rightarrow X^{-1}(A^c)=\left(X^{-1}(A)\right)^c \in \mathcal{F} \Rightarrow A^c \in \mathcal{B}_0$
+- $A_n \in \mathcal{B}_0,n=1,2,\cdots \Rightarrow X^{-1}\left(\bigcup_{n=1}^{\infty}A_n\right)=\bigcup_{n=1}^{\infty}X^{-1}(A_n) \in \mathcal{F} \Rightarrow \bigcup_{n=1}^{\infty}A_n \in \mathcal{B}_0$
+
+の３点に注意すればよい。以上から、
+
+$$
+\sigma\left(\{(-\infty,a]\mid a \in \mathbb{R}\}\right) \subset \mathcal{B}_0
+$$
+がわかる。左辺は $\mathcal{B}(\mathbb{R})$ と一致する。したがって、 $\mathcal{B}(\mathbb{R}) \subset \mathcal{B}_0$ が得られた。しかし、定義から $\mathcal{B}(\mathbb{R}) \supset \mathcal{B}_0$ だから、結局 $\mathcal{B}(\mathbb{R}) = \mathcal{B}_0$ であることがわかった。これは
+
+$$
+A \in \mathcal{B}(\mathbb{R}) \Rightarrow X^{-1}(A) \in \mathcal{F}
+$$
+
+を意味し、(1)が示された。
+
+</proof>
 
 実数値関数を $f:\mathbb{R} \rightarrow \mathbb{R}$ とする。 $\mathbb{R}$ の任意のボレル集合 $B$ に対して、$f$ の逆像 $f^{-1}(B)=\{x \mid f(x)=y \in B\}$ がボレル集合であるとき、 $f$ を**ボレル関数**という。
 
