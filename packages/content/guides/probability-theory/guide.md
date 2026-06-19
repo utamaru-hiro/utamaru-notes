@@ -1165,12 +1165,257 @@ $$
 
 ### 2.3 確率空間の直積
 #### 2.3.1 有限個の確率空間の直積
+
+$(S_k,\mathcal{S}_k,\mu_k),k=1,2,\cdots,n$ を確率空間の列とする。このとき
+
+$$
+\Omega=\prod_{k=1}^nS_k,\quad \mathcal{F}=\sigma(\mathcal{P})
+$$
+
+とすれば（ただし、 $\mathcal{P}$ は $\Omega$ のべき集合）、可測空間 $(\Omega, \mathcal{F})$ の上の確率測度 $P$ で、任意の $A_1 \in \mathcal{S}_1,A_2 \in \mathcal{S}_2,\cdots,A_n \in \mathcal{S}_n$ に対して、
+
+$$
+P(A_1 \times A_2 \times \cdots \times A_n) = \prod_{k=1}^n\mu_k(A_k)
+$$
+
+を満たすものが構成でき、そのような測度は一意的である。
+
+このようにして定義された $\sigma$ -加法族 $\mathcal{F}$ と測度 $P$ を
+
+$$
+\mathcal{S}_1 \times \mathcal{S}_2 \times \cdots \times \mathcal{S}_n, \quad \mu_1 \times \mu_2 \times \cdots \times \mu_n 
+$$
+
+とかき、それぞれ、**直積 $\sigma$ -加法族**、**直積測度**という。
+
+<proposition title="2.20 独立確率変数列の存在">
+
+確率空間 $(S_k,\mathcal{S}_k,\mu_k)$ 上に確率変数 $X^{(k)}:S_k \to \mathbb{R}, k=1,2,\cdots,n$ が与えられたとき、 $\omega=(\omega_1,\omega_2,\cdots,\omega_n) \in \Omega=\prod_{k=1}^nS_k$ に対して
+
+$$
+X_k(\omega)=X^{(k)}(\omega_k)
+$$
+
+とおけば、 $(X_k)_{k=1,2,\cdots,n}$ は確率空間 $(\Omega,\mathcal{F},P)$ 上の独立な確率変数列である。ただし $\mathcal{F}=\mathcal{S}_1\times\mathcal{S}_2\times\cdots\times\mathcal{S}_n,\,\, P=\mu_1\times\mu_2\times\cdots\times\mu_n$ である。
+
+</proposition>
+
+$(S_k,\mathcal{S}_k,\mu_k) \equiv (S,\mathcal{S},\mu)$ が $k$ によらないときに、以上のようにして得られる $(\Omega,\mathcal{F},P)\equiv(S^n,\mathcal{S}^n,\mu^n)$ を結果 $S$ とその分布 $\mu$ をもつ $n$ 回の**独立同試行**という。
+
 #### 2.3.2 無限個の確率空間の直積
+
+確率空間の無限列 $(S_n,\mathcal{S}_n,\mu_n), n=1,2,\cdots$ が与えられているとする。このとき $\Omega=\prod_{n=1}^{\infty}S_n$ （無限直積空間）とし、 $\Omega$ の部分集合で
+
+$$
+C_A^{(n)}=\{\omega \in \Omega \mid (\omega_1,\omega_2,\cdots,\omega_n)\in A\},\quad A \in \mathcal{S_1}\times\mathcal{S_2}\times\cdots\times\mathcal{S_n}
+$$
+
+の形のものを**柱状集合**という。柱状集合の集まり
+
+$$
+\mathcal{C}=\{C_A^{(n)} \mid n=1,2,\cdots,A\in\mathcal{S_1}\times\mathcal{S_2}\times\cdots\times\mathcal{S_n}\}
+$$
+
+は $\Omega$ の有限加法族である。 $\mathcal{C}$ が生成する $\sigma$ -加法族 $\mathcal{F}=\sigma(\mathcal{C})$ を**コルモゴロフの$\sigma$-加法族**という。
+
 #### 2.3.3 独立確率変数の無限列の存在
+
+<theorem title="2.23">
+
+$\mu_1,\mu_2,\cdots$ を $(\mathbb{R},\mathcal{B}(\mathbb{R}))$ 上の確率測度の列とする。このとき適当な確率空間 $(\Omega,\mathcal{F},P)$ の上に確率変数列 $X_1,X_2,\cdots$ を作って
+
+$(1)\,\,(X_n)_{n=1,2,\cdots}$ は独立
+
+$(2)\,\,$ 各 $X_n$ の分布は $\mu_n$
+
+となるようにできる。
+
+</theorem>
+
+<def title="2.24">
+
+確率変数列 $(X_n)_{n=1,2,\cdots}$ （または $(X_n)_{n=1,2,\cdots,N}$ ）が独立で同分布をもつことを簡略に **i.i.d.**(independent and identically distributed)ということがある。
+
+</def>
+
 ### 2.4 σ-加法族に関する条件付き確率と条件付き期待値
 #### 2.4.1 素朴な定義
-#### 2.4.2 一般的な定義
-#### 2.4.3 条件付き期待値の性質
+
+$\{B_i\}_{i=1,2,\cdots,n}$ が与えられたときの $A$ の条件付き確率を
+
+$$
+P(A \mid \{B_i\}_{i=1,2,\cdots,n})(\omega) = \sum_{i=1}^{n}P(A \mid B_i)1_{B_i}(\omega)
+$$
+
+によって定義する。さらに条件付き期待値は
+
+$$
+E[X \mid \{B_i\}_{i=1,2,\cdots,n}](\omega) = \sum_{i=1}^{n}E[X \mid B_i]1_{B_i}(\omega)
+$$
+
+で定義することができる。
+
+有限分割 $\{B_i\}_{i=1,2,\cdots,n}$ を与えることと、それが生成する $\sigma$ -加法族 $\mathcal{G}=\sigma(\{B_i\}_{i=1,2,\cdots,n})$ を考えることは同値だから
+
+$$
+P(A \mid \mathcal{G})(\omega),\quad E[X \mid \mathcal{G}](\omega)
+$$
+
+と書いても良い。
+
+#### 2.4.2 ラドン-ニコディムの定理
+
+ここで2.4.3で利用する**ラドン-ニコディムの定理**を天下り的に与えておく。
+
+測度空間 $(S, \mathcal{S}, \mu)$ と、 $S$ 上の実数値可積分関数 $f$ が与えられているとする。すなわち、 $f$ は写像 $f:(S, \mathcal{S}) \to (\mathbb{R},\mathcal{B}(\mathbb{R}))$ として可測で、 $\int_{S}|f(x)|\mu(dx) \lt \infty$ を満たすとする。このとき、 $A \in \mathcal{S}$ に対して
+
+$$
+\begin{equation}
+\nu(A)=\int_A f(x)\mu(dx) \tag{A.1}
+\end{equation}
+$$
+
+とおけば、集合関数 $\nu$ は有限な符号付き測度で、 $\mu$ について絶対連続である。すなわち
+
+$(1)\,\,$ （有限性）任意の $A \in \mathcal{S}$ に対して $|\nu(A)| \le \infty$ （つまり $\nu(A) \in \mathbb{R}$ ）
+
+$(2)\,\,$ （ $\sigma$ -加法性） $A_n \in \mathcal{S}, n=1,2,\cdots$ は互いに素な集合として、
+
+$$
+\nu\left(\bigcup_{n=1}^{\infty}A_n\right) = \sum_{n=1}^{\infty}\nu(A_n)
+$$
+
+$(3)\,\,$ （絶対連続性） $\mu(A)=0,A \in \mathcal{S}$ ならば $\nu(A)=0$
+
+逆にこのような条件を満たす $\nu$ が与えられたときに、関数 $f$ を適当にとれば $\nu$ は $(A.1)$ の形に表現できることを保証するのが**ラドン-ニコディムの定理**である。
+
+<theorem title="2.25 ラドン-ニコディムの定理">
+
+$\mu$ は $(S,\mathcal{S})$ 上の有限測度（つまり $\mu(S) \lt \infty$）、 $\nu$ は $(S, \mathcal{S})$ 上の有限な符号付き測度で、 $\mu$ に関して絶対連続であると仮定する。このとき
+
+$(1)\,\,S$ 上の $\mathbb{R}$ 値 $\mathcal{S}$ -可測関数 $f$ で、 $\mu$ について可積分なものが存在し、 $\nu$ は $(A.1)$ のように表現できる。
+
+$(2)\,\,$ （$f$ の一意性）条件 $(A.1)$ を満たす関数 $\tilde{f}$ が他に存在すれば
+
+$$
+f(x)=\tilde{f}(x), \quad \mu-a.e.x
+$$
+
+が成立する。
+
+</theorem>
+
+<def title="2.26">
+
+定理2.25が定める関数 $f$ を、 $\nu$ の $\mu$ に関する**密度関数**(density function)と呼び
+
+$$
+\frac{d\nu}{d\mu}(x)
+$$
+
+と書くことがある。
+
+</def>
+
+#### 2.4.3 一般的な定義
+
+$(\Omega, \mathcal{F}, P)$ を確率空間、 $\mathcal{G}$ を $\mathcal{F}$ の **部分$\sigma$
+-加法族**とする。すなわち
+
+$$
+\mathcal{G} \subset \mathcal{F} で \mathcal{G} も \sigma -加法族
+$$
+
+である。実数値確率変数 $X=X(\omega)$ が与えられ、可積分（つまり $E[|X|]\lt\infty$ ）であるときに、
+
+$$
+Q(B)=E[X, B],\quad B \in \mathcal{G}
+$$
+
+とおくと、 $Q$ は $(\Omega,\mathcal{G})$ 上の有限な符号付き測度であり、明らかに $B \in \mathcal{G}$ が $P(B)=0$ を満たせば $Q(B)=0$ だから、 $Q$ は $(P, \mathcal{G})$ について絶対連続である。 $(P,\mathcal{G})$ とは、測度 $P$ を $\mathcal{G}$ 上で（つまり $\mathcal{G}$ に制限して）考えたものである。したがって、ラドン-ニコディムの定理を $(S, \mathcal{G},\mu)=(\Omega, \mathcal{G}, P), \nu=Q$ として適用すれば、 $\mathcal{G}$ -可測で $P$ -可積分な関数 $Y=Y(\omega)$ が存在して、任意の $B \in \mathcal{G}$ に対して
+
+$$
+Q(B)=\int_BY(\omega)P(d\omega)
+$$
+
+が成立することがわかる。いいかえれば、２つの条件
+
+$$
+\begin{equation}
+\tag{2.5}
+\begin{split}
+(1)\,\,&B \in \mathcal{G} \Longrightarrow E[X,B]=E[Y,B] \\
+(2)\,\,&Yは\mathcal{G}-可測な確率変数
+\end{split}
+\end{equation}
+$$
+
+を満たすような $Y$ が存在する。 $Y$ は $P-a.s.$ の意味で一意的に定まる。
+
+<def title="2.25">
+
+$(1)\,\,$条件(2.5)を満たす確率変数 $Y(\omega)$ を $E[X \mid \mathcal{G}](\omega)$ とかき、 $\mathcal{G}$ の下での $X$ の**条件付き期待値**（条件付き平均値）という。
+
+$(2)\,\,A \in \mathcal{F}$ に対して
+
+$$
+P(A \mid \mathcal{G})(\omega)=E[1_A \mid \mathcal{G}](\omega)
+$$
+
+とおき、 $\mathcal{G}$ の下での $A$ の**条件付き確率**という。
+
+</def>
+
+<example title="2.26">
+
+$(1)\,\,\mathcal{G}=\mathcal{F}$ のときは、 $Y=X$ ととれば(2.5)を満たす。したがって $E[X|\mathcal{F}]=X(P-a.s.)$ である。
+
+$(2)\,\,\mathcal{G}=\{\emptyset,\Omega\}$ のときは、 $E[X|\mathcal{G}]=E[X](P-a.s.)$ である。実際、定数関数 $Y=E[X]$ は $\mathcal{G}$ -可測であり、条件(2.5)(1)を $B=\emptyset,\Omega$ に対して満たすことも容易にわかる。
+
+</example>
+
+<proposition title="2.27">
+
+$\mathcal{G}=\sigma(\{B_i\}_{i=1,2,\cdots,n})$ が $\Omega$ の有限分割から定まるとき、素朴な意味での条件付き確率・条件付き期待値は、定義2.25の意味での条件付き確率・条件付き期待値と一致する。
+
+</proposition>
+
+<proof>
+
+条件付き期待値について見てみよう。条件付き確率については、特に $X=1_A$ ととればいい。 $E[X|\{ B_i\}]$ を素朴な意味での条件付き期待値とすれば、 $E[X|\{B_i\}]$ が $\mathcal{G}$-可測であることはあきらかである。したがって、 $Y=E[X|\{B_i\}]$ が条件(2.5)(1)を満たすことを確認すれば結論がいえる。そこで、 $B \in \mathcal{G}$ として (2.5)(1)の右辺を計算していこう。
+
+$$
+\begin{split}
+E[E[X|\{B_i\}],B]&=E\left[\sum_{i=1}^{n}E[X|B_i]1_{B_i},B\right] \\
+&=\sum_{i=1}^{n}E\left[\frac{E[X,B_i]}{P(B_i)}1_{B_i},B\right] \\
+&=\sum_{i=1}^{n}\frac{E[X, B_i]}{P(B_i)}P(B_i \cap B)
+\end{split}
+$$
+
+ところが、 $B \in \mathcal{G}$ だから
+
+$$
+P(B_i \cap B)=
+\begin{cases}
+P(B_i), & B_i \subset B のとき \\
+0, & B_i \cap B=\emptyset のとき \\
+\end{cases}
+$$
+
+であり、上式はさらに
+
+$$
+\begin{split}
+&=\sum_{i:B_i \subset B}E[X,B_i] \\
+&=E[X,B]
+\end{split}
+$$
+
+と変形できる。ゆえに(2.5)(1)が成り立つことがわかった。
+
+</proof>
+
+#### 2.4.4 条件付き期待値の性質
 ### 2.5 コルモゴロフの0-1法則
 
 ## 第３章　大数の法則
