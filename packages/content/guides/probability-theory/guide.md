@@ -1106,9 +1106,43 @@ $$
 
 だから、 $X_k\ge0$ と仮定して結論をいえば十分である。ただし $\sum_{\mathrm{sgn}}$ は写像 $\mathrm{sgn}:\{1,2,\cdots,n\} \to \{+,-\}$ 全体についての和を表す。
 
-**第２段：** TODO
+**第２段：** 
 
-**第３段：** TODO
+$$
+g^{(N)}(x)=\sum_{i=0}^{N\cdot 2^N-1}\frac{i}{2^N}1_{[\frac{i}{2^N},\frac{i+1}{2^N}]}(x)+N1_{[N,\infty)}(x),\quad x \ge 0
+$$
+
+とおき $X_k^{(N)}=g^{(N)}(X_k)$ とすると、 $X_k^{(N)}$ は単純な確率変数であって $N \to \infty$ とするとき $X_k^{(N)} \nearrow X_k$ （すなわち、単調に増加して $X_k$ に近づく）を満たす。しかも補題2.14から $X_1^{(N)},X_2^{(N)},\cdots,X_n^{(N)}$ は独立になる。したがって、各 $X_k$ は単純な確率変数として結論を示せば十分である。積分に関する単調収束定理を用いる。
+
+**第３段：** 各 $k=1,2,\cdots,n$ について有限集合 $I_k$ があって、 $i \in I_k$ に対して $a_i^k \ge 0,\,\,A_i^k \in \mathcal{F}$ がとれ、非負かつ単純な確率変数 $X_k$ は
+
+$$
+X_k(\omega)=\sum_{i \in I_k}a_i^k1_{A_i^k}(\omega)
+$$
+
+と表示することができる。ただし、 $a_i^k \neq a_{i'}^k\,\,(i \neq i',i,i' \in I_k)$ で $\{A_i^k\}_{i \in I_k}$ は互いに素であるとしてよい。このとき
+
+$$
+E[X]=\sum_{i_1 \in I_1,i_2 \in I_2,\cdots,i_n \in I_n,}a_{i_1}^1a_{i_2}^2\cdots a_{i_n}^nE\left[1_{A_{i_1}^1}1_{A_{i_2}^2}\cdots 1_{A_{i_n}^n}\right]
+$$
+
+となるが、 $X_k,\,\,k=1,2,\cdots,n$ の独立性を用いれば
+
+$$
+\begin{split}
+E\left[1_{A_{i_1}^1}1_{A_{i_2}^2}\cdots 1_{A_{i_n}^n}\right]&=P(X_k=a_{i_k}^k, 1\le k \le n) \\
+&=\prod_{k=1}^nP(X_k=a_{i_k}^k) \\
+&=\prod_{k=1}^nP(A_{i_k}^k)=\prod_{k=1}^nE\left[1_{A_{i_k}^k}\right] \\
+\end{split}
+$$
+
+がわかる。したがって
+
+$$
+E[X]=\prod_{k=1}^nE[X_k]
+$$
+
+が証明された。
 
 </proof>
 
