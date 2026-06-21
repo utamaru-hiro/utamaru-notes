@@ -184,7 +184,513 @@ $$
 
 </theorem>
 
+#### E) 関数のテイラー展開
+
+テイラーの定理でもし$I$のすべての点$x$に対して$n \to \infty$のとき$R_n \to 0$となるならば、$f(x)$は$I$において、
+
+$$
+\begin{split}
+f(x)&=\sum_{n=0}^{\infty}\frac{f^{(n)}(x)}{n!}(x-a)^n \\
+&=f(a)+\frac{f'(a)}{1!}(x-a)+\cdots+\frac{f^{(n)}(a)}{n!}(x-a)^n+\cdots
+\end{split}
+$$
+
+のように無限級数として表されることになる。
+
+一般に、$x$を変数として
+
+$$
+\sum_{n=0}^{\infty}c_n(x-a)^n=c_0+c_1(x-a)+c_2(x-a)^2+\cdots
+$$
+
+の形に書かれる級数は、$a$を中心とする$x$の**整級数**（または**べき級数**）とよばれる。特に$0$を中心とする整級数は
+
+$$
+\sum_{n=0}^{\infty}a_nx^n=a_0+a_1x+a_2x^2+\cdots
+$$
+
+の形の級数である。
+
+もし区間$I$において関数$f$が上のように
+
+$$
+f(x)=\sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}(x-a)^n
+$$
+
+と表されるならば、これを$f$の$a$における**テイラー展開**といい、右辺の級数を$f$の**テイラー級数**とよぶ。
+
+#### F) 指数関数・三角関数のテイラー展開
+
+<proposition>
+
+$a$を正の定数とするとき
+
+$$
+\lim_{n \to \infty}\frac{a^n}{n!}=0
+$$
+
+が成り立つ。
+
+</proposition>
+
+<proof>
+
+$0\lt a\le 1$の場合は$0\lt a^n\le1$であるから、この極限は明らか。
+
+次に$a \gt 1$とし、$2a-1$より大きい自然数のうち最小のものを$n_0$とする。そのとき、$m$を$n_0$より大きい自然数とすれば$m \ge n_0+1\gt2a$であるから
+
+$$
+\frac{a}{m} \lt \frac{1}{2}
+$$
+
+である。いま$n$を$n_0$より大きい任意の自然数とすれば、
+
+$$
+\frac{a^n}{n!}=\frac{a^{n_0}}{n_0!}\cdot\frac{a}{n_0+1}\cdot\frac{a}{n_0+2}\cdot\cdots\cdot\frac{a}{n}
+$$
+
+で、右辺の$a_{n_0}/n_0!$を除く$n-n_0$個の因数は上に注意したことによっていずれも$1/2$より小さい。したがって
+
+$$
+\frac{a^n}{n!}\lt\frac{n^{n_0}}{n_0!}\left(\frac{1}{2}\right)^{n-n_0}
+$$
+
+上の不等式で$a^{n_0}/n_0!$は定数であり、$(1/2)^{n-n_0}$は$n \to \infty$のとき$0$に近づく。よって
+
+$$
+\lim_{n \to \infty}\frac{a^n}{n!}=0
+$$
+
+である。
+
+</proof>
+
+<theorem title="4">
+
+指数関数 $e^{x}$は全区間$(-\infty,\infty)$で
+
+$$
+e^x=1+\frac{x}{1!}+\frac{x^2}{2!}+\cdots+\frac{x^n}{n!}+\cdots
+$$
+
+とテイラー級数に展開される。
+
+</theorem>
+
+<proof>
+
+C)の例１でみたように
+
+$$
+e^x=1+\frac{x}{1!}+\frac{x^2}{2!}+\frac{x^{n-1}}{(n-1)!}+R_n \\
+R_n=\frac{e^{\theta x}}{n!}x^n
+$$
+
+である。任意の$x$に対し、$n \to \infty$のとき$R_n \to 0$であることを言えばよい。
+
+
+$x\le0$のときは$\theta x\le 0$、したがって$0\lt e^{\theta x}\le1$であるから
+
+$$
+|R_n|\le\frac{|x|^n}{n!}
+$$
+
+で、補題により$n \to \infty$のとき右辺は$0$に近づくから、$\lim_{n \to \infty}R_n=0$である。
+
+$0 \lt x$のときは、$0\lt\theta x\lt x$であるから、$1\lt e^{\theta x}\lt e^x$で、
+
+$$
+0\lt R_n\lt e^x\cdot\frac{x^n}{n!}
+$$
+
+となる。ここで$e^x$は$n$に無関係な定数で、補題より$n \to \infty$のとき$x^n/n! \to 0$であるから、やはり$\lim_{n \to \infty}R_n=0$となる。これで定理が証明された。
+
+</proof>
+
+<theorem title="5">
+
+三角関数$\sin{x},\cos{x}$は全区間$(-\infty,\infty)$で
+
+$$
+\begin{split}
+\sin{x}&=\sum_{n=0}^{\infty}(-1)^{n-1}\frac{x^{2n-1}}{(2n-1)!} \\
+&=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots, \\
+\cos{x}&=\sum_{n=0}^{\infty}(-1)^n\frac{x^{2n}}{2n!} \\
+&=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\cdots
+\end{split}
+$$
+
+と整級数に展開される。
+
+</theorem>
+
 ### 6.2 極限の計算
+
+#### A) 不定形の極限
+
+不定形は原則、
+
+$$
+\frac{0}{0}\quad or\quad \frac{\infty}{\infty}
+$$
+
+の形に還元して考えるのが原則的な手段である。
+
+例えば、$0\cdot\infty$の形の場合、すなわち$u \to 0$、$v \to \infty$の場合には、$uv$を
+
+$$
+\frac{u}{v^{-1}}\quad or \quad\frac{v}{u^{-1}}
+$$
+
+と変形すれば、$\frac{0}{0}$または$\frac{\infty}{\infty}$の形になる。
+
+また、$u^v$が$1^\infty,0^0,\infty^0$などの形になる場合は
+
+$$
+\log{u^v}=v\log{u}
+$$
+
+が上記の$\infty\cdot 0$または$0\cdot\infty$の形になる。
+
+これらを計算するために、前節の定理３やC)で述べるロピタルの定理などが用いられる。
+
+次の節ではロピタルの定理の準備として、コーシーの平均値の定理を導入する。
+
+#### B) 平均値の定理の一般化
+
+<theorem title="1 コーシーの平均値の定理">
+
+関数$f,g$は区間$[a,b]$で連続、区間$(a,b)$で微分可能で、$(a,b)$のすべての点$x$に対し$g'(x)\neq 0$であるとする。このとき、
+
+$$
+\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(c)}{g'(c)}
+$$
+
+となるような$(a,b)$の点$c$が存在する。
+
+</theorem>
+
+<proof>
+
+すべての点で$g'(x)\neq0$なので$g(b)\neq g(a)$であることに注意する。
+
+$$
+\begin{split}
+\varphi(x)=&\left(f(b)-f(a)\right)\left(g(x)-g(a)\right) \\
+&-\left(g(b)-g(a)\right)\left(f(x)-f(a)\right)
+\end{split}
+$$
+
+という関数$\varphi(x)$を定義する。$\varphi$も$[a,b]$で連続、$(a,b)$で連続で、明らかに
+
+$$
+\varphi(b)=\varphi(a)=0
+$$
+
+である。よってロルの定理より区間$(a,b)$に$\varphi'(c)=0$となる$c$が存在するが、
+
+$$
+\varphi'(x)=\left(f(b)-f(a)\right)g'(x)-\left(g(b)-g(a)\right)f'(x)
+$$
+
+であるから、$\varphi'(c)=0$を書き換えれば、定理の等式が得られる。
+
+</proof>
+
+#### C) ロピタルの定理
+
+<theorem title="2 ロピタルの定理">
+
+$-\infty\le a \lt b \le\infty$とし（$a$は$-\infty$であってもよく、$b$は$+\infty$であってもよい）、$f,g$は区間$(a,b)$で微分可能で、$(a,b)$でつねに$g'(x)\neq0$とする。また $x \to a$のとき$f'(x)/g'(x)$の極限が存在し
+
+$$
+\lim_{x \to a}\frac{f'(x)}{g'(x)}=A
+$$
+
+であるとする。このとき、もし仮定
+
+$$
+(a)\qquad\lim_{x \to a}f(x)=0,\quad\lim_{x \to a}g(x)=0
+$$
+
+あるいは
+
+$$
+(b)\qquad\lim_{x \to a}g(x)=+\infty\quadまたは\quad\lim_{x \to a}g(x)=-\infty
+$$
+
+のいずれかが成り立つならば、$f(x)/g(x)$の極限も存在して
+
+$$
+\lim_{x \to a}\frac{f(x)}{g(x)}=A
+$$
+
+である。
+
+$A$は$+\infty$または$-\infty$でもよい。
+
+また、 $x \to b$の場合でも同様の定理が成り立つ。
+
+</theorem>
+
+<proof>
+
+まず$-\infty \le A \lt +\infty$とし、$r$を$A\lt r$を満たす任意の実数とする。$A\lt \rho \lt r$なる$\rho$をとれば、$x \to a$のとき$f'(x)/g'(x) \to A$であるから、$a \lt c_1$なる$c_1$を適当に取るとき、$a \lt x \lt c_1$を満たすすべての$x$に対して
+
+$$
+\frac{f'(x)}{g'(x)}\lt \rho
+$$
+
+が成り立つ。いま$u, v$を$a\lt u\lt v \lt c_1$を満たす２つの数とすると、定理１によって
+
+$$
+\frac{f(u)-f(v)}{g(u)-g(v)}=\frac{f'(w)}{g'(w)}
+$$
+
+となる$w \in (u,v)$が存在する。したがって、
+
+$$
+\begin{equation}
+\frac{f(u)-f(v)}{g(u)-g(v)}\lt \rho
+\end{equation}
+$$
+
+である。
+
+そこでいま、(a) を仮定する。そのとき上の不等式で $u \to a$とすれば、$f(u) \to 0,\,\,g(u) \to 0$であるから
+
+$$
+\frac{f(u)}{g(u)}\le\rho\lt r
+$$
+
+を得る。
+
+次に(b)を仮定する。もし$g(x) \to -\infty$ならば$g$のかわりに$-g$を考えれば良いから、$\lim_{x \to a}g(x)=+\infty$と仮定して差し支えない。さて、そう仮定し、$v$を１つ固定すると、$a\lt c_2\lt v$なる$c_2$を適当に取るとき、$a\lt u \lt c_2$である任意の$u$に対して$g(u)\gt0,\,\,g(u)-g(v)\gt0$となるから、上の不等式(1)の両辺に$\left(g(u)-g(v)\right)/g(u)$をかけると
+
+$$
+\frac{f(u)-f(v)}{g(u)}\lt\rho-\rho\frac{g(v)}{g(u)}
+$$
+
+したがって
+
+$$
+\frac{f(u)}{g(u)}\lt\rho-\rho\frac{g(v)}{g(u)}+\frac{f(v)}{g(u)}
+$$
+
+をえる。そこで$u \to a$とすると$g(u) \to +\infty$であるから、上の式で$g(u)$を分母とする右辺の２つの項はいくらでも$0$に近づく。よって$a\lt c_3 \lt c_2$なる$c_3$を適当にとれば、$a \lt u \lt c_3$であるとき
+
+$$
+-\rho\frac{g(v)}{g(u)}+\frac{f(v)}{g(u)}\lt r- \rho
+$$
+
+したがって
+
+$$
+\frac{f(u)}{g(u)}\lt r
+$$
+
+以上によって、仮定(a)(b)いずれの場合にも、$A \lt r$ を満たす任意の実数$r$をとるとき、$a\lt M$なる定数$M$をとれば、$a \lt x \lt M$であるすべての$x$に対して
+
+$$
+\frac{f(x)}{g(x)} \lt r
+$$
+
+の成り立つことが証明された（$A=-\infty$ の場合はこれで証明が終わったのである）。
+
+同様に、もし$-\infty \lt A \le +\infty$ならば、$s \lt A$である任意の実数$s$をとるとき、 $a \lt M'$となる$M'$を適当にとれば、 $a \lt x \lt M'$を満たすすべての$x$に対して
+
+$$
+s \lt \frac{f(x)}{g(x)}
+$$
+
+が成り立つことが証明される。
+
+$A$が有限の場合には、以上によって、$s \lt A \lt r$なる$s,r$を任意に与えたとき、上記のように$M,M'$を適当にとれば、$a \lt x \lt \min{\{M,M'\}}$であるすべての$x$に対して
+
+$$
+s \lt \frac{f(x)}{g(x)} \lt r
+$$
+
+が成り立つから
+
+$$
+\lim_{x \to a}\frac{f(x)}{g(x)}=A
+$$
+
+である。これで証明が完了した。
+
+</proof>
+
+#### D) 極限の計算
+
+<example title="1">
+
+$\alpha$を正の定数とするとき
+
+$$
+\lim_{x \to +\infty}\frac{\log{x}}{x^\alpha}=0
+$$
+
+</example>
+
+<proof>
+
+$f(x)=\log{x},\,\,g(x)=x^\alpha$とすると、$f'(x)=\frac{1}{x},\,\,g'(x)=\alpha x^{\alpha-1}$なので、
+
+$$
+\frac{f'(x)}{g'(x)}=\frac{1}{\alpha x^\alpha} \to 0\,\,(x \to +\infty)
+$$
+
+である。よってロピタルの定理より$\lim_{x \to +\infty}\frac{\log{x}}{x^\alpha}=0$である。
+
+</proof>
+
+<example title="2">
+
+$\alpha$を正の定数とするとき
+
+$$
+\lim_{x \to +0}x^\alpha \log{x}=0
+$$
+
+</example>
+
+<proof>
+
+$1/x=y$とおけば、$x\to +0$のとき$y \to +\infty$で、例１より
+
+$$
+\lim_{x \to +0}x^\alpha\log{x}=\lim_{x \to +\infty}\left(\frac{-\log{y}}{y^\alpha}\right)=0
+$$
+
+</proof>
+
+<example title="3">
+
+$$
+\lim_{x\to+0}x^x=1
+$$
+
+</example>
+
+<proof>
+
+$u=x^x$とおくと、$\log{u}=x\log{x}$で、例２より$x\to+0$のとき$x\log{x}\to0$。よって$u\to e^0=1$。
+
+</proof>
+
+<example title="4">
+
+$$
+\lim_{x\to0}\frac{x-\sin{x}}{x^3}=\frac{1}{6}
+$$
+
+</example>
+
+<proof>
+
+$\sin{x}=x-\frac{x^3}{3!}+\varepsilon$とおくと、$\lim_{x\to0}\frac{\varepsilon}{x^3}=0$（前節の定理３より）。よって
+
+$$
+\begin{split}
+\lim_{x\to0}\frac{x-\sin{x}}{x^3}&=\lim_{x\to0}\frac{x-\left(x-\frac{x^3}{3!}+\varepsilon\right)}{x^3} \\
+&=\frac{1}{3!}=\frac{1}{6}
+\end{split}
+$$
+
+</proof>
+
+<example title="5">
+
+$$
+\lim_{x\to0}\frac{\tan{x}-x}{x(1-\cos{x})}=\frac{2}{3}
+$$
+
+<example>
+
+<proof>
+
+$$
+\frac{\tan{x}-x}{x(1-\cos{x})}=\frac{1}{\cos{x}}\cdot\frac{\sin{x}-x\cos{x}}{x(1-\cos{x})}, \\
+\lim_{x\to0}\frac{1}{\cos{x}}=1
+$$
+
+であるから、
+
+$$
+\lim_{x\to0}\frac{\sin{x}-x\cos{x}}{x(1-\cos{x})}
+$$
+
+を求めればよい。前節6.1の定理３によって
+
+$$
+\begin{split}
+\sin{x}&=x-\frac{x^3}{3!}+\varepsilon_1,\qquad\lim_{x\to0}\frac{\varepsilon_1}{x^3}=0, \\
+\cos{x}&=1-\frac{x^2}{2!}+\varepsilon_2,\qquad\lim_{x\to0}\frac{\varepsilon_2}{x^2}=0
+\end{split}
+$$
+
+よって
+
+$$
+\sin{x}-x\cos{x}=\left(x-\frac{x^3}{6}\right)-\left(x-\frac{x^3}{2}\right)+\delta_1=\frac{x^3}{3}+\delta_1 \\
+x(1-\cos{x})=\frac{x^3}{2}+\delta_2
+$$
+
+で$\lim_{x\to0}\frac{\delta_1}{x^3}=\lim_{x\to0}\frac{\delta_2}{x^3}=0$。ゆえに
+
+$$
+\lim_{x\to0}\frac{\sin{x}-x\cos{x}}{x(1-\cos{x})}=\lim_{x \to 0}\frac{\frac{1}{3}+\frac{\delta_1}{x^3}}{\frac{1}{2}+\frac{\delta_2}{x^3}}=\frac{2}{3}
+$$
+
+</proof>
+
+<example title="6">
+
+$a_1,\cdots,a_n$を正の定数とし、$\alpha \gt 0$に対して
+
+$$
+F(\alpha)=\left(\frac{a_1^\alpha+\cdots+a_n^\alpha}{n}\right)^{\frac{1}{\alpha}}
+$$
+
+とおく。この関数について
+
+$$
+\lim_{a\to+0}F(\alpha)=(a_1\cdots a_n)^{\frac{1}{n}}
+$$
+
+が成り立つ
+
+</example>
+
+<proof>
+
+$$
+\log{F(\alpha)}=\frac{1}{\alpha}\log{\left(\frac{a_1^\alpha+\cdots+a_2^\alpha}{n}\right)}
+$$
+
+これを$\alpha$の関数と見て、ロピタルの定理を適用すると、分母の微分は１で、分子の微分
+
+$$
+\begin{split}
+\frac{d}{d\alpha}&\log{\left(\frac{a_1^\alpha+\cdots+a_n^\alpha}{n}\right)} \\
+&=\frac{n}{a_1^\alpha+\cdots+a_n^\alpha}\cdot\frac{a_1^\alpha\log{a_1}+\cdots+a_n^\alpha\log{a_n}}{n}
+\end{split}
+$$
+
+は$\alpha \to +0$のとき$\frac{1}{n}(\log{a_1}+\cdots+\log{a_n})=\log{(a_1\cdots a_n)^{\frac{1}{n}}}$に近づく。よって
+
+$$
+\lim_{\alpha \to +0}\log{F(\alpha)}=\log{(a_1\cdots a_n)^{\frac{1}{n}}}
+$$
+
+したがって
+
+$$
+\lim_{\alpha \to +0}F(\alpha)=(a_1\cdots a_n)^{\frac{1}{n}}
+$$
+
+</proof>
 
 ## 第７章　積分法
 ### 7.1 リーマン積分
