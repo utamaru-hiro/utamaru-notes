@@ -606,7 +606,7 @@ $$
 \lim_{x\to0}\frac{\tan{x}-x}{x(1-\cos{x})}=\frac{2}{3}
 $$
 
-<example>
+</example>
 
 <proof>
 
