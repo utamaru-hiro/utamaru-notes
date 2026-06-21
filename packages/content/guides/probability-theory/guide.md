@@ -1447,7 +1447,7 @@ $$
 E[f(X)|\mathcal{G}]=E[f(X)]\quad a.s.
 $$
 
-</propositon>
+</proposition>
 
 <proof>
 
