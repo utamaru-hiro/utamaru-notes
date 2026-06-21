@@ -1416,6 +1416,81 @@ $$
 </proof>
 
 #### 2.4.4 条件付き期待値の性質
+
+<proposition>
+
+$X,Y$ は可積分な実数値確率変数とする
+
+$(1)\,\,$任意の$a,b\in\mathbb{R}$に対し
+
+$$
+E[aX+bY \mid \mathcal{G}]=aE[X\mid \mathcal{G}]+bE[Y\mid \mathcal{G}]\quad a.s.
+$$
+
+$(2)\,\,X\ge0\,a.s.$ならば$E[X \mid \mathcal{G}]\ge0\,\,a.s.$である
+
+$(3)\,\,X$が$\mathcal{G}$-可測で、積$XY$が可積分ならば
+
+$$
+E[XY\mid \mathcal{G}]=XE[Y\mid \mathcal{G}]\quad a.s.
+$$
+
+$(4)\,\,\mathcal{H},\mathcal{G}$を$\mathcal{F}$の部分$\sigma$-加法族で$\mathcal{H} \subset \mathcal{G}$とすれば
+
+$$
+E[E[X|\mathcal{G}]|\mathcal{H}]=E[X|\mathcal{H}]\quad a.s.
+$$
+
+$(5)\,\,X$と$\mathcal{G}$が独立（すなわち$\sigma(X)$と$\mathcal{G}$が独立）ならば、 $E[X|\mathcal{G}]=E[X]\,\,a.s.$である。したがって、$f$を$\mathbb{R}$上のボレル可測関数として$f(X)$が可積分ならば
+
+$$
+E[f(X)|\mathcal{G}]=E[f(X)]\quad a.s.
+$$
+
+</propositon>
+
+<proof>
+
+$(1)\,\,Z=aE[X|\mathcal{G}]+bE[X|\mathcal{G}]$ は$\mathcal{G}$-可測であり、任意の$B\in\mathcal{G}$に対して$E[aX+bY,B]=E[Z,B]$を満たすから$E[aX+bY|\mathcal{G}]=Z\,\,a.s.$がわかる。
+
+$(2)\,\,$ は自明なので省略。
+
+$(3)\,\,$右辺は$\mathcal{G}$-可測だから、任意の$B\in\mathcal{G}$に対して
+
+$$
+\begin{equation}
+E[XY,B]=E[XE[Y|\mathcal{G}],B]
+\end{equation}
+$$
+
+を示せば十分である。まず$X=1_A,A \in \mathcal{G}$のときは
+
+$$
+E[1_AE[Y|\mathcal{G}],B]=E[E[Y|\mathcal{G}],A\cap B]=E[Y,A\cap B]=E[1_AY,B]
+$$
+
+だから(1)は成立する。したがって$X$が$\mathcal{G}$-可測な単純確率変数のときに(1)は示される。さらに極限をとることにより、$X$が一般の$\mathcal{G}$-可測な確率変数のときにも(1)が証明される。特に$Y=1$ととれば$E[1|\mathcal{G}]=1\,\,a.s.$だから$E[X|\mathcal{G}]=X\,\,a.s.$を得る。
+
+$(4)\,\,$両辺とも$\mathcal{H}$-可測だから、任意の$B\in\mathcal{H}$に対して
+
+$$
+\begin{equation}
+E[E[E[X|\mathcal{G}]|\mathcal{H}],B]=E[X,B]
+\end{equation}
+$$
+
+を示せば十分である。ところが(2)の左辺は$E[E[X|\mathcal{G}],B]$に一致し、$\mathcal{H}\subset\mathcal{G}$だから、$B\in\mathcal{G}$でもあり、これは$E[X,B]$と一致することがわかる。特に$\mathcal{G}=\mathcal{T}(\equiv \{\emptyset,\Omega\})$にとって$E[E[X|\mathcal{G}]]=E[X]$を得る。
+
+$(5)\,\,X$と$\mathcal{G}$は独立だから、任意の$B\in\mathcal{G}$に対し
+
+$$
+E[X,B]=E[X]\cdot P(B)=E[E[X],B]
+$$
+
+これは$E[X|\mathcal{G}]=E[X]\,\,a.s.$を意味する。$f(X)$と$\mathcal{G}$も独立になれるから、$X$の代わりに$f(X)$ととって$E[f(X)|\mathcal{G}]=E[f(X)]\,\,a.s.$が得られる。
+
+</proof>
+
 ### 2.5 コルモゴロフの0-1法則
 
 ## 第３章　大数の法則
