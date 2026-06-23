@@ -1491,7 +1491,194 @@ $$
 
 </proof>
 
+<proposition title="2.31 イェンセンの不等式">
+
+$\psi$は$\mathbb{R}$上の実数値関数で下に凸とする。このとき、確率変数$X$が$E[|X|]\lt\infty,\,\,E[|\psi(X)|]\lt\infty$を満たせば
+
+$$
+E[\psi(X)|\mathcal{G}]\ge\psi(E[X|\mathcal{G}])\quad a.s.
+$$
+
+である。特に、$p\ge1$として、$X$が$p$乗可積分$(E[|X|^p]\lt\infty)$ならば
+
+$$
+E[|X|^p|\mathcal{G}]\ge |E[X|\mathcal{G}]|^p\quad a.s.
+$$
+
+</proposition>
+
+<proof>
+
+$\psi$は下に凸だから、グラフ$y=\psi(x)$はその任意の（広義の）接線より上にある。すなわち、任意の$a\in\mathbb{R}$に対し$c=c(a)\in\mathbb{R}$が存在し$\psi(x)\ge\psi(a)+c\cdot(x-a),\,\,x\in\mathbb{R}$とできる。しかも$c$は$a$のボレル可測関数に取れる。特に$x=X,\,\,a=E[X|\mathcal{G}]$ととれば、$\mathcal{G}$-可測な関数$\tilde{c}=\tilde{c}(\omega)\equiv c(E[X|\mathcal{G}](\omega))$が存在し
+
+$$
+\psi(X)\ge\psi(E[X|\mathcal{G}])+\tilde{c}\cdot(X-E[X|\mathcal{G}])\quad a.s.
+$$
+
+であることがわかる。したがって命題2.29-(2)と(1)より
+
+$$
+E[\psi(X)|\mathcal{G}]\ge E[\psi(E[X|\mathcal{G}]|\mathcal{G})]+E[\tilde{c}\cdot(X-E[X|\mathcal{G}])|\mathcal{G}]\quad a.s.
+$$
+
+ところが、$\psi(E[X|\mathcal{G}])$は$\mathcal{G}$-可測だから命題2.29-(3)により右辺の第１項は$\psi(E[X|\mathcal{G}])$と$a.s.$に一致する。第２項は$\tilde{c}$が$\mathcal{G}$-可測なので、やはり命題2.29-(3)より$\tilde{c}E[X-E[X|\mathcal{G}]|\mathcal{G}]$になり$E[E[X|\mathcal{G}]|\mathcal{G}]=E[X|\mathcal{G}]$だから、この項は$a.s.$に$0$になる。したがって、イェンセンの不等式が示された。特に$\psi(x)=|x|^p,\,\,p\ge1$が下に凸であることに注意すれば第２の不等式が得られる。
+
+</proof>
+
+<proposition title="2.32">
+
+可積分な実数値確率変数列$(X_n)_{n=1,2,\cdots}$と$X$が与えられ、$X_n \to X$（一次平均収束）ならば、$E[X_n|\mathcal{G}] \to E[X|\mathcal{G}]$（一次平均収束）である。
+
+</proposition>
+
+<proof>
+
+次のように評価すればよい。
+
+$$
+E[|E[X_n|\mathcal{G}]-E[X|\mathcal{G}]|]=E[|E[X_n-X|\mathcal{G}]] \\
+\le E[E[|X_n-X||\mathcal{G}]]=E[|X_n-X|] \xrightarrow{n \to \infty}0
+$$
+
+ここで、第１の等号は命題2.29-(1)、次の不等号は命題2.31、最後の等号は命題2.29-(4)を用いた。
+
+</proof>
+
+> [!warn] 直交射影
+> $L^2\equiv L^2(\Omega,\mathcal{F},P)$ は内積$(X,Y)_{L^2}=E[XY]$をもつ実ヒルベルト空間である。$L_{\mathcal{G}}^2$を$\mathcal{G}$-可測関数からなる$L^2$の部分空間として$X\in L_{\mathcal{G}}^2$とすれば、命題2.29-(3)より、$Y\in L^2$に対し
+> $$E[X(Y-E[Y|\mathcal{G}])]=0$$
+> が成立することがわかる。これは$E[Y|\mathcal{G}]$が$Y$の$L_{\mathcal{G}}^2$への直交射影であることを意味する。
+
 ### 2.5 コルモゴロフの0-1法則
+
+$(\Omega, \mathcal{F},P)$を確率空間とし、$\mathcal{F}$の部分$\sigma$-加法族の列$(\mathcal{B}_k)_{k=1,2,\cdots}$が与えられ、独立であるとする
+
+$$
+\mathcal{G}_k=\sigma\left(\bigcup_{j=k}^{\infty}\mathcal{B}_j\right),\qquad \mathcal{T}=\bigcap_{k=1}^{\infty}\mathcal{G}_k
+$$
+
+とおき、$\mathcal{T}$を末尾加法族(tail σ-algebra)という。
+
+<info title="末尾加法族の直感的意味">
+
+末尾加法族$\mathcal{T}$は、$\mathcal{G}_k$が「$k$番目以降のすべての情報」を表すことから、「すべての$k$に対して、$k$番目以降の情報だけで完全に決定されるイベント」の集合です。つまり、最初の有限個の情報を取り除いても確定するイベント—**無限遠方の情報に依存するイベント**を捉えています。
+
+例えば、確率変数列$(X_1, X_2, X_3, \ldots)$があるとき、「この列は収束するか」「$\limsup_n X_n$の値」といった性質は、最初の1000項を変えても変わりません。このような「漸近的性質」が末尾加法族に属します。
+
+</info>
+
+<theorem title="2.34 コルモゴロフの0-1法則">
+
+任意の$A\in\mathcal{T}$は$P(A)=0$または$1$を満たす。
+
+</theorem>
+
+<proof>
+
+**第１段**：$k=1,2,\cdots$に対して
+
+$$
+\mathcal{F}_k=\sigma\left(\bigcup_{j=1}^{k}\mathcal{B}_j\right),\quad \mathcal{F}_\infty=\sigma\left(\bigcup_{j=1}^{\infty}\mathcal{B}_j\right)
+$$
+
+とおく。$A\in\mathcal{T}$が与えられたとき、任意の$n=1,2,\cdots$に対して$1_A$と$\mathcal{F}_n$は独立だから、命題2.29-(5)より
+
+$$
+E[1_A|\mathcal{F}_n]=E[1_A]=P(A)\quad a.s.
+$$
+
+である。したがって、任意の$B\in\mathcal{F}_n$に対して
+
+$$
+\begin{split}
+E[1_A,B]&=E[E[1_A|\mathcal{F}_n],B] \\
+&=E[P(A),B] \\
+&=P(A)P(B) \\
+\end{split}
+$$
+
+である。$n$は任意だったから、すべての$B\in\bigcup_{n=1}^{\infty}\mathcal{F}_n$に対して
+
+$$
+\begin{equation}
+E[1_A,B]=P(A)P(B)
+\end{equation}
+$$
+
+が成立することがわかった。
+
+**第２段**：任意の$B\in\mathcal{F}_{\infty}$に対して、(3)が成立することを示そう。そのために
+
+$$
+\mathcal{P}=\bigcup_{n=1}^{\infty}\mathcal{F}_n,\qquad \mathcal{L}=\{B\in\mathcal{F};(3)が成立\}
+$$
+
+とおく。このとき、$\mathcal{P}$が$\pi$-系、$\mathcal{L}$が$\lambda$-系であることは、ともに明らかである。$\mathcal{L}$については、単調収束定理を用いればよい。したがって、$\pi-\lambda$定理によれば
+
+$$
+\sigma(\mathcal{P})=\mathcal{F}_{\infty} \subset \mathcal{L}
+$$
+
+がわかり、(3)は任意の$B \in \mathcal{F}_{\infty}$に対して成立することが示された。
+
+**第３段**：(3)において、特に$B=A$ととれば
+
+$$
+P(A)=P(A)^2
+$$
+
+がえられ、したがって$P(A)=0$または$1$であることがいえた。
+
+</proof>
+
+> [!warn]
+> ここの証明がよくわかっていないので後でたどり直す
+
+<info title="0-1法則の意義">
+
+コルモゴロフの0-1法則は、独立な情報列の「無限遠方の現象」は確率的ゆれを持たないことを主張しています。末尾加法族$\mathcal{T}$に属するイベント$A$は、いかなる有限個の情報を変えても決定されるので、その確率は0か1に制限されます。
+
+実務的には：収束しているか/発散しているか、振動しているか/収束しているか、といった漸近的性質は、最初のいくつかの項では決まらず、無限の構造に依存するが、そのような性質は本質的に「確実に起きるか起きないか」に二値化される、ということです。これは**大数の法則**の理論的根拠の一つになります。
+
+</info>
+
+<proposition title="2.35">
+
+$(X_n)_{n=1,2,\cdots}$を独立な確率変数列として、その見本平均の概収束極限
+
+$$
+Y=\lim_{n \to \infty}\frac{1}{n}\sum_{k=1}^nX_k
+$$
+
+が存在すると仮定する。このとき、確率変数$Y$は$a.s.$に定数である。
+
+</proposition>
+
+<proof>
+
+$\mathcal{B}_k=\sigma(X_k)$ととる。このとき、$Y$は$(\mathcal{B}_k)_{k=1,2,\cdots}$の末尾加法族$\mathcal{T}$について可測である。
+
+**直感的に言えば**：$Y$は「全ての項の無限平均」なので、最初の有限個の項を変えても変わりません。数学的には、任意の$m=1,2,\cdots$に対して、$Y$の右辺の和を$k=m$から始めて考えても$\lim_{n \to \infty}\frac{1}{n}\sum_{k=1}^{m-1}X_k=0$だから
+
+$$
+Y=\lim_{n \to \infty}\sum_{k=m}^{\infty}X_k
+$$
+
+である。したがって、$Y$は$\mathcal{G}_m$-可測であり、しかも$m$は任意にとってよいから$Y$は$\mathcal{T}$-可測であることがわかる。特に、任意の$x\in\mathbb{R}$に対して$\{Y \le x\}\in\mathcal{T}$だから、定理2.34より
+
+$$
+P(Y \le x)=0 または1
+$$
+
+である。これはYが$a.s.$に定数であることを意味する。実際、もし「$Y$が$a.s.$に定数」でなければ、ある$x\in\mathbb{R}$が存在して
+
+$$
+P(Y\le x )\gt 0\quadかつ\quad(Y\gt x)\gt0
+$$
+
+となるからである。
+
+</proof>
 
 ## 第３章　大数の法則
 ### 3.1 弱法則
