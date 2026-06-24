@@ -866,6 +866,147 @@ $$
 
 </proof>
 
+<theorem title="1">
+
+区間$[a,b]$で有界な関数$f$に対して
+
+$$
+\underline{\int_a^b}f\le\overline{\int_a^b}f
+$$
+
+</theorem>
+
+<proof>
+
+上方和が下方和の上界になっている、またその逆から明らか。
+
+</proof>
+
+$\underline{\int_a^b}f=\overline{\int_a^b}f$が成り立つとき、$f$は$[a,b]$で**リーマン積分可能**であるといい、この共通の値を
+
+$$
+\int_a^b f\quadまたは\quad \int_a^b f(x)dx
+$$
+
+と書いて、関数$f$の区間$[a,b]$における**リーマン積分**とよぶ。$a$はこの積分の**下端**、$b$を**上端**とよばれる。
+
+#### C) 積分可能の条件
+
+<theorem title="2">
+
+$f$は区間$[a,b]$で有界な関数とする。$f$が$[a,b]$で積分可能であるためには、任意の$\varepsilon\gt0$に対し
+
+$$
+U(P,f)-L(P,f)\lt\varepsilon
+$$
+
+となるような$[a,b]$の分割$P$の存在することが必要かつ十分である。
+
+</theorem>
+
+<proof>
+
+この式が成り立つ時は積分可能なのは明らか。
+
+積分可能なとき、$\int_a^bf$は上方和の下限、かつ下方和の上限であるから、任意の$\varepsilon\gt0$に対し
+
+$$
+\begin{split}
+U(P_2,f)\lt\int_a^bf+\frac{\varepsilon}{2} \\
+L(P_1,f)\lt\int_a^bf-\frac{\varepsilon}{2} \\
+\end{split}
+$$
+
+となるような$[a,b]$の分割$P_1,P_2$が存在する。そこで$P=P_1\cup P_2$とおけば、$U(P,f)\le U(P_2,f),\,\,L(P,f)\ge L(P_1,f)$であるから
+
+$$
+\begin{split}
+U(P,f)-L(P,f)&\le U(P_2,f)-L(P_1,f) \\
+&\lt \left(\int_a^bf+\frac{\varepsilon}{2}\right) - \left(\int_a^bf-\frac{\varepsilon}{2}\right)=\varepsilon
+\end{split}
+$$
+
+これで主張が証明された。
+
+</proof>
+
+#### D) 連続関数・単調関数の積分可能性
+
+<theorem title="3">
+
+区間$[a,b]$で連続な関数$f$は$[a,b]$で積分可能である。
+
+</theorem>
+
+<proof>
+
+$\varepsilon\gt0$を任意に与えた正数とし、$\eta=\varepsilon/(b-a)$とおく。$f$は閉区間$[a,b]$で連続、したがって一様連続であるから、この$\eta$に対し、$\delta\gt0$を、$x,y\in[a,b],|x-y|\lt\delta$ならば
+
+$$
+|f(x)-f(y)|\lt\eta
+$$
+
+となるようにとることができる。
+
+そこで$[a,b]$の分割$P=(x_0,x_1,\cdots,x_n)$を$\varDelta x_i\lt\delta(i=1,2,\cdots,n)$となるようにとる。そのとき、$[x_{i-1},x_i]$における$f$の最大値$M_i$、最小値$m_i$は、それぞれある$c_i,d_i\in[x_{i-1},x_i]$によって$M_i=f(c_i),m_i=f(d_i)$と書かれるから、$M_i-m_i\lt\eta$であり、したがって
+
+$$
+\begin{split}
+U(P,f)-L(P,f)&=\sum_{i=1}^{n}(M_i-m_i)\varDelta x_i \\
+&\lt\eta\sum_{i=1}^n\varDelta x_i=\eta(b-a)=\varepsilon
+\end{split}
+$$
+
+となる。ゆえに定理２によって$f$は$[a,b]$で積分可能である。
+
+</proof>
+
+<theorem title="4">
+
+関数$f$が区間$[a,b]$で単調ならば$f$は$[a,b]$で積分可能である。
+
+</theorem>
+
+<proof>
+
+どちらでも同じであるから$f$は単調増加とする。また$f(a)=f(b)$ならば$f$は定数となって定理は自明であるから、$f(a)\lt f(b)$とする。
+
+$\varepsilon \gt0$を任意に与えた正数とし、
+
+$$
+\eta=\frac{\varepsilon}{f(b)-f(a)}
+$$
+
+とおく。分割$P=(x_0,x_1,\cdots,x_n)$を$\varDelta x_i\lt\eta\,\,(i=1,2,\cdots,n)$となるようにとる。そうすれば、$M_i=f(x_i),m_i=f(x_{i-1})$であるから
+
+$$
+\begin{split}
+U(P,f)-L(P,f)&=\sum_{i=1}^{n}(f(x_i)-f(x_{i-1}))\varDelta x_i \\
+&\lt\eta\sum_{i=1}^n(f(x_i)-f(x_{i-1}))=\eta(f(b)-f(a))=\varepsilon
+\end{split}
+$$
+
+ゆえにふたたび定理２によって$f$は積分可能である。
+
+</proof>
+
+#### E) 不連続点がある場合
+
+不連続点が無限個あっても、$f$は積分可能である。
+
+<theorem title="5">
+
+$f$は区間$[a,b]$で有界であるとし、$[a,b]$における$f$の不連続点の集合を$E$とする。任意の$\varepsilon\gt0$に対し、
+
+$$
+a\le u_1\lt v_1 \lt u_2 \lt v_2 \lt \cdots \lt u_s \lt v_s \le b \\
+\sum_{j=1}^s(v_j-u_j)\lt\varepsilon
+$$
+
+を満たす有限個の点$u_j,v_j\,\,(j=1,\cdots,n)$を適当に取れば、$E\cap(a,b)$の点はすべて、開区間$(u_1,v_1),\cdots,(u_s,v_s)$の和集合に含まれると仮定する。そのとき、$f$は区間$[a,b]$で積分可能である。
+
+</theorem>
+
 ### 7.2 積分の性質
 ### 7.3 不定積分、広義積分
 
