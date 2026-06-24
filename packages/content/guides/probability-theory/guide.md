@@ -1681,8 +1681,220 @@ $$
 </proof>
 
 ## 第３章　大数の法則
+
+大数の弱法則 $\to$ 確率収束
+
+大数の強法則 $\to$ 概収束
+
 ### 3.1 弱法則
+
+確率空間$(\Omega, \mathcal{F}, P)$上に実数値確率変数列$(X_n)_{n=1,2,\cdots}$が与えられ、それぞれ$E[|X_n|]\lt\infty$を満たすとしよう。このとき、期待値$m_n=E[X_n]$は有限である。
+
+$$
+Y_n=\frac{1}{n}\sum_{k=1}^{n}X_k,\quad \bar{m}_n=\frac{1}{n}\sum_{k=1}^{n}m_k
+$$
+
+とおく。$Y_n$は$(X_k)_{k=1,2,\cdots}$の**見本平均**（あるいは**標本平均**）、$\bar{m}_n$は$Y_n$の期待値である。
+
+<def title="3.1">
+
+$(1)\,\,$規格化された見本平均$\tilde{Y}_n=Y_n-\bar{m}_n$が$0$に確率収束するとき、すなわち、任意の$\epsilon \gt 0$に対して
+
+$$
+\lim_{n \to \infty}P(|Y_n-\bar{m}_n|\gt\epsilon)=0
+$$
+
+が成立するとき、$(Y_n)_{n=1,2,\cdots}$は**大数の弱法則**を満たすという。
+
+$(2)\,\,\tilde{Y}_n$が$0$に概収束するとき、$(Y_n)_{n=1,2,\cdots}$は**大数の強法則**を満たすという。
+
+</def>
+
+<theorem title="3.2">
+
+$(X_n)_{n=1,2,\cdots}$が組ごとに独立、つまりどの組$i,j(i \neq j)$をとっても$X_i$と$X_j$は独立で、
+
+$$
+\sup_{n}\rm{Var}(X_n)\lt \infty
+$$
+
+ならば、$(Y_n)_{n=1,2,\cdots}$は大数の弱法則を満たす。
+
+</theorem>
+
+<proof>
+
+$\epsilon\gt0$は任意として
+
+$$
+\begin{split}
+P(|\tilde{Y}_n|\gt\epsilon)&\le\frac{1}{\epsilon^2}E[\tilde{Y}_m^2] \\
+&=\frac{1}{\epsilon^2n^2}\sum_{j,k=1}^nE[(X_j-m_j)(X_k-m_k)] \\
+&=\frac{1}{\epsilon^2n^2}\sum_{k=1}^nE[(X_k-m_k)^2] \\
+&\le\frac{1}{\epsilon^2n}\sup_{n}\rm{Var}(X_n)\quad\longrightarrow\quad0\quad(n \to \infty)
+\end{split}
+$$
+
+だからである。ここで、最初の不等式はチェビシェフの不等式、３行目に移る時は組ごとの独立性を用いた。
+
+</proof>
+
 ### 3.2 強法則
+
+大数の強法則を示すためには、ボレル-カンテリの補題とコルモゴロフの不等式を利用するため、準備として証明しておく。
+
+#### 上極限・下極限
+
+事象の列$A_n\in\mathcal{F},n=1,2,\cdots$に対して
+
+$$
+\limsup_{n \to \infty}A_n=\bigcap_{k=1}^{\infty}\bigcup_{n=k}^{\infty}A_n
+$$
+
+とおき、$A_n$の**上極限**という。あるいは
+
+$$
+\omega\in\limsup_{n \to \infty}A_n\quad\Longleftrightarrow\quad\omegaは無限個のA_nに属する
+$$
+
+と言い換えてもよい。このことを簡単に"$A_n\,\,i.o.$"と書くことがある。
+
+また、
+
+$$
+\liminf_{n \to \infty}A_n=\bigcup_{k=1}^{\infty}\bigcap_{n=k}^{\infty}A_n
+$$
+
+とおき、$A_n$の下極限という。
+
+$$
+\begin{split}
+\omega&\in\liminf_{n \to \infty}A_n \\
+&\Longleftrightarrow \text{ある番号k=k(}\omega\text{)から先のすべてのnに対して}\omega\in A_n \\
+&\Longleftrightarrow \sharp\{n \mid \omega \notin A_n\}\lt\infty
+\end{split}
+$$
+
+である。次が成り立つ。
+
+$$
+\left(\limsup_{n \to \infty}A_n\right)^c=\liminf_{n \to \infty}A_n^c
+$$
+
+#### ボレル-カンテリの補題
+
+<proposition title="3.4 ボレル-カンテリの補題">
+
+$(1)\,\,\sum_{n=1}^\infty P(A_n)\lt\infty$ならば
+
+$$
+P\left(\limsup_{n \to \infty}A_n\right)=0
+$$
+
+すなわち、$P(A_n\,\,i.o.)=0$である。
+
+$(2)\,\,$事象 $(A_n)_{n=1,2,\cdots}$が独立で$\sum_{n=1}^\infty P(A_n)=\infty$ならば
+
+$$
+P\left(\limsup_{n \to \infty}A_n\right)=1
+$$
+
+</proposition>
+
+<info title="ボレル-カンテリの補題の直感的意味">
+
+この補題は、無限列の事象 $A_1, A_2, A_3, \ldots$ が「無限個（infinitely often, i.o.）起こる確率」を、単純な確率の合計で完全に判定できることを主張しています：
+
+- **(1) 合計が有限**：$\sum P(A_n) < \infty$ ⟹ 無限個起こる確率は 0
+  - 直感：各事象の確率が減衰していくので、無限回繰り返しても総確率が有限に留まる
+  - 「稀な事象を無限に試しても、結局は起こらない」
+
+- **(2) 合計が無限 + 独立性**：$\sum P(A_n) = \infty$ ⟹ 無限個起こる確率は 1
+  - 直感：確率が減衰しないので、独立試行の積み重ねで必ずいつかは起こる
+  - 「十分な回数試せば、独立な事象は確実に何度も起こる」
+
+**典型的な応用場面**：
+- **大数の強法則の証明**：見本平均の収束を示すときに、「偏差が繰り返し大きくなる」という坏イベント列が確率 0 に落ちることを保証
+- **ランダムウォークの再帰性**：「原点に戻る」という事象が無限回起こるかどうかの判定
+- **無限列のタイトルな挙動**：確率変数列が「確率1で収束する」「確率1で発散する」などの判定
+
+</info>
+
+<proof>
+
+$(1)\,\,A=\limsup_{n \to \infty}A_n$とおく。このとき、任意の$k=1,2,\cdots$について$A\subset\bigcup_{n=k}^{\infty}A_n$だから、確率測度の劣加法性により
+
+$$
+P(A)\le P\left(\bigcup_{n=k}^{\infty}A_n\right)\le\sum_{n=k}^{\infty}P(A_n)
+$$
+
+ところが、$k$は任意にとってよいから、特に$k \to \infty$とすれば、(1)の仮定から右辺$\to 0$となり、$P(A)=0$が得られる。
+
+$(2)\,\,$まず、任意の$k=1,2,\cdots$に対して$P(\bigcup_{n=k}^{\infty}A_n)=1$を言えば十分であることを示しておこう。実際、このことが言えれば、再び$P$の劣加法性より
+
+$$
+P(A^c)=P\left(\bigcup_{k=1}^{\infty}(\bigcup_{n=k}^{\infty}A_n)^c\right)\le\sum_{k=1}^{\infty}P\left((\sum_{n=k}^{\infty}A_n)^c\right)=0
+$$
+
+となるから、$P(A)=1$がわかるのである。ところが、任意の$N=1,2,\cdots$に対して
+
+$$
+\begin{split}
+1-P\left(\bigcup_{n=k}^{\infty}A_n\right)&\le1-P\left(\bigcup_{n=k}^{N}A_n\right) \\
+&=P\left((\bigcup_{n=k}^{N}A_n)^c\right) \\
+&=P\left(\bigcap_{n=k}^{N}A_n^c\right) \\
+&=\prod_{n=k}^{N}P(A_n^c) \\
+&=\prod_{n=k}^{N}(1-P(A_n)) \\
+&\le\prod_{n=k}^{N}e^{-P(A_n)}
+\end{split}
+$$
+
+最後の不等号では$1-x\le e^{-x},\,\,x\ge0$を用いた。したがって、任意の$N=1,2,\cdots$に対して、
+
+$$
+1-P\left(\bigcup_{n=k}^{\infty}A_n\right)\le\exp\left\{-\sum_{n=k}^{N}P(A_n) \right\}
+$$
+
+が示された。ところが、(2)の仮定から$\sum_{n=k}^{\infty}P(A_n)=\infty$だから、$N \to \infty$のとき、右辺$\to 0$となり、$P(\bigcup_{n=k}^{\infty}A_n)=1$が得られる。
+
+</proof>
+
+<lemma title="3.5">
+
+$\sum_{n=k}^{\infty}P(A_n)\lt\infty$ならば
+
+$$
+P\left(\liminf_{n \to \infty}A_n^c\right)=1
+$$
+
+である。すなわち
+
+$$
+\sharp\{n \mid \omega \in A_n\}\lt \infty, \quad a.s.\,\,\omega
+$$
+
+が成立する。
+
+<supplement title="ボレル-カンテリ補題のまとめと活用">
+
+ボレル-カンテリの補題（補題3.4）と補題3.5を合わせると、次のように要約できます：
+
+| 条件 | 結論 |
+|-----|------|
+| $\sum P(A_n) < \infty$ | $P(A_n \text{ i.o.}) = 0$（ほぼ確実に有限回だけ起こる） |
+| $\sum P(A_n) = \infty$ + 独立 | $P(A_n \text{ i.o.}) = 1$（ほぼ確実に無限回起こる） |
+
+**核心的な効用**：
+1. **収束判定**：確率変数列 $(X_n)$ の挙動（収束 vs 発散）を、各項の「大きな偏差イベント」の確率合計で判定
+2. **確率1での性質**：大数の強法則などで「ほぼ確実に収束する」という強い主張を証明可能にする
+
+後続する大数の強法則の証明では、「見本平均が真の期待値から大きく外れる」というイベント列を作り、ボレル-カンテリの補題でその確率が0に落ちることを示すという手法が使われます。
+
+</supplement>
+
+<lemma>
+
+#### コルモゴロフの定理
 
 ## 第４章　中心極限定理と少数の法則
 ### 4.1 測度の弱収束
