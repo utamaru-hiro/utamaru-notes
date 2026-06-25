@@ -1894,7 +1894,105 @@ $$
 
 </supplement>
 
-#### コルモゴロフの定理
+#### コルモゴロフの不等式
+
+<theorem title="3.6 コルモゴロフの不等式">
+
+$(X_n)_{n=1,2,\cdots}$を独立な実数値確率変数列で、$E[X_n]=0$かつ$V_n=\rm{Var}(X_n)\lt\infty$とする。このとき、任意の$a\gt0$に対して
+
+$$
+P\left(\max_{1\le k \le n}\left|\sum_{i=1}^kX_i \right|\ge a\right)\le\frac{1}{a^2}\sum_{i=1}^nV_i
+$$
+
+が成立する。
+
+</theorem>
+
+<proof>
+
+確率を評価したい事象を
+
+$$
+A^*=\left\{\omega\in\Omega\mid\max_{1 \le k \le n}|Z_k|\ge a\right\}
+$$
+
+とおく。ただし
+
+$$
+Z_k=\sum_{i=1}^kX_i,\quad k=1,2,\cdots,n
+$$
+
+である。確率$P(A^*)$を評価するために、$|Z_k|$が（$k$を動かすとき）いつ始めて$a$以上になるか、そのような$k$に着目して$A^*$を互いに素な事象に分けてみよう。つまり、$k=1,2,\cdots,n$に対して
+
+$$
+A_k^*=\{\omega\in\Omega\mid i=1,2,\cdots,k-1に対しては|Z_i|\lt aで、かつ|Z_k|\ge a\}
+$$
+
+とおけば、$A_k^*\in\sigma(X_1,X_2,\cdots,X_k)$で$A^*$は
+
+$$
+A^*=\bigcup_{k=1}^nA_k^*\quad（互いに素）
+$$
+
+と分解できる。したがって
+
+$$
+P(A^*)=\sum_{k=1}^nP(A_k^*)\le\sum_{k=1}^n\frac{1}{a^2}E[Z_k^2,A_k^*]
+$$
+
+と評価できる。最後の不等号は、$\omega\in A_k^*$ならば$Z_k^2\ge a^2$だからである。
+
+$Z_n=Z_k+(Z_n-Z_k)$で$(Z_n-Z_k)^2\ge0$に注意すれば
+
+$$
+\begin{split}
+E[Z_n^2,A_k^*]-E[Z_k^2,A_k^*]&\ge2E[Z_k(Z_n-Z_k),A_k^*] \\
+&=2E\left[1_{A_k^*}Z_k(Z_n-Z_k)\right]
+\end{split}
+$$
+
+ところが、系2.16から$1_{A_k^*}Z_k$と$(Z_n-Z_k)=\sum_{i=k+1}^nX_i$は独立であることがわかり、この期待値は
+
+$$
+2E\left[1_{A_k^*}Z_k\right]E[Z_n-Z_k]
+$$
+
+に等しく、したがって$0$である。ゆえに
+
+$$
+\begin{split}
+P(A^*)&\le\sum_{k=1}^n\frac{1}{a^2}E[Z_n^2,A_k^*]=\frac{1}{a^2}E[Z_n^2,A^*] \\
+&\le \frac{1}{a^2}E[Z_n^2]=\frac{1}{a^2}E\left[\left(\sum_{i=1}^nX_i\right)^2\right] \\
+&=\frac{1}{a^2}\sum_{i=1}^nV_i
+\end{split}
+$$
+
+最後は再び$(X_i)_{i=1,2,\cdots,n}$の独立性を用いた。
+
+</proof>
+
+> [!info]
+> コルモゴロフの不等式は、$k$をじこくと考えたときに、時刻$k$までの和の絶対値の最大値も同様に評価できることを主張している。
+
+#### 大数の強法則
+
+<theorem title="3.8 コルモゴロフの第1定理">
+
+実数値確率変数列$(X_n)_{n=1,2,\cdots}$が独立で
+
+$$
+\sum_{n=1}^\infty\frac{1}{n^2}\rm{Var}(X_n)\lt\infty
+$$
+
+を満たせば、$Y_n=\frac{1}{n}\sum_{k=1}^nX_k$に対して大数の強法則が成立する。
+
+</theorem>
+
+<theorem title="3.10 コルモゴロフの第2定理">
+
+実数値確率変数列$(X_n)_{n=1,2,\cdots}$は独立同分布（$i.i.d.$）で、期待値$m=E[X_n]$は有限であると仮定する。このとき、$Y_n=\frac{1}{n}\sum_{k=1}^nX_k$に対して大数の強法則が成立する。
+
+</theorem>
 
 ## 第４章　中心極限定理と少数の法則
 ### 4.1 測度の弱収束
