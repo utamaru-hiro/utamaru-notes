@@ -1007,6 +1007,251 @@ $$
 
 </theorem>
 
+#### F) 極限としての上積分・下積分
+
+A)では上方和の下限として上積分、下方和の上限として下積分を定義した。
+
+ここでは上方和・下方和の極限として定義することを考える。
+
+$P=(x_0,x_1,\cdots,x_n)$を$[a,b]$の分割とし、前のように
+
+$$
+\varDelta x_i=x_i-x_{i-1}
+$$
+
+とする。そのとき数$d(P)$を
+
+$$
+d(P)=max\{\varDelta x_1,\cdots,\varDelta x_n\}
+$$
+
+と定義する。$d(P)$を$0$に近づけることは、分割を"一様に細かく"していくことであると考えられる。
+
+<theorem title="6">
+
+区間$[a,b]$で有界な任意の関数$f$に対して
+
+$$
+\begin{split}
+\lim_{d(P) \to 0}U(P,f)=\overline{\int_a^b}f \\
+\lim_{d(P) \to 0}L(P,f)=\underline{\int_a^b}f \\
+\end{split}
+$$
+
+が成り立つ。詳しく言えば、任意の$\varepsilon\gt0$に対し、適当に$\delta\gt0$をとれば、$d(P)\lt\delta$を満たす任意の$P$に対して
+
+$$
+\begin{split}
+0 \le U(P,f)-\overline{\int_a^b}f\lt\varepsilon \\
+0 \le \underline{\int_a^b}f -L(P,f)\lt\varepsilon \\
+\end{split}
+$$
+
+となる。
+
+</theorem>
+
+#### G) リーマン和の極限としての積分
+
+$f$を区間$[a,b]$で有界な関数とし、$P=(x_0,x_1,\cdots,x_n)$を$[a,b]$の分割とする。各$i=1,\cdots,n$に対し、小区間$[x_{i-1},x_i]$から１つずつ点$s_i$をとって、和
+
+$$
+\sum_{i=1}^{n}f(s_i)\varDelta x_i=\sum_{i=1}^{n}f(s_i)(x_i-x_{i-1})
+$$
+
+を作れば、これは明らかに$L(P,f)$と$U(P,f)$の間にある。このような和を分割$P$に対する$f$の**リーマン和**という。
+
+リーマン和は点$s_i$の選び方に依存するから、分割$P$から一意的には定まらないが、一般にこれを$S(P,f)$と書くことにすれば、
+
+$$
+L(P,f)\le S(P,f) \le U(P,f)
+$$
+
+である。
+
+> [!info]
+> 上方和、下方和は上限$M_i,$下限$m_i$を用いて定義されるから、一般には計算が困難で、その意味で理論的な概念である。それに対してリーマン和は具体的な関数値を用いて定義されるから、計算が容易である。その点にリーマン和の実用性がある。
+
+いま、ある定数$A$が存在して、任意の$\varepsilon\gt0$に対し、適当に$\delta\gt0$をとれば、$d(P)\lt\delta$である任意の$P$に対して、
+
+$$
+|S(P,f)-A|\lt\varepsilon
+$$
+
+が成り立つとする。そのとき
+
+$$
+\lim_{d(P) \to \0}S(P,f)=A
+$$
+
+とかき、$d(P) \to 0$のとき$S(P,f)$は$A$に収束するという。明らかに、この意味でリーマン和が収束する場合、極限$A$は一意的に定まる。
+
+<theorem title="7">
+
+$f$を区間$[a,b]$で有界な関数とし、$P$を$[a,b]$の分割とする。$d(P) \to 0$のときリーマン和$S(P,f)$が収束するためには、$f$が$[a,b]$で積分可能であることが必要かつ十分である。かつそのとき
+
+$$
+\lim_{d(P) \to 0}S(P,f)=\int_a^bf
+$$
+
+が成り立つ。
+
+</theorem>
+
+<proof>
+
+$f$が積分可能ならば、定理６により
+
+$$
+\lim_{d(P)\to0}L(P,f)=\lim_{d(P)\to0}U(P,f)=\int_a^bf
+$$
+
+であって、$L(P,f)\le S(P,f) \le U(P,f)$であるから
+
+$$
+\lim_{d(P)\to0}S(P,f)=\int_a^b
+$$
+
+となる。
+
+逆に、$\lim_{d(P)\to0}S(P,f)=A$が存在するとしよう。そうすれば$\varepsilon\gt0$に対し、ある$\delta\gt0$が存在して、$d(P)\lt0$である限り
+
+$$
+|S(P,f)-A|\lt\frac{\varepsilon}{2}
+$$
+
+が成り立つ。いま、$P$を$d(P)\lt\delta$を満たす分割とし、$M_i=\sup{f(x)}\,\,(x_{i-1}\le x\le x_i)$とすれば、
+
+$$
+0\le M_i-f(s_i)\lt\frac{\varepsilon}{2(b-a)}
+$$
+
+となる$s_i\in[x_{i-1},x_i]$が存在するから、この$s_i$を用いてリーマン和
+
+$$
+S(P,f)=\sum_{i=1}^{n}f(s_i)\varDelta x_i
+$$
+
+を作れば、
+
+$$
+\begin{split}
+U(P,f)-S(P,f)&=\sum_{i=1}^n(M_i-f(s_i))\varDelta x_i \\
+&\lt\frac{\varepsilon}{2(b-a)}\sum_{i=1}^n\varDelta x_i=\frac{\varepsilon}{2}
+\end{split}
+$$
+
+したがって$d(P)\lt\delta$なる限り
+
+$$
+\begin{split}
+|U(P,f)-A|&=(U(P,f)-S(P,f))+|S(P,f)-A| \\
+&\lt \frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon
+\end{split}
+$$
+
+となる。ゆえに
+
+$$
+A=\lim_{d(P)\to0}U(P,f)
+$$
+
+である。同様にして
+
+$$
+A=\lim_{d(P)\to0}L(P,f)
+$$
+
+も得られるから、定理６によって$A=\overline{\int_a^b}f=\underline{\int_a^b}f$、すなわち$f$は積分可能で$A=\int_a^bf$である。
+
+</proof>
+
+#### H) 合成関数の積分
+
+<theorem title="8">
+
+$f$は区間$[a,b]$で積分可能な関数で、その値域が$[m,M]$に含まれるとする。また$\varphi$は区間$[m,M]$で連続な関数とする。このとき合成関数$h=\varphi \circ f$は区間$[a,b]$で積分可能である
+
+</theorem>
+
+<proof>
+
+$\varepsilon\gt0$を任意に与えた正数とする。$\varphi$は$[m,M]$で一様連続であるから、$\delta\gt0$を、$s,t\in[m,M],\,\,|s-t|\lt\delta$ならば$|\varphi(s)-\varphi(t)|\lt\varepsilon$となるように選ぶことができる。ここで$\delta\lt\varepsilon$と仮定してさしつかえない。
+
+$f$は$[a,b]$で積分可能であるから、$[a,b]$の分割$P=(x_0,x_1,\cdots,x_n)$で
+
+$$
+U(P,f)-L(P,f)=\sum_{i=1}^n(M_i-m_i)\varDelta x_i\lt\delta^2
+$$
+
+となるものが存在する。ただし
+
+$$
+\begin{split}
+M_i&=\sup{f(x)} \\
+m_i&=\inf{f(x)}
+\end{split}
+$$
+
+である。いま
+
+$$
+\begin{split}
+M_i^*&=\sup{h(x)}=\sup{\varphi(f(x))} \\
+m_i^*&=\inf{h(x)}=\inf{\varphi(f(x))} \\
+\end{split}
+$$
+
+とおいて、
+
+$$
+U(P,h)-L(P,h)=\sum_{i=1}^n(M_i^*-m_i^*)\varDelta x_i
+$$
+
+を評価しよう。
+
+そのために番号$i=1,\cdots,n$を２組に分けて、$M_i-m_i\lt\delta$であるような$i$の集合を$A,\,\,M_i-m_i\ge\delta$であるような$i$の集合を$B$とする。そのとき
+
+$$
+\delta\sum_{i \in B}\varDelta x_i\le\sum_{i \in B}(M_i-m_i)\varDelta x_i\lt\delta^2
+$$
+
+であるから
+
+$$
+\sum_{i \in B}\varDelta x_i\lt\delta
+$$
+
+である。
+
+さて
+
+$$
+U(P,h)-L(P,h)=\sum_{i \in A}(M_i^*-m_i^*)\varDelta x_i + \sum_{i \in B}(M_i^*-m_i^*)\varDelta x_i
+$$
+
+であるが、$i\in A$ならば$M_i-m_i\lt\delta$であるから、$s,t\in[m_i,M_i]$ならば$|\varphi(s)-\varphi(t)|\lt\varepsilon$である。したがって、$u,v\in[x_{i-1},x_i]$ならば$|h(u)-h(v)|\lt\varepsilon$、よって$M_i^*-m_i^*\le\varepsilon$である。したがって
+
+$$
+\sum_{i \in A}(M_i^*-m_i^*)\varDelta x_i\le\varepsilon\sum_{i\in A}\varDelta x_i\le\varepsilon(b-a)
+$$
+
+となる。一方、$m\le t \le M$に対して$\sup{|\varphi(t)|}=K$とおけば、$i\in B$となる$i$に対して$M_i^*-m_i^*\le2K$であるから
+
+$$
+\sum_{i\in B}(M_i^*-m_i^*)\varDelta x_i\le2K\sum_{i \in B}\varDelta x_i\lt2K\delta \lt 2K\varepsilon
+$$
+
+を得る。ゆえに
+
+$$
+U(P,h)-L(P,h)\lt\varepsilon(b-a+2K)
+$$
+
+ここで$\varepsilon$は任意の正数であった。ゆえに定理２によって$h=\varphi\circ f$は$[a,b]$で積分可能である。
+
+</proof>
+
 ### 7.2 積分の性質
 ### 7.3 不定積分、広義積分
 
