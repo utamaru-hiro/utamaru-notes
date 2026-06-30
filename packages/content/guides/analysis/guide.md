@@ -1081,7 +1081,7 @@ $$
 が成り立つとする。そのとき
 
 $$
-\lim_{d(P) \to \0}S(P,f)=A
+\lim_{d(P) \to 0}S(P,f)=A
 $$
 
 とかき、$d(P) \to 0$のとき$S(P,f)$は$A$に収束するという。明らかに、この意味でリーマン和が収束する場合、極限$A$は一意的に定まる。
@@ -1253,6 +1253,115 @@ $$
 </proof>
 
 ### 7.2 積分の性質
+
+#### A) 積分の線形性と加法性
+
+<theorem title="1">
+
+$(a)\,\,f_1,f_2$が区間$[a,b]$で積分可能ならば、$f_1+f_2$も同じ区間で積分可能で、
+
+$$
+\int_a^b(f_1+f_2)=\int_a^bf_1+\int_a^bf_2
+$$
+
+となる。
+
+$(b)\,\,f$が区間$[a,b]$で積分可能ならば、定数$c$に対して$cf$も同じ区間で積分可能で、
+
+$$
+\int_a^bcf=c\int_a^bf
+$$
+
+となる。
+
+$(c)\,\,f$が区間$[a,b]$で有界で$a\lt c \lt b$なるとき、$f$が区間$[a,c],[c,b]$のそれぞれで積分可能ならば、$f$は区間$[a,b]$で積分可能であり、逆もまた成り立つ。またそのとき
+
+$$
+\int_a^cf+\int_c^bf=\int_a^bf
+$$
+
+</theorem>
+
+<proof>
+
+$(a)\,\,$①$f_1,f_2$が積分可能$\quad\Rightarrow\quad f=f_1+f_2$が積分可能であることの証明
+
+$[a,b]$の任意の分割$P$に対し、区間$[x_{i-1},x_i]$における$f,f_1,f_2$の上限を$M_i,M_i',M_i''$、下限をそれぞれ$m_i,m_i',m_i''$とすれば、明らかに
+
+$$
+m_i'+m_i''\le m_i \le M_i \le M_i'+M_i''
+$$
+
+であるから、
+
+$$
+\sum_{j=1}^2L(P,f_j)\le L(P,f) \le U(P,f) \le \sum_{j=1}^2U(P,f_j)
+$$
+
+である。いま$f_1,f_2$が積分可能ならば、任意の$\varepsilon\gt0$に対し
+
+$$
+U(P_j,f_j)-L(P_j,f_j)\lt\frac{\varepsilon}{2}
+$$
+
+を満たす分割$P_1,P_2$が存在し、$P=P_1\cup P_2$とおけば
+
+$$
+U(P,f_j)-L(P,f_j)\lt\frac{\varepsilon}{2}
+$$
+
+となるから
+
+$$
+U(P,f)-L(P,f)\le\sum_{j=1}^2(U(P,f_j)-L(P,f_j))\lt\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon
+$$
+
+をえる。ゆえに$f$は積分可能である。
+
+②$\int_a^b(f_1+f_2)=\int_a^bf_1+\int_a^bf_2$の証明
+
+①と同じ$P$に対し、
+
+$$
+\int_a^bf_j-\frac{\varepsilon}{2}\lt L(P,f_j)\le U(P,f_j)\lt\int_a^bf_j+\frac{\varepsilon}{2}
+$$
+
+が成り立つから
+
+$$
+\int_a^bf_1+\int_a^bf_2-\varepsilon\lt\sum_{j=1}^2L(P,f_j)\le L(P,f)\le\int_a^bf
+$$
+
+$$
+\int_a^bf\le U(P,f)\le\sum_{j=1}^2U(P,f_j)\lt\int_a^bf_1+\int_a^bf_2+\varepsilon
+$$
+
+$\varepsilon$は任意であるから、これより定理の等式を得る。
+
+$(b)\,\,$定数倍に関する主張は容易なので省略。
+
+$(c)\,\,$こちらも省略。
+
+</proof>
+
+<lemma>
+
+$f,g$が区間$[a,b]$で積分可能ならば、$fg$も$[a,b]$で積分可能である。
+
+</lemma>
+
+<proof>
+
+定理１によって$f+g,f-g$が積分可能であるから、定理８によって$(f+g)^2,(f-g)^2$も積分可能である。したがって
+
+$$
+fg=\frac{1}{4}\{(f+g)^2-(f-g)^2\}
+$$
+
+は積分可能である。
+
+</proof>
+
 ### 7.3 不定積分、広義積分
 
 ## 第８章　積分の計算
