@@ -215,6 +215,214 @@ sumFoldlStrict :: [Int] -> Int
 sumFoldlStrict = foldl' (+) 0
 ```
 
+## 標準関数ミニリファレンス
+
+`Prelude`（標準で自動 import されるモジュール）には、学習初期から頻出する関数がまとまっています。まずは「変換する (`map`)」「集約する (`sum`)」「表示する (`show`)」の3系統で覚えると整理しやすいです。
+
+### map（要素を変換する）
+
+`map` はリストの各要素に同じ関数を適用し、新しいリストを返します。
+
+```hs
+-- map の型: (a -> b) -> [a] -> [b]
+-- 「要素変換関数」と「元のリスト」を受け取り、変換後リストを返す
+doubleAll :: [Int] -> [Int]
+doubleAll = map (*2)
+
+exampleMap1 :: [Int]
+exampleMap1 = map (+1) [1, 2, 3]
+
+exampleMap2 :: [String]
+exampleMap2 = map show [10, 20, 30]
+```
+
+> [!warning]
+> `map` は「要素数を変えない」関数です。要素を間引きたい場合は `filter`、1つの値にまとめたい場合は `foldr`/`foldl'` を使います。
+
+### sum・product（数値リストを集約する）
+
+`sum` は合計、`product` は総積を返します。どちらも数値型のリストを対象にします。
+
+```hs
+-- sum の型: Num a => [a] -> a
+total :: Int
+total = sum [1, 2, 3, 4]
+
+-- product の型: Num a => [a] -> a
+multiplied :: Int
+multiplied = product [1, 2, 3, 4]
+
+-- map と組み合わせる例
+sumSquares :: Int
+sumSquares = sum (map (^2) [1, 2, 3, 4])
+```
+
+### show・read（文字列との相互変換）
+
+`show` は値を文字列化し、`read` は文字列を値として読み取ります。
+
+```hs
+-- show の型: Show a => a -> String
+asText :: String
+asText = show (Just 42)
+
+-- read の型: Read a => String -> a
+asInt :: Int
+asInt = read "123"
+
+-- 型注釈で読む型を固定する例
+asDouble :: Double
+asDouble = read "3.14"
+```
+
+> [!warning]
+> `read` は失敗時に例外になります。外部入力を扱う場合は `reads` や `Text.Read.readMaybe` で安全に扱ってください。
+
+### head/tail/length/null（リストの基本操作）
+
+リスト先頭・末尾・長さ・空判定は頻繁に使います。特に `head`/`tail` は空リストで失敗するため注意が必要です。
+
+```hs
+items :: [Int]
+items = [10, 20, 30]
+
+len :: Int
+len = length items
+
+isEmpty1 :: Bool
+isEmpty1 = null items
+
+firstItemSafe :: Maybe Int
+firstItemSafe = case items of
+  [] -> Nothing
+  (x:_) -> Just x
+```
+
+### filter・any・all（条件で絞る/判定する）
+
+条件関数（述語）を使って要素を絞り込んだり、条件を満たす要素があるか/すべて満たすかを調べられます。
+
+```hs
+nums :: [Int]
+nums = [1, 2, 3, 4, 5, 6]
+
+evens :: [Int]
+evens = filter even nums
+
+hasLarge :: Bool
+hasLarge = any (>5) nums
+
+allPositive :: Bool
+allPositive = all (>0) nums
+```
+
+### foldr と foldl'（畳み込みの使い分け）
+
+`foldr` と `foldl'` は、どちらもリストを1つの値にまとめる関数です。違いは「畳み込み方向」と「評価戦略」です。
+
+- `foldr`: 右から畳む。無限リストや遅延評価と相性がよい場面がある
+- `foldl'`: 左から畳む厳格版。合計などの数値集約でメモリ効率がよい
+
+```hs
+import Data.List (foldl')
+
+-- foldr の型: (a -> b -> b) -> b -> [a] -> b
+sumByFoldr :: [Int] -> Int
+sumByFoldr = foldr (+) 0
+
+-- foldl' の型: (b -> a -> b) -> b -> [a] -> b
+sumByFoldlStrict :: [Int] -> Int
+sumByFoldlStrict = foldl' (+) 0
+
+-- foldr は右結合で展開されるイメージ
+-- foldr (:) [] [1,2,3] = 1 : (2 : (3 : []))
+rebuild :: [Int]
+rebuild = foldr (:) [] [1, 2, 3]
+```
+
+> [!warning]
+> 初学者はまず「数値の合計・件数などは `foldl'`、リスト構築や遅延を活かす場面は `foldr`」で使い分けると安全です。`foldl`（`'` なし）はサンクが溜まりやすいため通常は避けます。
+
+### よく使う標準関数（追加）
+
+`Prelude` と `Data.List` には、実務でも頻出する小さな道具が多くあります。以下は特に使用頻度の高い関数です。
+
+```hs
+-- concatMap: map + concat を一度に行う
+tags :: [String]
+tags = concatMap words ["haskell fp", "typed functional"]
+
+-- zipWith: 2つのリストを要素ごとに結合
+added :: [Int]
+added = zipWith (+) [1, 2, 3] [10, 20, 30]
+
+-- maximum/minimum: 最大値・最小値
+maxV :: Int
+maxV = maximum [4, 9, 2]
+
+minV :: Int
+minV = minimum [4, 9, 2]
+
+-- take/drop: 先頭から n 件取り出す / 捨てる
+head3 :: [Int]
+head3 = take 3 [1, 2, 3, 4, 5]
+
+rest :: [Int]
+rest = drop 3 [1, 2, 3, 4, 5]
+
+-- lookup: キーに対応する値を Maybe で取得
+port :: Maybe Int
+port = lookup "api" [("web", 80), ("api", 8080)]
+```
+
+> [!warning]
+> `maximum`/`minimum` は空リストで例外になります。入力が空の可能性がある場合は、`null` チェックや `NonEmpty` の利用を検討してください。
+
+### 型シグネチャ早見表（標準関数）
+
+学習中に頻出する標準関数を、型シグネチャ中心で一覧化します。`ghci` の `:type` と合わせて使うと定着が早くなります。
+
+| 関数 | 型シグネチャ | 用途メモ |
+|---|---|---|
+| `map` | `(a -> b) -> [a] -> [b]` | 各要素を変換 |
+| `filter` | `(a -> Bool) -> [a] -> [a]` | 条件で絞り込み |
+| `foldr` | `(a -> b -> b) -> b -> [a] -> b` | 右から畳み込み |
+| `foldl'` | `(b -> a -> b) -> b -> [a] -> b` | 左から厳格に畳み込み |
+| `sum` | `Num a => [a] -> a` | 合計 |
+| `product` | `Num a => [a] -> a` | 総積 |
+| `any` | `(a -> Bool) -> [a] -> Bool` | 1つでも真か |
+| `all` | `(a -> Bool) -> [a] -> Bool` | すべて真か |
+| `length` | `[a] -> Int` | 要素数 |
+| `null` | `[a] -> Bool` | 空リスト判定 |
+| `take` | `Int -> [a] -> [a]` | 先頭から n 件 |
+| `drop` | `Int -> [a] -> [a]` | 先頭から n 件捨てる |
+| `zipWith` | `(a -> b -> c) -> [a] -> [b] -> [c]` | 2リストを要素ごとに合成 |
+| `concatMap` | `(a -> [b]) -> [a] -> [b]` | map + concat |
+| `lookup` | `Eq a => a -> [(a, b)] -> Maybe b` | 連想リスト検索 |
+| `show` | `Show a => a -> String` | 値を文字列化 |
+| `read` | `Read a => String -> a` | 文字列を値に変換（失敗注意） |
+
+> [!warning]
+> `read`、`head`、`tail`、`maximum`、`minimum` は部分関数として失敗する可能性があります。外部入力や空リストを扱うときは `Maybe`/`Either` ベースの安全な関数を優先してください。
+
+### 関数をつなぐときの定番パターン
+
+標準関数は単体で覚えるより、「つなげて使う形」で覚えると実践で使いやすくなります。
+
+```hs
+-- 1) map で変換して sum で合計
+pipeline1 :: Int
+pipeline1 = sum (map (*2) [1, 2, 3])
+
+-- 2) filter で絞って length で件数
+pipeline2 :: Int
+pipeline2 = length (filter odd [1, 2, 3, 4, 5])
+
+-- 3) map show で文字列化して結合
+pipeline3 :: String
+pipeline3 = unwords (map show [1, 2, 3])
+```
+
 ## 型クラス
 
 ### 代表的な型クラス (Eq, Ord, Show, Read)
