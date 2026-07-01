@@ -1362,6 +1362,91 @@ $$
 
 </proof>
 
+#### B) 積分と不等式
+
+<theorem title="2">
+
+$(a)\,\,f$が$[a,b]$で積分可能で$m \le f(x) \le M$ならば
+
+$$
+m(b-a) \le \int_a^bf \le M(b-a)
+$$
+
+$(b)\,\,f_1,f_2$が$[a,b]$で積分可能で$f_1(x) \le f_2(x)$ならば
+
+$$
+\int_a^bf_1 \le \int_a^bf_2
+$$
+
+$(c)\,\,f_1,f_2$が$[a,b]$で連続かつ$f_1(x) \le f_2(x)$で、恒等的に$f_1(x)=f_2(x)$ではないならば、
+
+$$
+\int_a^bf_1 \lt \int_a^bf_2
+$$
+
+$(d)\,\,f$が$[a,b]$で連続ならば、$a \lt \xi \le b$を満たすある$\xi$に対して
+
+$$
+\int_a^bf=f(\xi)(b-a)
+$$
+
+$(e)\,\,f$が$[a,b]$で積分可能ならば、$|f|$も$[a,b]$で積分可能で
+
+$$
+\left|\int_a^bf\right| \le \int_a^b|f|
+$$
+
+</theorem>
+
+#### C) 積分関数とその性質
+
+$f$を区間$I$で定義された関数とする。もし、$\alpha \lt \beta$を満たす$I$の任意の２点$\alpha,\beta$に対して区間$[\alpha,\beta]$で$f$が有界かつ積分可能ならば、$f$は$I$で**積分可能**であるという。
+
+これまで$\int_a^bf$において、つねに$a \lt b$を仮定してきたが、今後$a \ge b$の場合には
+
+$$
+\begin{split}
+a&=b\quad\Rightarrow\quad\int_a^bf=0 \\
+a &\gt b\quad\Rightarrow\quad\int_a^bf=-\int_b^af
+\end{split}
+$$
+
+とする。
+
+<proposition>
+
+$f$は区間$I$で積分可能とし、$\alpha,\beta\in I,\,\,\alpha \neq \beta$とする。そのとき
+
+$(a)\,\,\alpha$と$\beta$の間のすべての$t$に対して$|f(t)|\le M$が成り立つならば
+
+$$
+\left|\int_\alpha^\beta f\right| \le M|\beta-\alpha|
+$$
+
+$(b)\,\,\alpha$と$\beta$の間のすべての$t$に対して$m \le f(t) \le M$が成り立つならば
+
+$$
+m \le \frac{\int_\alpha^\beta f}{\beta-\alpha} \le M
+$$
+
+</proposition>
+
+$f$を区間$I$で積分可能な関数とする。そのとき、下端$a \in I$を固定し、上端$x$を変数として、積分
+
+$$
+\int_a^xf
+$$
+
+を考えれば、この値は$x$に応じて定まるから、$x$の関数となる。この関数を
+
+$$
+F(x)=\int_a^xf=\int_a^xf(t)dt
+$$
+
+とおいて、$f$の**積分関数**という。
+
+積分関数は下端$a$の取り方に依存するから一意的ではない。しかし2つの積分関数の差は定数である。$F(x)=\int_a^xf,\,\,G(x)=\int_{a'}^xf$とすれば、$G(x)-F(x)=\int_{a'}^af$となる。そこで、下端を特定しない意味で、１つの積分関数に任意の定数を加えて得られる関数を総称して、$f$の**不定積分**ということがある。
+
 ### 7.3 不定積分、広義積分
 
 ## 第８章　積分の計算
