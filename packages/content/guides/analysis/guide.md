@@ -1593,6 +1593,135 @@ $$
 
 ### 7.3 不定積分、広義積分
 
+#### A) 不定積分とその基本公式
+
+定理３により、区間$[a,b]$で積分可能な関数$f$には不定積分（厳密には下端を特定しない積分関数）$F$が存在する。
+
+さらに、$f$が連続であれば、$F$は微分可能で$F'=f$となる。微分可能な不定積分は特に**原始関数**という。
+
+関数$f$の不定積分を求めることを$f$を**積分する**という。
+
+不定積分$F$は
+
+$$
+F=\int{f}\quadまたは\quad \int{f(x)}dx
+$$
+
+と書く。
+
+<theorem title="1">
+
+次の積分公式が成り立つ。
+
+$(a)\,\,n$が自然数であるとき
+
+$$
+\int{x^n}dx=\frac{x^{n+1}}{n+1}
+$$
+
+$n$が負の整数であるときにも、$n \neq -1$ならば、$x\gt0,\,\,x\lt0$のおのおのの範囲でこの公式が成り立つ。
+
+また、$\alpha$が一般の実数の場合にも、$\alpha \neq -1$ならば、$x\gt0$の範囲で
+
+$$
+\int{x^\alpha}dx=\frac{x^{\alpha+1}}{\alpha+1}
+$$
+
+$(b)\,\,x\gt0,x\lt0$のおのおのの範囲で
+
+$$
+\int\frac{dx}{x}=\log |x|
+$$
+
+$(c)\,\,k\neq0$のとき
+
+$$
+\begin{split}
+\int e^{kx}dx&=\frac{1}{k}e^{kx} \\
+\int \sin kx\,dx&=-\frac{1}{k}\cos kx \\
+\int \cos kx\,dx&=-\frac{1}{k}\sin kx \\
+\end{split}
+$$
+
+$(d)\,\,a\gt0$のとき、区間$(-a,a)$で
+
+$$
+\int \frac{dx}{\sqrt{a^2-x^2}}=\arcsin \frac{x}{a}
+$$
+
+$(e)\,\,a\neq0$のとき
+
+$$
+\int \frac{dx}{x^2+a^2}=\frac{1}{a}\arctan \frac{x}{a}
+$$
+
+</theorem>
+
+#### B) 積分定数
+
+$$
+\int f(x)\,dx=F(x)+C
+$$
+
+と書いたときの$C$を**積分定数**という。
+
+#### C) 積分の定義の拡張
+
+下記に定義するような積分を広義積分といい、広義の積分が存在する場合、その積分が**収束**する、存在しない場合、**発散**するという。
+
+<def title="広義積分">
+
+まず、区間の端が無限大である場合を定義する。$f$が任意の$R \gt a$に対して$[a,R]$で積分可能であるとき
+
+$$
+\int_a^{+\infty}f=\lim_{R \to +\infty}\int_a^Rf
+$$
+
+によって定める。同様に、任意の$L \lt b$に対して$[L,b]$で積分可能であるとき
+
+$$
+\int_{-\infty}^bf=\lim_{L \to -\infty}\int_L^bf
+$$
+
+と定める。さらに
+
+$$
+\int_{-\infty}^{+\infty}f=\int_{-\infty}^cf+\int_c^{+\infty}f
+$$
+
+とし、右辺の２つの積分がともに収束するときに限って定義されるものとする（このとき値は$c$のとり方によらない）。
+
+次に、積分区間は有界だが被積分関数が端点で有界でない場合を定義する。$f$が任意の$\varepsilon \gt 0$に対して$[a,b-\varepsilon]$で積分可能であるとき
+
+$$
+\int_a^bf=\lim_{\varepsilon \to +0}\int_a^{b-\varepsilon}f
+$$
+
+と定める。左端で特異となる場合も同様に
+
+$$
+\int_a^bf=\lim_{\varepsilon \to +0}\int_{a+\varepsilon}^bf
+$$
+
+と定める。
+
+さらに、$c \in (a,b)$で$f$が有界でない場合には
+
+$$
+\int_a^bf=\int_a^cf+\int_c^bf
+$$
+
+とし、右辺の２つを
+
+$$
+\int_a^cf=\lim_{\varepsilon \to +0}\int_a^{c-\varepsilon}f,\qquad
+\int_c^bf=\lim_{\varepsilon \to +0}\int_{c+\varepsilon}^bf
+$$
+
+で定め、両者がともに収束するときに限って収束とする。
+
+</def>
+
 ## 第８章　積分の計算
 ### 8.1 不定積分の計算
 ### 8.2 定積分の計算
