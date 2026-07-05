@@ -1722,6 +1722,64 @@ $$
 
 </def>
 
+#### E) 積分の収束に関するコーシーの条件
+
+<theorem title="2">
+
+$(a)\,\,f$が$(a,b]$で連続のとき、積分$\int_a^bf$が収束するための必要十分条件は、任意の$\varepsilon\gt0$に対して、適当な$\delta\gt0$をとれば、$a\lt p \lt q \lt a+\delta(\lt b)$を満たす任意の$p,q$に対して
+
+$$
+\left| \int_p^qf\right|\lt \varepsilon
+$$
+
+となることである。
+
+$(b)\,\,f$が$[a,+\infty)$で連続のとき、積分$\int_a^\infty f$が収束するための必要十分条件は、任意の$\varepsilon\gt0$に対し、適当に$M(\gt a)$をとれば、$M\lt p \lt q$を満たす任意の$p,q$に対して
+
+$$
+\left| \int_p^qf \right| \lt \varepsilon
+$$
+
+となることである。
+
+</theorem>
+
+<theorem title="3">
+
+$(a)\,\,f$が$(a,b]$で連続のとき、積分$\int_a^b|f|$が収束すれば$\int_a^bf$も収束して
+
+$$
+\left| \int_a^bf\right|\lt \int_a^b|f|
+$$
+
+$(b)\,\,f$が$[a,+\infty)$で連続のとき、積分$\int_a^{+\infty}|f|$が収束すれば$\int_a^{+\infty}f$も収束して
+
+$$
+\left|\int_a^{+\infty}f\right|\lt\int_a^{+\infty}|f|
+$$
+
+</theorem>
+
+#### G) 無限級数との比較
+
+<theorem title="6">
+
+関数$f$は$[1,+\infty)$で定義され、正の値をとる単調減少な連続関数とする。そのとき、級数
+
+$$
+\sum_{n=1}^\infty f(n)
+$$
+
+が収束するためには、広義積分
+
+$$
+\int_1^{+\infty}f(x)dx
+$$
+
+の収束することが必要かつ十分である。
+
+</theorem>
+
 ## 第８章　積分の計算
 ### 8.1 不定積分の計算
 ### 8.2 定積分の計算
